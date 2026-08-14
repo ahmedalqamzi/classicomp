@@ -54,12 +54,23 @@ export function App({ bridge }: AppProps) {
     setState((current) => reduceAppState(current ?? viewState, { type: 'game/select', gameId }));
   }
 
+  // Bridge mutations re-reduce from persisted state, which lags the in-memory
+  // route and selection; adopt the persisted domain fields but keep those two.
+  function applyBridgeResult(next: AppState) {
+    setState((current) =>
+      current === null
+        ? next
+        : { ...next, route: current.route, selectedGameId: current.selectedGameId },
+    );
+  }
+
   async function activateProfile(profileId: string) {
-    setState(await activeBridge.setActiveProfile(profileId));
+    const next = await activeBridge.setActiveProfile(profileId);
+    setState((current) => (current === null ? next : { ...next, route: current.route }));
   }
 
   async function queueInstall(gameId: string) {
-    setState(await activeBridge.queueInstall(gameId));
+    applyBridgeResult(await activeBridge.queueInstall(gameId));
   }
 
   return (
