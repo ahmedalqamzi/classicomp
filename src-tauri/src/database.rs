@@ -35,6 +35,7 @@ pub struct Game {
     pub executable_path: Option<String>,
     pub upstream_url: String,
     pub accent: String,
+    pub tags: Vec<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
@@ -72,13 +73,26 @@ pub struct SaveSnapshot {
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(rename_all = "camelCase")]
+pub struct Mod {
+    pub id: String,
+    pub game_id: String,
+    pub name: String,
+    pub summary: String,
+    pub version: String,
+    pub author: String,
+    pub enabled: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(rename_all = "camelCase")]
 pub struct AppState {
-    pub active_profile_id: String,
+    pub active_profile_id: Option<String>,
     pub selected_game_id: String,
     pub route: String,
     pub profiles: Vec<Profile>,
     pub games: Vec<Game>,
     pub libraries: HashMap<String, Vec<LibraryEntry>>,
+    pub mods: HashMap<String, Vec<Mod>>,
     pub downloads: Vec<Download>,
     pub save_snapshots: Vec<SaveSnapshot>,
     pub cloud_provider: Option<String>,
@@ -95,6 +109,7 @@ impl Database {
         };
         database.migrate()?;
         database.seed_if_empty()?;
+        database.fill_reference_tables_if_empty()?;
         Ok(database)
     }
 
@@ -104,26 +119,34 @@ impl Database {
         };
         database.migrate()?;
         database.seed_if_empty()?;
+        database.fill_reference_tables_if_empty()?;
         Ok(database)
     }
 
     pub fn load_state(&self) -> Result<AppState> {
-        let active_profile_id = self
-            .setting("active_profile_id")?
-            .unwrap_or_else(|| "owner".to_string());
+        let active_profile_id = self.setting("active_profile_id")?;
         let selected_game_id = self
             .setting("selected_game_id")?
             .unwrap_or_else(|| "openrct2".to_string());
-        let route = self
-            .setting("route")?
-            .unwrap_or_else(|| "library".to_string());
+        let route = match self.setting("route")?.as_deref() {
+            Some("catalog") => "catalog".to_string(),
+            Some("mods") => "mods".to_string(),
+            _ => "library".to_string(),
+        };
         let cloud_provider = self.setting("cloud_provider")?;
 
         let profiles = self.profiles()?;
         let games = self.games()?;
         let libraries = self.libraries()?;
-        let downloads = self.downloads(&active_profile_id)?;
-        let save_snapshots = self.save_snapshots(&active_profile_id)?;
+        let mods = self.mods()?;
+        let downloads = match &active_profile_id {
+            Some(profile_id) => self.downloads(profile_id)?,
+            None => Vec::new(),
+        };
+        let save_snapshots = match &active_profile_id {
+            Some(profile_id) => self.save_snapshots(profile_id)?,
+            None => Vec::new(),
+        };
 
         Ok(AppState {
             active_profile_id,
@@ -132,6 +155,7 @@ impl Database {
             profiles,
             games,
             libraries,
+            mods,
             downloads,
             save_snapshots,
             cloud_provider,
@@ -154,6 +178,19 @@ impl Database {
         Ok(())
     }
 
+    pub fn sign_out(&self) -> Result<()> {
+        self.upsert_setting("active_profile_id", None)
+    }
+
+    pub fn toggle_mod(&self, profile_id: &str, mod_id: &str) -> Result<()> {
+        self.connection.execute(
+            "insert into profile_mods (profile_id, mod_id, enabled) values (?1, ?2, 1)
+             on conflict(profile_id, mod_id) do update set enabled = 1 - enabled",
+            params![profile_id, mod_id],
+        )?;
+        Ok(())
+    }
+
     pub fn queue_install(&self, profile_id: &str, game_id: &str) -> Result<()> {
         self.connection.execute(
             "insert into user_library (profile_id, game_id, install_state, install_path, play_minutes)
@@ -171,7 +208,6 @@ impl Database {
                 game_id
             ],
         )?;
-        self.upsert_setting("route", Some("downloads"))?;
         Ok(())
     }
 
@@ -233,6 +269,28 @@ impl Database {
             create table if not exists app_settings (
               key text primary key,
               value text
+            );
+
+            create table if not exists game_tags (
+              game_id text not null references games(id) on delete cascade,
+              tag text not null,
+              primary key (game_id, tag)
+            );
+
+            create table if not exists mods (
+              id text primary key,
+              game_id text not null references games(id) on delete cascade,
+              name text not null,
+              summary text not null,
+              version text not null,
+              author text not null
+            );
+
+            create table if not exists profile_mods (
+              profile_id text not null references profiles(id) on delete cascade,
+              mod_id text not null references mods(id) on delete cascade,
+              enabled integer not null default 0,
+              primary key (profile_id, mod_id)
             );
             ",
         )?;
@@ -296,6 +354,55 @@ impl Database {
         Ok(())
     }
 
+    fn fill_reference_tables_if_empty(&self) -> Result<()> {
+        let tag_count: i64 = self
+            .connection
+            .query_row("select count(*) from game_tags", [], |row| row.get(0))?;
+        if tag_count == 0 {
+            for game in seed_games() {
+                for tag in &game.tags {
+                    self.connection.execute(
+                        "insert into game_tags (game_id, tag) values (?1, ?2)",
+                        params![game.id, tag],
+                    )?;
+                }
+            }
+        }
+
+        let mod_count: i64 = self
+            .connection
+            .query_row("select count(*) from mods", [], |row| row.get(0))?;
+        if mod_count == 0 {
+            for module in seed_mods() {
+                self.connection.execute(
+                    "insert into mods (id, game_id, name, summary, version, author)
+                     values (?1, ?2, ?3, ?4, ?5, ?6)",
+                    params![
+                        module.id,
+                        module.game_id,
+                        module.name,
+                        module.summary,
+                        module.version,
+                        module.author
+                    ],
+                )?;
+            }
+        }
+
+        let profile_mod_count: i64 = self
+            .connection
+            .query_row("select count(*) from profile_mods", [], |row| row.get(0))?;
+        if profile_mod_count == 0 {
+            self.connection.execute(
+                "insert into profile_mods (profile_id, mod_id, enabled)
+                 values ('owner', 'mod-openmw-tamriel-rebuilt', 1)",
+                [],
+            )?;
+        }
+
+        Ok(())
+    }
+
     fn setting(&self, key: &str) -> Result<Option<String>> {
         Ok(self
             .connection
@@ -338,7 +445,7 @@ impl Database {
                     runtime, version, executable_path, upstream_url, accent
              from games order by rowid",
         )?;
-        Ok(statement
+        let mut games = statement
             .query_map([], |row| {
                 Ok(Game {
                     id: row.get(0)?,
@@ -353,9 +460,55 @@ impl Database {
                     executable_path: row.get(9)?,
                     upstream_url: row.get(10)?,
                     accent: row.get(11)?,
+                    tags: Vec::new(),
                 })
             })?
-            .collect::<std::result::Result<Vec<_>, _>>()?)
+            .collect::<std::result::Result<Vec<_>, _>>()?;
+
+        for game in &mut games {
+            game.tags = self.game_tags(&game.id)?;
+        }
+        Ok(games)
+    }
+
+    fn game_tags(&self, game_id: &str) -> Result<Vec<String>> {
+        let mut statement = self
+            .connection
+            .prepare("select tag from game_tags where game_id = ?1 order by tag")?;
+        let tags = statement.query_map([game_id], |row| row.get::<_, String>(0))?;
+        Ok(tags.collect::<std::result::Result<Vec<_>, _>>()?)
+    }
+
+    fn mods(&self) -> Result<HashMap<String, Vec<Mod>>> {
+        let mut statement = self.connection.prepare(
+            "select p.id, m.id, m.game_id, m.name, m.summary, m.version, m.author,
+                    coalesce(pm.enabled, 0)
+             from profiles p
+             cross join mods m
+             left join profile_mods pm on pm.profile_id = p.id and pm.mod_id = m.id
+             order by p.rowid, m.rowid",
+        )?;
+        let rows = statement.query_map([], |row| {
+            Ok((
+                row.get::<_, String>(0)?,
+                Mod {
+                    id: row.get(1)?,
+                    game_id: row.get(2)?,
+                    name: row.get(3)?,
+                    summary: row.get(4)?,
+                    version: row.get(5)?,
+                    author: row.get(6)?,
+                    enabled: row.get::<_, i64>(7)? != 0,
+                },
+            ))
+        })?;
+
+        let mut mods: HashMap<String, Vec<Mod>> = HashMap::new();
+        for row in rows {
+            let (profile_id, module) = row?;
+            mods.entry(profile_id).or_default().push(module);
+        }
+        Ok(mods)
     }
 
     fn libraries(&self) -> Result<HashMap<String, Vec<LibraryEntry>>> {
@@ -439,6 +592,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://openrct2.io".into(),
             accent: "#648f46".into(),
+            tags: vec!["Simulation".into(), "Strategy".into()],
         },
         Game {
             id: "devilutionx".into(),
@@ -453,6 +607,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://github.com/diasurgical/devilutionX".into(),
             accent: "#9b433b".into(),
+            tags: vec!["RPG".into(), "Action".into()],
         },
         Game {
             id: "openmw".into(),
@@ -467,6 +622,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://openmw.org".into(),
             accent: "#8a6b3f".into(),
+            tags: vec!["RPG".into(), "Open World".into()],
         },
         Game {
             id: "openttd".into(),
@@ -481,6 +637,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://www.openttd.org".into(),
             accent: "#4c7693".into(),
+            tags: vec!["Simulation".into(), "Strategy".into()],
         },
         Game {
             id: "scummvm".into(),
@@ -495,6 +652,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://www.scummvm.org".into(),
             accent: "#5a7e9d".into(),
+            tags: vec!["Adventure".into(), "Point & Click".into()],
         },
         Game {
             id: "soh".into(),
@@ -509,6 +667,7 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://www.shipofharkinian.com".into(),
             accent: "#6a7750".into(),
+            tags: vec!["Adventure".into(), "Action".into()],
         },
         Game {
             id: "zelda64recompiled".into(),
@@ -523,6 +682,66 @@ fn seed_games() -> Vec<Game> {
             executable_path: None,
             upstream_url: "https://github.com/Zelda64Recomp/Zelda64Recomp".into(),
             accent: "#765a88".into(),
+            tags: vec!["Adventure".into(), "Action".into()],
+        },
+    ]
+}
+
+fn seed_mods() -> Vec<Mod> {
+    vec![
+        Mod {
+            id: "mod-openmw-tamriel-rebuilt".into(),
+            game_id: "openmw".into(),
+            name: "Tamriel Rebuilt".into(),
+            summary: "Adds the Morrowind mainland with new regions and quests.".into(),
+            version: "24.12".into(),
+            author: "Tamriel Rebuilt Team".into(),
+            enabled: false,
+        },
+        Mod {
+            id: "mod-openmw-rebirth".into(),
+            game_id: "openmw".into(),
+            name: "Morrowind Rebirth".into(),
+            summary: "Overhaul of landscapes, cities, and balance.".into(),
+            version: "7.0".into(),
+            author: "trancemaster_198".into(),
+            enabled: false,
+        },
+        Mod {
+            id: "mod-openrct2-openmusic".into(),
+            game_id: "openrct2".into(),
+            name: "OpenMusic".into(),
+            summary: "Open-source ride and scenery music pack.".into(),
+            version: "1.2".into(),
+            author: "OpenRCT2 Community".into(),
+            enabled: false,
+        },
+        Mod {
+            id: "mod-openrct2-scenarios".into(),
+            game_id: "openrct2".into(),
+            name: "Classic Scenarios Pack".into(),
+            summary: "Recreates the original RCT1 scenario lineup.".into(),
+            version: "2025.1".into(),
+            author: "OpenRCT2 Community".into(),
+            enabled: false,
+        },
+        Mod {
+            id: "mod-devilutionx-infernal".into(),
+            game_id: "devilutionx".into(),
+            name: "Infernal Difficulty".into(),
+            summary: "Brutal difficulty rebalance for veteran players.".into(),
+            version: "0.9".into(),
+            author: "Community".into(),
+            enabled: false,
+        },
+        Mod {
+            id: "mod-soh-hd-textures".into(),
+            game_id: "soh".into(),
+            name: "HD Texture Pack".into(),
+            summary: "High-resolution texture replacements.".into(),
+            version: "3.1".into(),
+            author: "Community".into(),
+            enabled: false,
         },
     ]
 }

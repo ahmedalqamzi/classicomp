@@ -33,6 +33,18 @@ fn set_active_profile(
 
 #[cfg(feature = "desktop")]
 #[tauri::command]
+fn sign_out(database: tauri::State<'_, Mutex<Database>>) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    database
+        .sign_out()
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
 fn queue_install(
     game_id: String,
     database: tauri::State<'_, Mutex<Database>>,
@@ -43,9 +55,30 @@ fn queue_install(
     let active_profile_id = database
         .load_state()
         .map_err(|error| error.to_string())?
-        .active_profile_id;
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
     database
         .queue_install(&active_profile_id, &game_id)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn toggle_mod(
+    mod_id: String,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    let active_profile_id = database
+        .load_state()
+        .map_err(|error| error.to_string())?
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
+    database
+        .toggle_mod(&active_profile_id, &mod_id)
         .and_then(|_| database.load_state())
         .map_err(|error| error.to_string())
 }
@@ -70,7 +103,9 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             load_state,
             set_active_profile,
-            queue_install
+            sign_out,
+            queue_install,
+            toggle_mod
         ])
         .run(tauri::generate_context!())
         .expect("error while running Classicomp");
