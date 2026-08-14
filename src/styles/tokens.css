@@ -1,0 +1,58 @@
+:root {
+  color-scheme: dark;
+  font-family: "IBM Plex Sans", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  background: #171a21;
+  color: #c7d5e0;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  --surface-0: #171a21;
+  --surface-1: #1b2838;
+  --surface-2: #101822;
+  --surface-3: #2a475e;
+  --surface-hover: #1c2b3d;
+  --line: #0d1219;
+  --line-soft: rgb(255 255 255 / 5%);
+  --text: #c7d5e0;
+  --text-bright: #fff;
+  --muted: #8f98a0;
+  --dim: #65717b;
+  --blue: #66c0f4;
+  --green: #75a319;
+  --green-dark: #5c7e10;
+  --gold: #c4a44a;
+  --red: #c14b40;
+  --focus: #66c0f4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 920px;
+  min-height: 100vh;
+  background: var(--surface-0);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+select,
+a,
+input {
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+select:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--focus);
+}

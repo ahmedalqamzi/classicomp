@@ -1,0 +1,10 @@
+node_modules/
+dist/
+target/
+src-tauri/target/
+.playwright-cli/
+.superpowers/
+output/
+tmp/
+*.tsbuildinfo
+*.log

@@ -1,0 +1,31 @@
+[package]
+name = "classicomp"
+version = "0.1.0"
+description = "Classicomp desktop launcher"
+authors = ["Classicomp"]
+edition = "2024"
+
+[features]
+default = []
+desktop = ["dep:tauri"]
+
+[lib]
+name = "classicomp_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "classicomp"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2.6.3", features = [] }
+
+[dependencies]
+rusqlite = { version = "0.40.2", features = ["bundled"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+tauri = { version = "2.11.5", optional = true , features = [] }
+thiserror = "2.0.17"
+
+[dev-dependencies]
+tempfile = "3.27.0"
