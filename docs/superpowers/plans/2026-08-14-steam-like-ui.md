@@ -36,6 +36,7 @@
 - Modify: `src/data/seed.ts` (full replacement)
 - Test: `src/domain/state.test.ts` (full replacement), `src/data/seed.test.ts` (full replacement)
 - Modify: `src/App.test.tsx` (one test body only, see Step 6)
+- Modify: `src/App.tsx` (bridge-merge fix only, see Step 6b)
 
 **Interfaces:**
 - Consumes: nothing new.
@@ -738,10 +739,42 @@ The third test still expects queuing to navigate to a Downloads page. Replace th
   });
 ```
 
+- [ ] **Step 6b: Fix the bridge round-trip state clobber in `src/App.tsx`**
+
+Found during implementation: bridge mutations re-reduce from persisted state, which lags the
+in-memory `route` and `selectedGameId` (those are never written through the bridge), so
+`setState(await bridge.queueInstall(...))` resets the UI route and selection. Replace the two
+handler functions in `App()` with:
+
+```tsx
+  // Bridge mutations re-reduce from persisted state, which lags the in-memory
+  // route and selection; adopt the persisted domain fields but keep those two.
+  function applyBridgeResult(next: AppState) {
+    setState((current) =>
+      current === null
+        ? next
+        : { ...next, route: current.route, selectedGameId: current.selectedGameId },
+    );
+  }
+
+  async function activateProfile(profileId: string) {
+    const next = await activeBridge.setActiveProfile(profileId);
+    setState((current) => (current === null ? next : { ...next, route: current.route }));
+  }
+
+  async function queueInstall(gameId: string) {
+    applyBridgeResult(await activeBridge.queueInstall(gameId));
+  }
+```
+
+(`activateProfile` adopts the new `selectedGameId` from the bridge — switching profiles selects
+the first game of that profile — but also preserves the route.)
+
 - [ ] **Step 7: Run the full vitest suite**
 
 Run: `npm test`
-Expected: PASS (all files). Note: `npx tsc -b` will still complain about `'downloads'` comparisons in `src/App.tsx`; that is intentional until Task 7 and must not be "fixed" here.
+Expected: PASS (all files). `npx tsc -b` also stays green: the legacy `'downloads'` union
+member keeps the remaining comparisons in `src/App.tsx` valid until Task 7 removes them.
 
 - [ ] **Step 8: Commit**
 
@@ -2317,12 +2350,23 @@ export function App({ bridge }: AppProps) {
     setState((current) => reduceAppState(current ?? viewState, { type: 'game/select', gameId }));
   }
 
+  // Bridge mutations re-reduce from persisted state, which lags the in-memory
+  // route and selection; adopt the persisted domain fields but keep those two.
+  function applyBridgeResult(next: AppState) {
+    setState((current) =>
+      current === null
+        ? next
+        : { ...next, route: current.route, selectedGameId: current.selectedGameId },
+    );
+  }
+
   async function activateProfile(profileId: string) {
-    setState(await activeBridge.setActiveProfile(profileId));
+    const next = await activeBridge.setActiveProfile(profileId);
+    setState((current) => (current === null ? next : { ...next, route: current.route }));
   }
 
   async function queueInstall(gameId: string) {
-    setState(await activeBridge.queueInstall(gameId));
+    applyBridgeResult(await activeBridge.queueInstall(gameId));
   }
 
   return (
@@ -2775,16 +2819,27 @@ export function App({ bridge }: AppProps) {
     setState((current) => reduceAppState(current ?? viewState, { type: 'game/select', gameId }));
   }
 
+  // Bridge mutations re-reduce from persisted state, which lags the in-memory
+  // route and selection; adopt the persisted domain fields but keep those two.
+  function applyBridgeResult(next: AppState) {
+    setState((current) =>
+      current === null
+        ? next
+        : { ...next, route: current.route, selectedGameId: current.selectedGameId },
+    );
+  }
+
   async function activateProfile(profileId: string) {
-    setState(await activeBridge.setActiveProfile(profileId));
+    const next = await activeBridge.setActiveProfile(profileId);
+    setState((current) => (current === null ? next : { ...next, route: current.route }));
   }
 
   async function signOut() {
-    setState(await activeBridge.signOut());
+    applyBridgeResult(await activeBridge.signOut());
   }
 
   async function queueInstall(gameId: string) {
-    setState(await activeBridge.queueInstall(gameId));
+    applyBridgeResult(await activeBridge.queueInstall(gameId));
   }
 
   if (!activeProfile) {
@@ -3266,17 +3321,28 @@ export function App({ bridge }: AppProps) {
     setState((current) => reduceAppState(current ?? viewState, { type: 'game/select', gameId }));
   }
 
+  // Bridge mutations re-reduce from persisted state, which lags the in-memory
+  // route and selection; adopt the persisted domain fields but keep those two.
+  function applyBridgeResult(next: AppState) {
+    setState((current) =>
+      current === null
+        ? next
+        : { ...next, route: current.route, selectedGameId: current.selectedGameId },
+    );
+  }
+
   async function activateProfile(profileId: string) {
-    setState(await activeBridge.setActiveProfile(profileId));
+    const next = await activeBridge.setActiveProfile(profileId);
+    setState((current) => (current === null ? next : { ...next, route: current.route }));
   }
 
   async function signOut() {
     setDownloadsOpen(false);
-    setState(await activeBridge.signOut());
+    applyBridgeResult(await activeBridge.signOut());
   }
 
   async function queueInstall(gameId: string) {
-    setState(await activeBridge.queueInstall(gameId));
+    applyBridgeResult(await activeBridge.queueInstall(gameId));
     setDownloadsOpen(true);
   }
 
@@ -3820,7 +3886,7 @@ c) Add the toggle handler after `queueInstall`:
 
 ```tsx
   async function toggleMod(modId: string) {
-    setState(await activeBridge.toggleMod(modId));
+    applyBridgeResult(await activeBridge.toggleMod(modId));
   }
 ```
 
