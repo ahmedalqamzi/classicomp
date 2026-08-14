@@ -58,6 +58,6 @@ describe('Classicomp desktop shell', () => {
 
     expect(screen.getByRole('tab', { name: 'Catalog' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('status')).toHaveTextContent('1 queued');
-    expect(JSON.parse(storage.getItem('classicomp.app-state.v1') ?? '{}').downloads).toHaveLength(1);
+    expect(JSON.parse(storage.getItem('classicomp.app-state.v2') ?? '{}').downloads).toHaveLength(1);
   });
 });

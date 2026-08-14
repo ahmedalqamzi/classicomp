@@ -12,8 +12,16 @@ export function createTauriBridge(): PlatformBridge {
       return invoke<AppState>('set_active_profile', { profileId });
     },
 
+    signOut(): Promise<AppState> {
+      return invoke<AppState>('sign_out');
+    },
+
     queueInstall(gameId: string): Promise<AppState> {
       return invoke<AppState>('queue_install', { gameId });
+    },
+
+    toggleMod(modId: string): Promise<AppState> {
+      return invoke<AppState>('toggle_mod', { modId });
     },
   };
 }

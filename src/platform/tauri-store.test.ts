@@ -34,10 +34,14 @@ describe('Tauri bridge', () => {
     await bridge.loadState();
     await bridge.setActiveProfile('guest');
     await bridge.queueInstall('openmw');
+    await bridge.signOut();
+    await bridge.toggleMod('mod-openmw-rebirth');
 
     expect(invoke).toHaveBeenNthCalledWith(1, 'load_state');
     expect(invoke).toHaveBeenNthCalledWith(2, 'set_active_profile', { profileId: 'guest' });
     expect(invoke).toHaveBeenNthCalledWith(3, 'queue_install', { gameId: 'openmw' });
+    expect(invoke).toHaveBeenNthCalledWith(4, 'sign_out');
+    expect(invoke).toHaveBeenNthCalledWith(5, 'toggle_mod', { modId: 'mod-openmw-rebirth' });
   });
 
   it('selects Tauri only when the runtime reports a Tauri shell', () => {

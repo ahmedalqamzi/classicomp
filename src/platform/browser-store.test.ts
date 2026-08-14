@@ -31,15 +31,7 @@ class MemoryStorage implements Storage {
 
 describe('browser persistence bridge', () => {
   it('restores the active profile from persisted browser state', async () => {
-    const createBrowserBridge = (browserStoreModule as {
-      createBrowserBridge?: (storage: Storage) => {
-        loadState(): Promise<{ activeProfileId: string }>;
-        setActiveProfile(profileId: string): Promise<unknown>;
-      };
-    }).createBrowserBridge;
-
-    expect(typeof createBrowserBridge).toBe('function');
-    if (!createBrowserBridge) return;
+    const createBrowserBridge = browserStoreModule.createBrowserBridge;
 
     const storage = new MemoryStorage();
     const firstRun = createBrowserBridge(storage);
@@ -53,15 +45,9 @@ describe('browser persistence bridge', () => {
     const createBrowserBridge = browserStoreModule.createBrowserBridge;
     const storage = new MemoryStorage();
     const firstRun = createBrowserBridge(storage);
-    const queueInstall = (firstRun as typeof firstRun & {
-      queueInstall?: (gameId: string) => Promise<unknown>;
-    }).queueInstall;
 
-    expect(typeof queueInstall).toBe('function');
-    if (!queueInstall) return;
-
-    await queueInstall('devilutionx');
-    await queueInstall('devilutionx');
+    await firstRun.queueInstall('devilutionx');
+    await firstRun.queueInstall('devilutionx');
 
     const restarted = createBrowserBridge(storage);
     const state = await restarted.loadState();
@@ -71,5 +57,45 @@ describe('browser persistence bridge', () => {
       profileId: 'owner',
       state: 'queued',
     });
+  });
+
+  it('persists sign-out across bridge recreation', async () => {
+    const createBrowserBridge = browserStoreModule.createBrowserBridge;
+    const storage = new MemoryStorage();
+    const firstRun = createBrowserBridge(storage);
+
+    await firstRun.signOut();
+    const restarted = createBrowserBridge(storage);
+    expect((await restarted.loadState()).activeProfileId).toBeNull();
+
+    await restarted.setActiveProfile('guest');
+    expect((await createBrowserBridge(storage).loadState()).activeProfileId).toBe('guest');
+  });
+
+  it('persists mod toggles across bridge recreation', async () => {
+    const createBrowserBridge = browserStoreModule.createBrowserBridge;
+    const storage = new MemoryStorage();
+    const firstRun = createBrowserBridge(storage);
+
+    await firstRun.toggleMod('mod-openmw-rebirth');
+
+    const restarted = createBrowserBridge(storage);
+    const state = await restarted.loadState();
+    expect(state.mods.owner?.find((mod) => mod.id === 'mod-openmw-rebirth')?.enabled).toBe(true);
+    expect(state.mods.guest?.find((mod) => mod.id === 'mod-openmw-rebirth')?.enabled).toBe(false);
+  });
+
+  it('maps a legacy persisted downloads route to the library', async () => {
+    const createBrowserBridge = browserStoreModule.createBrowserBridge;
+    const storage = new MemoryStorage();
+
+    const firstRun = createBrowserBridge(storage);
+    const state = await firstRun.loadState();
+    storage.setItem(
+      'classicomp.app-state.v2',
+      JSON.stringify({ ...state, route: 'downloads' }),
+    );
+
+    expect((await createBrowserBridge(storage).loadState()).route).toBe('library');
   });
 });
