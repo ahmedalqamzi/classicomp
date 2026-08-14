@@ -8,6 +8,7 @@ import { AppHeader } from './ui/app-header';
 import { CatalogView } from './ui/catalog-view';
 import { GameIcon } from './ui/game-icon';
 import { LibraryView } from './ui/library-view';
+import { SignInView } from './ui/sign-in-view';
 
 interface AppProps {
   bridge?: PlatformBridge;
@@ -31,12 +32,8 @@ export function App({ bridge }: AppProps) {
   }, [activeBridge]);
 
   const viewState = state ?? seedState;
-  const activeProfile =
-    viewState.profiles.find((profile) => profile.id === viewState.activeProfileId) ??
-    viewState.profiles[0];
-  const activeLibrary = selectVisibleLibrary(viewState);
-  const downloadsForProfile = viewState.downloads.filter(
-    (download) => download.profileId === viewState.activeProfileId,
+  const activeProfile = viewState.profiles.find(
+    (profile) => profile.id === viewState.activeProfileId,
   );
 
   function changeRoute(route: AppRoute) {
@@ -62,19 +59,32 @@ export function App({ bridge }: AppProps) {
     setState((current) => (current === null ? next : { ...next, route: current.route }));
   }
 
+  async function signOut() {
+    applyBridgeResult(await activeBridge.signOut());
+  }
+
   async function queueInstall(gameId: string) {
     applyBridgeResult(await activeBridge.queueInstall(gameId));
   }
+
+  if (!activeProfile) {
+    return <SignInView profiles={viewState.profiles} onSignIn={activateProfile} />;
+  }
+
+  const activeLibrary = selectVisibleLibrary(viewState);
+  const downloadsForProfile = viewState.downloads.filter(
+    (download) => download.profileId === viewState.activeProfileId,
+  );
 
   return (
     <main className="app-shell">
       <AppHeader
         activeProfile={activeProfile}
-        downloadsCount={downloadsForProfile.length}
         profiles={viewState.profiles}
         route={viewState.route}
         onActivateProfile={activateProfile}
         onChangeRoute={changeRoute}
+        onSignOut={signOut}
       />
 
       <section className="app-body">

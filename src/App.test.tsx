@@ -25,7 +25,8 @@ describe('Classicomp desktop shell', () => {
     expect(await screen.findByRole('heading', { name: 'OpenRCT2' })).toBeVisible();
     expect(screen.getByRole('tab', { name: 'Library' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('tab', { name: 'Catalog' })).toBeVisible();
-    expect(screen.getByRole('tab', { name: /Downloads/ })).toBeVisible();
+    expect(screen.getByRole('tab', { name: 'Mods' })).toBeVisible();
+    expect(screen.queryByRole('tab', { name: /Downloads/ })).not.toBeInTheDocument();
     expect(screen.getAllByText('Local only')[0]).toBeVisible();
     expect(screen.getByRole('status')).toHaveTextContent('Ready');
   });
@@ -59,5 +60,26 @@ describe('Classicomp desktop shell', () => {
     expect(screen.getByRole('tab', { name: 'Catalog' })).toHaveAttribute('aria-selected', 'true');
     expect(screen.getByRole('status')).toHaveTextContent('1 queued');
     expect(JSON.parse(storage.getItem('classicomp.app-state.v2') ?? '{}').downloads).toHaveLength(1);
+  });
+
+  it('signs out to the sign-in screen and back in as another profile', async () => {
+    const App = (appModule as { App?: typeof import('./App')['App'] }).App;
+    expect(typeof App).toBe('function');
+    if (!App) return;
+
+    const user = userEvent.setup();
+    const storage = new MemoryStorage();
+    render(<App bridge={createBrowserBridge(storage)} />);
+
+    await screen.findByRole('heading', { name: 'OpenRCT2' });
+    await user.click(screen.getByRole('button', { name: /The Dictator/ }));
+    await user.click(screen.getByRole('menuitem', { name: /Sign out/ }));
+
+    expect(await screen.findByRole('heading', { name: 'Sign in to Classicomp' })).toBeVisible();
+    expect(screen.queryByRole('tab', { name: 'Library' })).not.toBeInTheDocument();
+
+    await user.click(screen.getByRole('button', { name: /Guest/ }));
+    expect(await screen.findByRole('heading', { name: 'OpenRCT2' })).toBeVisible();
+    expect(screen.getByRole('button', { name: /Guest/ })).toBeVisible();
   });
 });

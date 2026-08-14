@@ -35,12 +35,8 @@
     padding-inline: 10px;
   }
 
-  .profile-menu {
+  .account-menu {
     padding-right: 8px;
-  }
-
-  .profile-menu span {
-    display: none;
   }
 
   .app-body:has(.library-rail) {
