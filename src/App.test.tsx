@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 import * as appModule from './App';
@@ -28,7 +28,7 @@ describe('Classicomp desktop shell', () => {
     expect(screen.getByRole('tab', { name: 'Mods' })).toBeVisible();
     expect(screen.queryByRole('tab', { name: /Downloads/ })).not.toBeInTheDocument();
     expect(screen.getAllByText('Local only')[0]).toBeVisible();
-    expect(screen.getByRole('status')).toHaveTextContent('Ready');
+    expect(screen.getByRole('status')).toHaveTextContent('No active downloads');
   });
 
   it('uses dense launcher chrome instead of marketing labels and repeated state badges', async () => {
@@ -44,7 +44,7 @@ describe('Classicomp desktop shell', () => {
     expect(screen.getByRole('heading', { name: 'Not installed' })).toBeVisible();
   });
 
-  it('queues a catalog game and keeps the catalog route', async () => {
+  it('queues a catalog game and shows it in the downloads bar', async () => {
     const App = (appModule as { App?: typeof import('./App')['App'] }).App;
     expect(typeof App).toBe('function');
     if (!App) return;
@@ -58,7 +58,10 @@ describe('Classicomp desktop shell', () => {
     await user.click(screen.getByRole('button', { name: 'Queue DevilutionX install' }));
 
     expect(screen.getByRole('tab', { name: 'Catalog' })).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getByRole('status')).toHaveTextContent('1 queued');
+    expect(screen.getByRole('status')).toHaveTextContent('Downloads (1)');
+    const queue = screen.getByLabelText('Download queue');
+    expect(queue).toBeVisible();
+    expect(within(queue).getByText('DevilutionX')).toBeVisible();
     expect(JSON.parse(storage.getItem('classicomp.app-state.v2') ?? '{}').downloads).toHaveLength(1);
   });
 

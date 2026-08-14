@@ -1,6 +1,6 @@
 .app-shell {
   display: grid;
-  grid-template-rows: 40px minmax(0, 1fr) 24px;
+  grid-template-rows: 40px minmax(0, 1fr) 36px;
   height: 100vh;
   overflow: hidden;
   background: var(--surface-0);
@@ -462,8 +462,7 @@
   white-space: nowrap;
 }
 
-.catalog-view,
-.downloads-view {
+.catalog-view {
   min-height: 0;
   overflow-y: auto;
   padding: 16px;
@@ -547,21 +546,6 @@
   background: var(--surface-1);
 }
 
-.status-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 10px;
-  border-top: 1px solid var(--line);
-  background: #10141b;
-  color: var(--dim);
-  font-size: 11px;
-}
-
-.status-strip .status-profile {
-  color: var(--dim);
-}
-
 .sign-in-view {
   display: grid;
   place-items: center;
@@ -619,4 +603,79 @@
   background: var(--surface-3);
   color: var(--text-bright);
   font-weight: 700;
+}
+
+.downloads-area {
+  position: relative;
+}
+
+.downloads-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 36px;
+  padding: 0 10px;
+  border-top: 1px solid var(--line);
+  background: #10141b;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.downloads-label {
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.downloads-current {
+  color: var(--text);
+}
+
+.downloads-progress {
+  width: 140px;
+  height: 6px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: #0b0f16;
+}
+
+.downloads-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+  transition: width .2s;
+}
+
+.downloads-state {
+  text-transform: capitalize;
+}
+
+.downloads-toggle {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  margin-left: auto;
+  padding: 4px 8px;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.downloads-toggle:hover {
+  color: var(--text-bright);
+}
+
+.downloads-panel {
+  position: absolute;
+  z-index: 10;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  max-height: 42vh;
+  overflow-y: auto;
+  border-top: 1px solid var(--line);
+  background: var(--surface-1);
+  box-shadow: 0 -8px 24px rgb(0 0 0 / 35%);
 }

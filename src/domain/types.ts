@@ -1,4 +1,4 @@
-export type AppRoute = 'library' | 'catalog' | 'mods' | 'downloads'; // 'downloads' is a legacy route removed once the downloads bar lands
+export type AppRoute = 'library' | 'catalog' | 'mods';
 export type InstallState = 'installed' | 'available' | 'queued' | 'downloading';
 export type DownloadState = 'queued' | 'downloading' | 'paused' | 'complete';
 export type SaveState = 'local' | 'synced' | 'conflict';

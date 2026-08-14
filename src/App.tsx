@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { seedState } from './data/seed';
 import { reduceAppState, selectVisibleLibrary } from './domain/state';
-import type { AppRoute, AppState, Game } from './domain/types';
+import type { AppRoute, AppState } from './domain/types';
 import type { PlatformBridge } from './platform/bridge';
 import { createDefaultBridge } from './platform/default-bridge';
 import { AppHeader } from './ui/app-header';
 import { CatalogView } from './ui/catalog-view';
-import { GameIcon } from './ui/game-icon';
+import { DownloadsBar } from './ui/downloads-bar';
 import { LibraryView } from './ui/library-view';
 import { SignInView } from './ui/sign-in-view';
 
@@ -20,6 +20,7 @@ export function App({ bridge }: AppProps) {
     [bridge],
   );
   const [state, setState] = useState<AppState | null>(null);
+  const [downloadsOpen, setDownloadsOpen] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -60,11 +61,13 @@ export function App({ bridge }: AppProps) {
   }
 
   async function signOut() {
+    setDownloadsOpen(false);
     applyBridgeResult(await activeBridge.signOut());
   }
 
   async function queueInstall(gameId: string) {
     applyBridgeResult(await activeBridge.queueInstall(gameId));
+    setDownloadsOpen(true);
   }
 
   if (!activeProfile) {
@@ -106,57 +109,14 @@ export function App({ bridge }: AppProps) {
             onQueueInstall={queueInstall}
           />
         ) : null}
-
-        {viewState.route === 'downloads' ? (
-          <DownloadsView downloads={downloadsForProfile} games={viewState.games} />
-        ) : null}
       </section>
 
-      <StatusStrip downloadsCount={downloadsForProfile.length} profileName={activeProfile.displayName} />
+      <DownloadsBar
+        downloads={downloadsForProfile}
+        games={viewState.games}
+        open={downloadsOpen}
+        onToggle={setDownloadsOpen}
+      />
     </main>
-  );
-}
-
-interface DownloadsViewProps {
-  downloads: AppState['downloads'];
-  games: Game[];
-}
-
-function DownloadsView({ downloads, games }: DownloadsViewProps) {
-  return (
-    <section className="downloads-view" aria-labelledby="downloads-heading">
-      <div className="view-heading">
-        <h2 id="downloads-heading">Downloads</h2>
-      </div>
-      {downloads.length === 0 ? (
-        <p className="empty-state">Nothing queued.</p>
-      ) : (
-        <div className="download-list">
-          {downloads.map((download) => {
-            const game = games.find((item) => item.id === download.gameId);
-            if (!game) return null;
-            return (
-              <article className="download-row" key={download.id}>
-                <GameIcon game={game} />
-                <div>
-                  <h3>{game.title}</h3>
-                  <p>Waiting for a verified install recipe</p>
-                </div>
-                <span>{download.state}</span>
-              </article>
-            );
-          })}
-        </div>
-      )}
-    </section>
-  );
-}
-
-function StatusStrip({ downloadsCount, profileName }: { downloadsCount: number; profileName: string }) {
-  return (
-    <footer className="status-strip" role="status">
-      <span>{downloadsCount === 0 ? 'Ready' : `${downloadsCount} queued`}</span>
-      <span className="status-profile">{profileName}</span>
-    </footer>
   );
 }
