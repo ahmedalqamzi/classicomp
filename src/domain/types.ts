@@ -1,4 +1,4 @@
-export type AppRoute = 'library' | 'catalog' | 'downloads';
+export type AppRoute = 'library' | 'catalog' | 'mods' | 'downloads'; // 'downloads' is a legacy route removed once the downloads bar lands
 export type InstallState = 'installed' | 'available' | 'queued' | 'downloading';
 export type DownloadState = 'queued' | 'downloading' | 'paused' | 'complete';
 export type SaveState = 'local' | 'synced' | 'conflict';
@@ -22,6 +22,17 @@ export interface Game {
   executablePath: string | null;
   upstreamUrl: string;
   accent: string;
+  tags: string[];
+}
+
+export interface Mod {
+  id: string;
+  gameId: string;
+  name: string;
+  summary: string;
+  version: string;
+  author: string;
+  enabled: boolean;
 }
 
 export interface LibraryEntry {
@@ -52,12 +63,13 @@ export interface SaveSnapshot {
 }
 
 export interface AppState {
-  activeProfileId: string;
+  activeProfileId: string | null;
   selectedGameId: string;
   route: AppRoute;
   profiles: Profile[];
   games: Game[];
   libraries: Record<string, LibraryEntry[]>;
+  mods: Record<string, Mod[]>;
   downloads: Download[];
   saveSnapshots: SaveSnapshot[];
   cloudProvider: string | null;
@@ -65,7 +77,8 @@ export interface AppState {
 
 export type AppAction =
   | { type: 'profile/activate'; profileId: string }
+  | { type: 'profile/signOut' }
+  | { type: 'mod/toggle'; modId: string }
   | { type: 'route/change'; route: AppRoute }
   | { type: 'game/select'; gameId: string }
   | { type: 'install/queue'; gameId: string };
-

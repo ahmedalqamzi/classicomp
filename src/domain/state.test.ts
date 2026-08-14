@@ -25,6 +25,7 @@ function makeState(): AppState {
         executablePath: null,
         upstreamUrl: 'https://github.com/diasurgical/devilutionX',
         accent: '#a33b33',
+        tags: ['RPG', 'Action'],
       },
       {
         id: 'openrct2',
@@ -39,6 +40,7 @@ function makeState(): AppState {
         executablePath: '/usr/bin/openrct2',
         upstreamUrl: 'https://openrct2.io',
         accent: '#5c8a45',
+        tags: ['Simulation', 'Strategy'],
       },
     ],
     libraries: {
@@ -59,6 +61,30 @@ function makeState(): AppState {
         },
       ],
     },
+    mods: {
+      alex: [
+        {
+          id: 'mod-devilutionx-infernal',
+          gameId: 'devilutionx',
+          name: 'Infernal Difficulty',
+          summary: 'Brutal difficulty rebalance for veteran players.',
+          version: '0.9',
+          author: 'Community',
+          enabled: false,
+        },
+      ],
+      mira: [
+        {
+          id: 'mod-devilutionx-infernal',
+          gameId: 'devilutionx',
+          name: 'Infernal Difficulty',
+          summary: 'Brutal difficulty rebalance for veteran players.',
+          version: '0.9',
+          author: 'Community',
+          enabled: false,
+        },
+      ],
+    },
     downloads: [],
     saveSnapshots: [],
     cloudProvider: null,
@@ -67,16 +93,9 @@ function makeState(): AppState {
 
 describe('Classicomp application state', () => {
   it('switches profile and selects the first game in that profile library', () => {
-    const reduceAppState = (stateModule as {
-      reduceAppState?: (state: unknown, action: unknown) => Record<string, unknown>;
-    }).reduceAppState;
-
-    expect(typeof reduceAppState).toBe('function');
-    if (!reduceAppState) return;
-
     const initial = makeState();
 
-    const next = reduceAppState(initial, {
+    const next = stateModule.reduceAppState(initial, {
       type: 'profile/activate',
       profileId: 'mira',
     });
@@ -97,7 +116,7 @@ describe('Classicomp application state', () => {
   });
 
   it('selects a game and returns to its library detail page', () => {
-    const initial = { ...makeState(), route: 'downloads' as const };
+    const initial = { ...makeState(), route: 'catalog' as const };
     const next = stateModule.reduceAppState(initial, {
       type: 'game/select',
       gameId: 'openrct2',
@@ -107,7 +126,7 @@ describe('Classicomp application state', () => {
     expect(next.route).toBe('library');
   });
 
-  it('queues one persistent download for an available game', () => {
+  it('queues one persistent download for an available game without changing route', () => {
     const initial = makeState();
     const next = stateModule.reduceAppState(initial, {
       type: 'install/queue',
@@ -130,7 +149,66 @@ describe('Classicomp application state', () => {
         etaSeconds: null,
       },
     ]);
-    expect(next.route).toBe('downloads');
+    expect(next.route).toBe('library');
     expect(repeated.downloads).toHaveLength(1);
+  });
+
+  it('ignores install queue requests when signed out', () => {
+    const initial = { ...makeState(), activeProfileId: null };
+    const next = stateModule.reduceAppState(initial, {
+      type: 'install/queue',
+      gameId: 'devilutionx',
+    });
+
+    expect(next).toBe(initial);
+  });
+
+  it('signs out by clearing the active profile', () => {
+    const next = stateModule.reduceAppState(makeState(), { type: 'profile/signOut' });
+
+    expect(next.activeProfileId).toBeNull();
+  });
+
+  it('signs in again after signing out', () => {
+    const signedOut = stateModule.reduceAppState(makeState(), { type: 'profile/signOut' });
+    const next = stateModule.reduceAppState(signedOut, {
+      type: 'profile/activate',
+      profileId: 'mira',
+    });
+
+    expect(next.activeProfileId).toBe('mira');
+    expect(next.selectedGameId).toBe('openrct2');
+  });
+
+  it('toggles a mod only for the active profile', () => {
+    const next = stateModule.reduceAppState(makeState(), {
+      type: 'mod/toggle',
+      modId: 'mod-devilutionx-infernal',
+    });
+
+    expect(next.mods.alex[0]?.enabled).toBe(true);
+    expect(next.mods.mira[0]?.enabled).toBe(false);
+  });
+
+  it('ignores mod toggles when signed out or for unknown mods', () => {
+    const signedOut = { ...makeState(), activeProfileId: null };
+    expect(
+      stateModule.reduceAppState(signedOut, {
+        type: 'mod/toggle',
+        modId: 'mod-devilutionx-infernal',
+      }),
+    ).toBe(signedOut);
+
+    const initial = makeState();
+    expect(
+      stateModule.reduceAppState(initial, { type: 'mod/toggle', modId: 'mod-unknown' }),
+    ).toBe(initial);
+  });
+
+  it('returns no library entries or mods when signed out', () => {
+    const signedOut = { ...makeState(), activeProfileId: null };
+
+    expect(stateModule.selectVisibleLibrary(signedOut)).toEqual([]);
+    expect(stateModule.selectVisibleMods(signedOut)).toEqual([]);
   });
 });

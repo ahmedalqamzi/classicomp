@@ -43,7 +43,7 @@ describe('Classicomp desktop shell', () => {
     expect(screen.getByRole('heading', { name: 'Not installed' })).toBeVisible();
   });
 
-  it('queues a catalog game and shows the persisted download', async () => {
+  it('queues a catalog game and keeps the catalog route', async () => {
     const App = (appModule as { App?: typeof import('./App')['App'] }).App;
     expect(typeof App).toBe('function');
     if (!App) return;
@@ -56,10 +56,8 @@ describe('Classicomp desktop shell', () => {
     await user.click(screen.getByRole('tab', { name: 'Catalog' }));
     await user.click(screen.getByRole('button', { name: 'Queue DevilutionX install' }));
 
-    expect(screen.getByRole('tab', { name: /Downloads/ })).toHaveAttribute('aria-selected', 'true');
-    expect(screen.getByRole('heading', { name: 'Downloads' })).toBeVisible();
-    expect(screen.getByText('DevilutionX')).toBeVisible();
-    expect(screen.getByText('Waiting for a verified install recipe')).toBeVisible();
+    expect(screen.getByRole('tab', { name: 'Catalog' })).toHaveAttribute('aria-selected', 'true');
+    expect(screen.getByRole('status')).toHaveTextContent('1 queued');
     expect(JSON.parse(storage.getItem('classicomp.app-state.v1') ?? '{}').downloads).toHaveLength(1);
   });
 });

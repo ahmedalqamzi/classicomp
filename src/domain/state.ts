@@ -1,4 +1,4 @@
-import type { AppAction, AppState, Game, LibraryEntry } from './types';
+import type { AppAction, AppState, Game, LibraryEntry, Mod } from './types';
 
 export function reduceAppState(state: AppState, action: AppAction): AppState {
   if (action.type === 'route/change') {
@@ -9,13 +9,35 @@ export function reduceAppState(state: AppState, action: AppAction): AppState {
     return { ...state, selectedGameId: action.gameId, route: 'library' };
   }
 
+  if (action.type === 'profile/signOut') {
+    return { ...state, activeProfileId: null };
+  }
+
+  if (action.type === 'mod/toggle') {
+    if (state.activeProfileId === null) return state;
+    const mods = state.mods[state.activeProfileId];
+    if (!mods?.some((mod) => mod.id === action.modId)) return state;
+
+    return {
+      ...state,
+      mods: {
+        ...state.mods,
+        [state.activeProfileId]: mods.map((mod) =>
+          mod.id === action.modId ? { ...mod, enabled: !mod.enabled } : mod,
+        ),
+      },
+    };
+  }
+
   if (action.type === 'install/queue') {
-    const downloadId = `download-${state.activeProfileId}-${action.gameId}`;
+    if (state.activeProfileId === null) return state;
+    const activeProfileId = state.activeProfileId;
+    const downloadId = `download-${activeProfileId}-${action.gameId}`;
     if (state.downloads.some((download) => download.id === downloadId)) {
       return state;
     }
 
-    const library = state.libraries[state.activeProfileId] ?? [];
+    const library = state.libraries[activeProfileId] ?? [];
     const hasEntry = library.some((entry) => entry.gameId === action.gameId);
     const nextLibrary = hasEntry
       ? library.map((entry) =>
@@ -35,16 +57,15 @@ export function reduceAppState(state: AppState, action: AppAction): AppState {
 
     return {
       ...state,
-      route: 'downloads',
       libraries: {
         ...state.libraries,
-        [state.activeProfileId]: nextLibrary,
+        [activeProfileId]: nextLibrary,
       },
       downloads: [
         ...state.downloads,
         {
           id: downloadId,
-          profileId: state.activeProfileId,
+          profileId: activeProfileId,
           gameId: action.gameId,
           state: 'queued',
           progress: 0,
@@ -68,7 +89,13 @@ export function reduceAppState(state: AppState, action: AppAction): AppState {
 }
 
 export function selectVisibleLibrary(state: AppState): LibraryEntry[] {
+  if (state.activeProfileId === null) return [];
   return state.libraries[state.activeProfileId] ?? [];
+}
+
+export function selectVisibleMods(state: AppState): Mod[] {
+  if (state.activeProfileId === null) return [];
+  return state.mods[state.activeProfileId] ?? [];
 }
 
 export function selectGame(state: AppState, gameId: string): Game | undefined {
