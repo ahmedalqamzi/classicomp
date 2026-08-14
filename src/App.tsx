@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { seedState } from './data/seed';
-import { reduceAppState, selectVisibleLibrary } from './domain/state';
+import { reduceAppState, selectVisibleLibrary, selectVisibleMods } from './domain/state';
 import type { AppRoute, AppState } from './domain/types';
 import type { PlatformBridge } from './platform/bridge';
 import { createDefaultBridge } from './platform/default-bridge';
@@ -8,6 +8,7 @@ import { AppHeader } from './ui/app-header';
 import { CatalogView } from './ui/catalog-view';
 import { DownloadsBar } from './ui/downloads-bar';
 import { LibraryView } from './ui/library-view';
+import { ModsView } from './ui/mods-view';
 import { SignInView } from './ui/sign-in-view';
 
 interface AppProps {
@@ -70,11 +71,16 @@ export function App({ bridge }: AppProps) {
     setDownloadsOpen(true);
   }
 
+  async function toggleMod(modId: string) {
+    applyBridgeResult(await activeBridge.toggleMod(modId));
+  }
+
   if (!activeProfile) {
     return <SignInView profiles={viewState.profiles} onSignIn={activateProfile} />;
   }
 
   const activeLibrary = selectVisibleLibrary(viewState);
+  const activeMods = selectVisibleMods(viewState);
   const downloadsForProfile = viewState.downloads.filter(
     (download) => download.profileId === viewState.activeProfileId,
   );
@@ -108,6 +114,10 @@ export function App({ bridge }: AppProps) {
             library={activeLibrary}
             onQueueInstall={queueInstall}
           />
+        ) : null}
+
+        {viewState.route === 'mods' ? (
+          <ModsView games={viewState.games} mods={activeMods} onToggleMod={toggleMod} />
         ) : null}
       </section>
 

@@ -107,4 +107,34 @@ describe('Classicomp desktop shell', () => {
     expect(screen.getByText('OpenMW')).toBeVisible();
     expect(screen.queryByText('OpenTTD')).not.toBeInTheDocument();
   });
+
+  it('shows per-game mods and toggles them for the active profile', async () => {
+    const App = (appModule as { App?: typeof import('./App')['App'] }).App;
+    expect(typeof App).toBe('function');
+    if (!App) return;
+
+    const user = userEvent.setup();
+    const storage = new MemoryStorage();
+    render(<App bridge={createBrowserBridge(storage)} />);
+
+    await screen.findByRole('heading', { name: 'OpenRCT2' });
+    await user.click(screen.getByRole('tab', { name: 'Mods' }));
+
+    expect(await screen.findByText('Tamriel Rebuilt')).toBeVisible();
+    const toggle = screen.getByRole('switch', { name: 'Toggle Tamriel Rebuilt' });
+    expect(toggle).toHaveAttribute('aria-checked', 'true');
+
+    await user.click(toggle);
+    expect(screen.getByRole('switch', { name: 'Toggle Tamriel Rebuilt' })).toHaveAttribute(
+      'aria-checked',
+      'false',
+    );
+
+    const persisted = JSON.parse(storage.getItem('classicomp.app-state.v2') ?? '{}') as {
+      mods: Record<string, Array<{ id: string; enabled: boolean }>>;
+    };
+    expect(
+      persisted.mods.owner?.find((mod) => mod.id === 'mod-openmw-tamriel-rebuilt')?.enabled,
+    ).toBe(false);
+  });
 });
