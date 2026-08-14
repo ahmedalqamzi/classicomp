@@ -85,4 +85,26 @@ describe('Classicomp desktop shell', () => {
     expect(await screen.findByRole('heading', { name: 'OpenRCT2' })).toBeVisible();
     expect(screen.getByRole('button', { name: /Guest/ })).toBeVisible();
   });
+
+  it('filters the catalog by search text and tag chips', async () => {
+    const App = (appModule as { App?: typeof import('./App')['App'] }).App;
+    expect(typeof App).toBe('function');
+    if (!App) return;
+
+    const user = userEvent.setup();
+    render(<App bridge={createBrowserBridge(new MemoryStorage())} />);
+
+    await screen.findByRole('heading', { name: 'OpenRCT2' });
+    await user.click(screen.getByRole('tab', { name: 'Catalog' }));
+
+    await user.type(screen.getByRole('searchbox', { name: 'Search catalog' }), 'diablo');
+    expect(screen.getByText('DevilutionX')).toBeVisible();
+    expect(screen.queryByText('OpenMW')).not.toBeInTheDocument();
+
+    await user.clear(screen.getByRole('searchbox', { name: 'Search catalog' }));
+    await user.click(screen.getByRole('button', { name: 'RPG' }));
+    expect(screen.getByText('DevilutionX')).toBeVisible();
+    expect(screen.getByText('OpenMW')).toBeVisible();
+    expect(screen.queryByText('OpenTTD')).not.toBeInTheDocument();
+  });
 });
