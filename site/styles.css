@@ -3,8 +3,9 @@
    marketing page. Every visual value is a token below; the rules underneath
    only assign tokens to elements.
 
-   Signature: the app-window hero with CSS-only dithered capsule art — the
-   page shows the product instead of describing it. */
+   Signature: the app-window chrome framing the real client — the store shelf
+   carries the hero, a game page anchors "How it works". The page shows the
+   product instead of describing it. */
 
 :root {
   color-scheme: dark;
@@ -233,13 +234,9 @@ h1, h2, h3 { font-family: var(--font-display); color: var(--ink-strong); }
 .hero { border-bottom: 1px solid var(--rule-soft); }
 
 .hero-inner {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
   max-width: var(--wrap);
   margin: 0 auto;
-  padding: clamp(48px, 8vw, 96px) var(--pad);
+  padding: clamp(40px, 6vw, 72px) var(--pad) clamp(40px, 5vw, 64px);
 }
 
 .eyebrow,
@@ -367,18 +364,55 @@ h1 {
   white-space: nowrap;
 }
 
-.app-body { padding: 14px; }
+/* real client captures framed by the window chrome */
+.hero-window { margin: clamp(28px, 4vw, 44px) 0 0; }
+
+.shot-window { margin: 0 0 12px; }
+
+.app-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--bg-deep);
+}
+
+/* On narrow screens the shelf keeps a legible height and crops the row
+   horizontally instead of shrinking the box art to nothing. */
+@media (max-width: 700px) {
+  .hero-window .app-shot {
+    height: 150px;
+    object-fit: cover;
+    object-position: left center;
+  }
+}
+
+.shot-caption { margin-bottom: 28px; }
+
+/* catalogue name strip — the fold should answer "is my game in there?" */
+.hero-games {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.hero-games-label {
+  margin-right: 10px;
+  color: var(--accent);
+  font-size: 10.5px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
 
 /* capsule art: pure-CSS box art. Dithered gradients + scanlines + vignette,
    so every tile reads as a shelf object, not a placeholder. */
-.capsule,
 .feature-art {
   position: relative;
   border-radius: 2px;
   overflow: hidden;
 }
 
-.capsule::after,
 .feature-art::after {
   content: "";
   position: absolute;
@@ -394,80 +428,6 @@ h1 {
 .art-c { background: linear-gradient(155deg, #f45bb5 0%, #5a2ea6 52%, #1b1440 100%); }
 .art-d { background: linear-gradient(170deg, #b8e356 0%, #3f8f4f 50%, #123524 100%); }
 .art-e { background: linear-gradient(150deg, #6fc3ff 0%, #3a63c9 55%, #141a3d 100%); }
-
-.capsule-featured {
-  height: clamp(150px, 20vw, 200px);
-  margin-bottom: 10px;
-  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, .55);
-}
-
-.capsule-featured::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, .14) 50%, transparent 65%);
-  background-size: 250% 100%;
-  animation: sheen 7s ease-in-out infinite;
-}
-
-@keyframes sheen {
-  0%, 55% { background-position: 120% 0; }
-  90%, 100% { background-position: -60% 0; }
-}
-
-.capsule-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.capsule-row .capsule { height: clamp(64px, 8vw, 86px); }
-
-.capsule-tag {
-  position: absolute;
-  left: 8px;
-  bottom: 7px;
-  z-index: 1;
-  color: rgba(255, 255, 255, .92);
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
-}
-
-.capsule-featured .capsule-tag { left: 12px; bottom: 11px; font-size: 11px; }
-
-.capsule-install {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 1;
-  padding: 4px 12px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #a4d007 5%, #5c7e10 95%);
-  color: #0c1303;
-  font-size: 11px;
-  font-weight: 700;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, .2);
-}
-
-.capsule-badge {
-  position: absolute;
-  top: 7px;
-  right: 7px;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-}
 
 .app-status {
   display: flex;
@@ -585,16 +545,38 @@ p { margin: 0 0 14px; }
 
 .features p { margin: 0; color: var(--muted); font-size: 14px; }
 
-/* roadmap — wishlist rows */
-.roadmap > li {
-  padding: 10px 2px;
-  border-top: 1px solid var(--rule-soft);
-  color: var(--muted);
-  font-size: 14.5px;
+/* roadmap — numbered wishlist cards, same panel furniture as features */
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr));
+  gap: 2px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: var(--rule-soft);
+  overflow: hidden;
 }
 
-.roadmap > li:first-child { border-top: 0; }
-.roadmap strong { color: var(--ink-strong); font-weight: 600; }
+.roadmap > li {
+  padding: 18px;
+  background: var(--surface);
+  transition: background .15s;
+}
+
+.roadmap > li:hover { background: var(--surface-2); }
+
+/* seven cards never fill an auto-fit grid evenly — the last one takes the row */
+.roadmap > li:last-child { grid-column: 1 / -1; }
+
+.roadmap-no {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .18em;
+}
+
+.roadmap h3 { margin: 7px 0 5px; font-size: 15px; }
+
+.roadmap p { margin: 0; color: var(--muted); font-size: 13.5px; }
 
 /* legal notice panel */
 .notice {
@@ -619,7 +601,6 @@ footer {
 /* ── responsive ───────────────────────────────────────────────────────── */
 
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; }
   .lede { max-width: none; }
 }
 
@@ -631,8 +612,6 @@ footer {
 }
 
 @media (max-width: 400px) {
-  .capsule-row { grid-template-columns: repeat(2, 1fr); }
-  .capsule-row .capsule { height: 72px; }
   .app-status { font-size: 10px; }
 }
 

@@ -53,36 +53,32 @@
       </p>
     </div>
 
-    <div class="app-window" aria-hidden="true">
-      <div class="app-chrome">
+    <figure class="app-window hero-window">
+      <div class="app-chrome" aria-hidden="true">
         <span class="app-dot"></span><span class="app-dot"></span><span class="app-dot"></span>
         <span class="app-title">classicomp — catalogue</span>
       </div>
-      <div class="app-tabs">
+      <div class="app-tabs" aria-hidden="true">
         <span class="app-tab is-active">Catalogue</span>
         <span class="app-tab">Library</span>
         <span class="app-tab">Downloads</span>
         <span class="app-search">search the catalogue</span>
       </div>
-      <div class="app-body">
-        <div class="capsule capsule-featured art-a">
-          <span class="capsule-tag">Featured · source port</span>
-          <span class="capsule-install">+ Install</span>
-        </div>
-        <div class="capsule-row">
-          <div class="capsule art-b"><span class="capsule-tag">Recompilation</span></div>
-          <div class="capsule art-c"><span class="capsule-tag">Decompilation</span></div>
-          <div class="capsule art-d">
-            <span class="capsule-tag">Update ready</span>
-            <span class="capsule-badge">1</span>
-          </div>
-          <div class="capsule art-e"><span class="capsule-tag">New release</span></div>
-        </div>
-      </div>
-      <div class="app-status">
+      <img class="app-shot" src="media/shelf.jpg" width="1800" height="302" fetchpriority="high"
+        alt="The Classicomp store shelf: real box art for Pokémon Red, Street Fighter Alpha 3, Crash Bandicoot, Syphon Filter, Banjo-Kazooie: Nuts &amp; Bolts, Super Smash Bros., Majora's Mask and Diddy Kong Racing, each with its platform and year beneath.">
+      <div class="app-status" aria-hidden="true">
         <span class="status-dot"></span>sync complete — 151 projects · 55 playable · 48 builds · 42 launching<span class="status-cursor"></span>
       </div>
-    </div>
+    </figure>
+
+    <p class="hero-games">
+      <span class="hero-games-label">In the catalogue</span>
+      Diablo · The Legend of Zelda: Ocarina of Time · Majora's Mask · Twilight Princess ·
+      Super Mario 64 · Mario Kart 64 · Banjo-Kazooie · Star Fox 64 · Perfect Dark ·
+      Morrowind · RollerCoaster Tycoon 2 · Sonic Unleashed · Crash Bandicoot ·
+      Symphony of the Night · Jak and Daxter · Transport Tycoon Deluxe · Harvest Moon 64 ·
+      Duke Nukem: Zero Hour · Mega Man 64 · Skate 3 · …
+    </p>
   </div>
 </header>
 
@@ -105,6 +101,18 @@
 <section aria-labelledby="how">
   <p class="section-eyebrow">What the client does</p>
   <h2 id="how">How it works</h2>
+  <figure class="app-window shot-window">
+    <div class="app-chrome" aria-hidden="true">
+      <span class="app-dot"></span><span class="app-dot"></span><span class="app-dot"></span>
+      <span class="app-title">classicomp — Ocarina of Time</span>
+    </div>
+    <img class="app-shot" src="media/game-page.jpg" width="1280" height="784" loading="lazy"
+      alt="A game page in Classicomp for The Legend of Zelda: Ocarina of Time — a gameplay screenshot gallery, the box art, an In library button, and the start of the implementations list.">
+  </figure>
+  <p class="note shot-caption">
+    A game page in the client: the screenshots, the download, every implementation that can
+    run it, and what changed lately.
+  </p>
   <ul class="features">
     <li>
       <span class="feature-art art-b" aria-hidden="true"></span>
@@ -165,13 +173,41 @@
   <p class="section-eyebrow">On the wishlist</p>
   <h2 id="next">Coming next</h2>
   <ul class="roadmap">
-    <li><strong>Big Picture mode</strong> — a full-screen, controller-first layout for a TV or a handheld.</li>
-    <li><strong>Remote install</strong> — queue a game from anywhere and have the machine at home fetch it.</li>
-    <li><strong>Mobile app</strong> — browse the catalogue and manage your library from a phone.</li>
-    <li><strong>Cloud saves</strong> — sync progress between machines.</li>
-    <li><strong>Friends list</strong> — see who is online and what they are playing.</li>
-    <li><strong>Multiplayer connectivity</strong> — join a friend's session straight from their profile.</li>
-    <li><strong>Built-in workshop</strong> — browse, install and update mods without leaving the app.</li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">01</span>
+      <h3>Big Picture mode</h3>
+      <p>A full-screen, controller-first layout for a TV or a handheld.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">02</span>
+      <h3>Remote install</h3>
+      <p>Queue a game from anywhere and have the machine at home fetch it.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">03</span>
+      <h3>Mobile app</h3>
+      <p>Browse the catalogue and manage your library from a phone.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">04</span>
+      <h3>Cloud saves</h3>
+      <p>Sync progress between machines.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">05</span>
+      <h3>Friends list</h3>
+      <p>See who is online and what they are playing.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">06</span>
+      <h3>Multiplayer connectivity</h3>
+      <p>Join a friend's session straight from their profile.</p>
+    </li>
+    <li>
+      <span class="roadmap-no" aria-hidden="true">07</span>
+      <h3>Built-in workshop</h3>
+      <p>Browse, install and update mods without leaving the app.</p>
+    </li>
   </ul>
 </section>
 
