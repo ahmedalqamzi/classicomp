@@ -8,7 +8,22 @@ interface SignInViewProps {
 export function SignInView({ profiles, onSignIn }: SignInViewProps) {
   return (
     <main className="sign-in-view">
-      <section className="sign-in-card" aria-labelledby="sign-in-heading">
+      <a
+        className="skip-link"
+        href="#active-view"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById('active-view')?.focus();
+        }}
+      >
+        Skip to content
+      </a>
+      <section
+        className="sign-in-card"
+        aria-labelledby="sign-in-heading"
+        id="active-view"
+        tabIndex={-1}
+      >
         <h1 id="sign-in-heading">Sign in to Classicomp</h1>
         <div className="sign-in-accounts">
           {profiles.map((profile) => (

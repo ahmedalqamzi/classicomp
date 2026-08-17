@@ -8,13 +8,45 @@
   font-size: 12px;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 6px;
+  left: 8px;
+  padding: 7px 11px;
+  transform: translateY(-160%);
+  border-radius: 2px;
+  background: var(--blue);
+  color: #0b0f16;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 100ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ── Top chrome (Steam-style client bar) ─────────────────────────────── */
+
 .app-header {
   display: grid;
-  grid-template-columns: 180px minmax(330px, 1fr) 245px;
+  grid-template-columns: auto auto auto minmax(0, 1fr) auto;
   align-items: stretch;
   border-bottom: 1px solid var(--line);
-  background: var(--surface-1);
-  box-shadow: inset 0 1px rgb(255 255 255 / 4%);
+  background: linear-gradient(#20242d, #171a21);
 }
 
 .brand-lockup {
@@ -25,10 +57,10 @@
 
 .brand-lockup h1 {
   margin: 0;
-  color: var(--text);
+  color: #d6d9de;
   font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .08em;
+  font-weight: 800;
+  letter-spacing: .14em;
 }
 
 .primary-tabs {
@@ -37,13 +69,14 @@
 }
 
 .primary-tabs button {
-  padding: 0 14px;
+  position: relative;
+  padding: 0 16px;
   border: 0;
-  border-inline: 1px solid transparent;
   background: transparent;
-  color: var(--muted);
+  color: #9aa3ad;
   font-size: 12px;
-  letter-spacing: .06em;
+  font-weight: 700;
+  letter-spacing: .08em;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -54,9 +87,17 @@
 }
 
 .primary-tabs button[aria-selected="true"] {
-  border-color: var(--line);
-  background: var(--surface-3);
   color: var(--text-bright);
+}
+
+.primary-tabs button[aria-selected="true"]::after {
+  position: absolute;
+  right: 12px;
+  bottom: 0;
+  left: 12px;
+  height: 2px;
+  content: "";
+  background: var(--blue);
 }
 
 .account-menu {
@@ -64,33 +105,45 @@
   display: flex;
   align-items: center;
   justify-self: end;
-  padding-right: 12px;
+  padding-right: 10px;
 }
 
 .account-menu > button {
   display: inline-flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
-  height: 28px;
-  padding: 0 10px;
-  border: 1px solid var(--line);
+  height: 30px;
+  padding: 0 8px 0 4px;
+  border: 0;
   border-radius: 2px;
-  background: var(--surface-2);
+  background: transparent;
   color: var(--text);
   font-size: 12px;
   cursor: pointer;
 }
 
 .account-menu > button:hover {
-  border-color: var(--surface-3);
+  background: rgb(255 255 255 / 5%);
   color: var(--text-bright);
+}
+
+.account-avatar {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 2px;
+  background: linear-gradient(#3d6c8d, var(--surface-3));
+  color: var(--text-bright);
+  font-size: 10px;
+  font-weight: 700;
 }
 
 .account-dropdown {
   position: absolute;
   z-index: 20;
   top: calc(100% + 6px);
-  right: 12px;
+  right: 10px;
   min-width: 210px;
   padding: 6px;
   border: 1px solid var(--line);
@@ -146,12 +199,14 @@
   grid-template-columns: 240px minmax(0, 1fr);
 }
 
+/* ── Library sidebar ─────────────────────────────────────────────────── */
+
 .library-rail {
   display: grid;
   grid-template-rows: 44px minmax(0, 1fr) 24px;
   min-height: 0;
   border-right: 1px solid var(--line);
-  background: var(--surface-2);
+  background: var(--rail-bg);
 }
 
 .search-field {
@@ -179,22 +234,43 @@
 .library-list {
   min-height: 0;
   overflow-y: auto;
-  scrollbar-color: #34495e var(--surface-2);
+  scrollbar-color: #34495e var(--rail-bg);
   scrollbar-width: thin;
 }
 
-.library-list section {
-  margin: 0;
-}
-
-.library-list h2 {
-  margin: 0;
-  padding: 10px 12px 4px;
+.library-list-header {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  padding: 8px 12px 5px;
+  border: 0;
+  background: transparent;
   color: var(--dim);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: .07em;
+  letter-spacing: .08em;
+  text-align: left;
   text-transform: uppercase;
+  cursor: pointer;
+}
+
+.library-list-header:hover {
+  color: var(--text);
+}
+
+.library-list-header svg {
+  transition: transform .12s;
+}
+
+.library-list-header[aria-expanded="false"] svg {
+  transform: rotate(-90deg);
+}
+
+.library-no-matches {
+  margin: 6px 12px;
+  color: var(--dim);
+  font-size: 11px;
 }
 
 .library-row {
@@ -203,22 +279,22 @@
   gap: 8px;
   align-items: center;
   width: 100%;
-  height: 30px;
+  height: 28px;
   padding: 0 10px;
   border: 0;
   background: transparent;
-  color: var(--dim);
+  color: #969ca4;
   text-align: left;
   cursor: pointer;
 }
 
 .library-row:hover {
-  background: var(--surface-hover);
-  color: var(--text);
+  background: var(--rail-row-hover);
+  color: #d8dce1;
 }
 
 .library-row[aria-current="page"] {
-  background: var(--surface-3);
+  background: linear-gradient(90deg, #3d6c8d 0%, var(--surface-3) 100%);
   color: var(--text-bright);
 }
 
@@ -249,6 +325,17 @@
   font-weight: 700;
 }
 
+/* Mods section headers: the icon reads as a per-game avatar (gradient chip
+   from the markup), not a stray grey checkbox. */
+.mods-game > h3 .game-icon {
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 3px;
+  color: rgb(255 255 255 / 92%);
+  font-size: 12px;
+}
+
 .game-icon img {
   position: absolute;
   inset: 0;
@@ -266,6 +353,8 @@
   font-size: 11px;
 }
 
+/* ── Library game detail ─────────────────────────────────────────────── */
+
 .game-detail {
   min-width: 0;
   min-height: 0;
@@ -277,20 +366,18 @@
 
 .game-hero {
   position: relative;
-  height: 260px;
+  height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
-  background: var(--surface-1);
-  box-shadow: inset 0 1px rgb(255 255 255 / 4%);
+  background: #10151d;
 }
 
 .game-hero::after {
   position: absolute;
-  inset: auto 0 0;
+  inset: 0;
   z-index: 1;
-  height: 100px;
   content: "";
-  background: linear-gradient(transparent, rgb(23 26 33 / 96%));
+  background: linear-gradient(transparent 34%, rgb(23 26 33 / 94%) 92%);
   pointer-events: none;
 }
 
@@ -305,16 +392,17 @@
 .game-hero-copy {
   position: absolute;
   z-index: 2;
-  left: 24px;
-  bottom: 18px;
-  max-width: 620px;
+  left: 28px;
+  bottom: 20px;
+  max-width: 640px;
   text-shadow: 0 1px 3px rgb(0 0 0 / 65%);
 }
 
 .game-hero-copy h2 {
   margin: 0 0 4px;
   color: var(--text-bright);
-  font-size: 22px;
+  font-size: 28px;
+  font-weight: 600;
   line-height: 1.1;
 }
 
@@ -328,42 +416,73 @@
   display: flex;
   gap: 16px;
   align-items: center;
-  min-height: 48px;
-  padding: 8px 16px;
+  min-height: 58px;
+  padding: 10px 20px;
   border-bottom: 1px solid var(--line);
-  background: var(--surface-1);
+  background: var(--chrome-charcoal);
   box-shadow: inset 0 1px rgb(255 255 255 / 4%);
 }
 
-.primary-action,
-.catalog-row button {
+.primary-action {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(#75a319, #5c7e10);
+  color: var(--text-bright);
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.primary-action:hover {
+  filter: brightness(1.12);
+}
+
+/* "Set up" stands beside PLAY rather than replacing it: blue, and sized to
+   read as the secondary of the pair, so the bar says "one step left" instead
+   of hiding the action the player came for. */
+.setup-action {
   display: inline-flex;
   gap: 6px;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  padding: 0 13px;
-  border: 1px solid #7fa529;
+  height: 38px;
+  padding: 0 18px;
+  border: 0;
   border-radius: 2px;
-  background: linear-gradient(#75a319, #5c7e10);
-  color: var(--text-bright);
-  font-size: 13px;
+  background: linear-gradient(#47bfff, #1a9fff);
+  color: #0b0f16;
+  font-size: 14px;
   font-weight: 600;
+  text-transform: uppercase;
   cursor: pointer;
 }
 
-.primary-action:hover,
-.catalog-row button:hover {
-  filter: brightness(1.08);
+.setup-action:hover {
+  filter: brightness(1.1);
 }
 
-.primary-action:disabled,
-.catalog-row button:disabled {
-  border-color: #33495b;
+/* PLAY greys out while setup is outstanding, so the pair reads in one glance:
+   the thing you want, and the thing standing in front of it. */
+.primary-action:disabled {
+  border: 1px solid #33495b;
   background: var(--surface-3);
   color: var(--muted);
   filter: none;
   cursor: default;
+}
+
+.rom-dialog-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 12px 0 10px;
 }
 
 .action-bar a,
@@ -386,21 +505,58 @@
   color: var(--gold);
 }
 
+.game-stats {
+  display: flex;
+  align-items: stretch;
+  padding: 0 20px;
+  border-bottom: 1px solid var(--line);
+  background: #1d2126;
+}
+
+.game-stat {
+  padding: 10px 28px 10px 0;
+  margin-right: 28px;
+  border-right: 1px solid var(--line-soft);
+}
+
+.game-stat:last-child {
+  border-right: 0;
+}
+
+.game-stat-label {
+  display: block;
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.game-stat-value {
+  display: block;
+  margin-top: 3px;
+  color: var(--text-bright);
+  font-size: 13px;
+}
+
 .detail-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
   gap: 16px;
-  padding: 16px;
+  padding: 16px 20px;
 }
 
 .about-panel,
 .metadata-panel {
   min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--card-border);
+  border-radius: 3px;
+  background: var(--surface-1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
 }
 
 .about-panel h3,
 .metadata-panel h3,
-.catalog-row h3,
 .download-row h3,
 .view-heading h2 {
   margin: 0;
@@ -462,7 +618,8 @@
   white-space: nowrap;
 }
 
-.catalog-view,
+/* ── Mods view ───────────────────────────────────────────────────────── */
+
 .mods-view {
   min-height: 0;
   overflow-y: auto;
@@ -478,15 +635,14 @@
   font-size: 20px;
 }
 
-.catalog-table,
 .download-list {
   border: 1px solid var(--line);
   background: var(--surface-1);
 }
 
-.catalog-row,
 .download-row {
   display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) 100px;
   gap: 12px;
   align-items: center;
   min-height: 58px;
@@ -494,36 +650,23 @@
   border-bottom: 1px solid var(--line);
 }
 
-.catalog-row:last-child,
 .download-row:last-child {
   border-bottom: 0;
 }
 
-.catalog-row {
-  grid-template-columns: 28px minmax(0, 1fr) 120px 74px;
-}
-
-.download-row {
-  grid-template-columns: 28px minmax(0, 1fr) 100px;
-}
-
-.catalog-row:hover,
 .download-row:hover {
   background: var(--surface-hover);
 }
 
-.catalog-row .game-icon,
 .download-row .game-icon {
   width: 28px;
   height: 28px;
 }
 
-.catalog-row h3,
 .download-row h3 {
   font-size: 13px;
 }
 
-.catalog-row p,
 .download-row p,
 .empty-state {
   margin: 2px 0 0;
@@ -534,7 +677,6 @@
   white-space: nowrap;
 }
 
-.catalog-row > span,
 .download-row > span {
   color: var(--muted);
   font-size: 11px;
@@ -546,6 +688,8 @@
   border: 1px solid var(--line);
   background: var(--surface-1);
 }
+
+/* ── Sign-in ─────────────────────────────────────────────────────────── */
 
 .sign-in-view {
   display: grid;
@@ -606,6 +750,8 @@
   font-weight: 700;
 }
 
+/* ── Downloads bar ───────────────────────────────────────────────────── */
+
 .downloads-area {
   position: relative;
 }
@@ -647,8 +793,26 @@
   transition: width .2s;
 }
 
+/* Total size unknown: sweep instead of a percentage. */
+.downloads-progress.indeterminate > span {
+  width: 40%;
+  animation: downloads-indeterminate 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes downloads-indeterminate {
+  from { transform: translateX(-30%); }
+  to { transform: translateX(190%); }
+}
+
 .downloads-state {
   text-transform: capitalize;
+}
+
+/* Live progress text ("42.3 MB of 128 MB · 6.2 MB/s") must not be
+   capitalized like a state label. */
+.downloads-state.downloads-live {
+  color: var(--muted);
+  text-transform: none;
 }
 
 .downloads-toggle {
@@ -668,6 +832,26 @@
   color: var(--text-bright);
 }
 
+.downloads-view-library {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  justify-self: end;
+  padding: 3px 10px;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--blue);
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.downloads-view-library:hover {
+  background: var(--blue);
+  color: #0b0f16;
+}
+
 .downloads-panel {
   position: absolute;
   z-index: 10;
@@ -681,12 +865,455 @@
   box-shadow: 0 -8px 24px rgb(0 0 0 / 35%);
 }
 
+/* ── Store view (Steam storefront) ───────────────────────────────────── */
+
+.store-view {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 10px 20px 24px;
+  background: linear-gradient(180deg, var(--surface-1) 0%, var(--store-deep) 380px, var(--surface-0) 760px);
+  scrollbar-color: #34495e transparent;
+  scrollbar-width: thin;
+}
+
+.store-topline {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.store-title {
+  margin: 0;
+  color: var(--dim);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.store-scanline {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.store-scanline > span {
+  overflow: hidden;
+  color: var(--dim);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.store-scanline > span[role="status"] {
+  color: var(--gold);
+}
+
+.store-scanline > button {
+  flex-shrink: 0;
+  padding: 2px 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.store-scanline > button:hover:not(:disabled) {
+  color: var(--text-bright);
+  text-decoration: underline;
+}
+
+.store-scanline > button:disabled {
+  color: var(--dim);
+  cursor: default;
+}
+
+.store-section-title {
+  margin: 0 0 12px;
+  color: var(--text-bright);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* Featured capsule */
+
+.store-featured {
+  margin-bottom: 40px;
+}
+
+.featured-capsule {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(280px, 1fr);
+  min-height: 300px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--surface-2);
+  box-shadow: 0 6px 24px rgb(0 0 0 / 45%);
+}
+
+.featured-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 300px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  cursor: pointer;
+}
+
+/* Full-bleed cropped capture — no blur wash; the gradient scrim keeps the
+   cluster readable instead. */
+.featured-art > img,
+.featured-art .art-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.featured-art .art-frame {
+  display: block;
+}
+
+.featured-art > img,
+.featured-art .art-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.featured-art::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent 52%, rgb(16 24 34 / 78%)),
+    linear-gradient(transparent 55%, rgb(10 14 20 / 68%));
+  pointer-events: none;
+}
+
+.featured-art-fallback {
+  padding: 20px;
+  color: rgb(255 255 255 / 92%);
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  text-align: center;
+  text-shadow: 0 2px 8px rgb(0 0 0 / 55%);
+  text-transform: uppercase;
+}
+
+.featured-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 22px;
+  background: linear-gradient(var(--store-deep), var(--surface-2));
+}
+
+.featured-title {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.featured-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.featured-chips li {
+  padding: 2px 8px;
+  border-radius: 2px;
+  background: rgb(102 192 244 / 12%);
+  color: var(--blue);
+  font-size: 11px;
+}
+
+.featured-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.featured-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: auto;
+}
+
+.featured-download {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  height: 34px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(#75a319, #5c7e10);
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.featured-download:hover {
+  filter: brightness(1.12);
+}
+
+.featured-browse {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.featured-browse:hover {
+  color: var(--text-bright);
+}
+
+/* Small screenshot thumbs under the CTA swap the hero capture. */
+.featured-thumbs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.featured-thumb {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #0b0f16;
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+  opacity: .75;
+  transition: opacity 120ms ease, border-color 120ms ease;
+}
+
+.featured-thumb:hover,
+.featured-thumb[aria-current="true"] {
+  border-color: var(--blue);
+  opacity: 1;
+}
+
+.featured-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Shelf rows */
+
+.store-shelf {
+  margin-bottom: 40px;
+}
+
+.store-shelf-track {
+  display: grid;
+  grid-auto-columns: 150px;
+  /* Capsules keep their intrinsic height — a slow-loading neighbor must
+     never stretch the whole row and inflate other tiles. */
+  align-items: start;
+  grid-auto-flow: column;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 4px 4px 8px;
+  scrollbar-color: #34495e transparent;
+  scrollbar-width: thin;
+}
+
+.store-capsule {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 3px;
+  background: var(--surface-2);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 35%);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+/* The hover lift travels as an inherited multiplier, never as a whole
+   `filter` declaration: the fill treatment stacks blur and drop-shadow into
+   that same property, and a flat `filter: brightness()` here would
+   out-specify and erase them — the blurred plinth would snap sharp the
+   moment the pointer landed. As a multiplier it brightens every layer by the
+   same ratio instead. */
+.store-capsule:hover,
+.store-capsule:focus-visible {
+  --art-lift: 1.12;
+
+  z-index: 1;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 22px rgb(0 0 0 / 55%);
+}
+
+.store-capsule-art {
+  position: relative;
+  display: grid;
+  flex: none;
+  place-items: center;
+  overflow: hidden;
+  /* Width-locked square tile: identical on every capsule, no matter what the
+     art inside is doing or whether it has loaded yet.
+
+     Square, not Steam's 2:3, because this catalogue is scans of physical
+     boxes and physical boxes are not one shape: N64 boxes are landscape
+     (1.434), Game Boy square (1.000), PS1 and most Wikipedia covers portrait
+     (0.707). Across the 117 audited covers the median aspect is exactly
+     1.000 and the range is 0.667–2.000. Steam can use 2:3 because publishers
+     supply purpose-made 600x900 capsules; here that container fits one
+     cluster and mutilates the other two — it crops 53% of the width off
+     every N64 box. A square tile is the centre of this distribution (0.707
+     and 1.434 are reciprocals, so portrait and landscape scans lose the same
+     amount), which drops average crop from 28.3% to 20.6% and worst-case
+     from 66.7% to 50%. */
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+/* One hairline on the tile, above the art, so the poster is bounded by a
+   crisp edge instead of bleeding into the page background. */
+.store-capsule-art::after {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  content: "";
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 7%);
+  pointer-events: none;
+}
+
+/* Reserved for the tallest footer a capsule can have — title, meta and the
+   optional play-state line. The space is held whether or not that third
+   line is present, so an "IN LIBRARY" badge no longer pushes its capsule
+   13px taller than everything else in the row. */
+.store-capsule-foot { min-height: 55px; }
+
+.store-capsule-art img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Biased up rather than centred: only the overflowing axis is affected, so
+     this does nothing to a landscape scan (which crops horizontally) and on
+     a portrait scan it spends the crop on the bottom edge — where the ESRB
+     block and publisher logos sit — instead of splitting it with the top,
+     where the title always is. */
+  object-position: 50% 35%;
+  filter: brightness(var(--art-lift, 1));
+  transition: filter 120ms ease;
+}
+
+.store-capsule-name {
+  padding: 8px 10px;
+  color: rgb(255 255 255 / 92%);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  text-align: center;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 55%);
+  text-transform: uppercase;
+}
+
+/* Title and status stack so a long title truncates cleanly instead of
+   squeezing the status label. */
+.store-capsule-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: stretch;
+  padding: 5px 8px 6px;
+}
+
+.store-capsule-year {
+  color: var(--dim);
+  font-size: 10px;
+}
+
+.store-capsule-status {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.store-capsule-status[data-availability="released"] {
+  color: var(--green);
+}
+
+.store-capsule-status[data-availability="playable"] {
+  color: var(--blue);
+}
+
+.store-capsule-status[data-availability="in-development"] {
+  color: var(--gold);
+}
+
+/* Browse-all list */
+
+.store-browse-head {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.store-browse-head h3 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.store-count {
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 .catalog-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .catalog-filters .catalog-search {
@@ -694,16 +1321,23 @@
   margin: 0;
 }
 
-.tag-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+.catalog-filters select {
+  height: 26px;
+  padding: 0 7px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 12px;
 }
 
 .tag-chip {
-  padding: 3px 11px;
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 11px;
   border: 1px solid var(--line);
-  border-radius: 999px;
+  border-radius: 2px;
   background: var(--surface-1);
   color: var(--muted);
   font-size: 11px;
@@ -721,15 +1355,739 @@
   color: #0b0f16;
 }
 
-.catalog-filters select {
-  height: 26px;
-  padding: 0 7px;
+.tracking-game {
+  margin-bottom: 18px;
+}
+
+.tracking-game.is-highlighted .tracking-game-head h3 {
+  color: var(--blue);
+}
+
+.tracking-game.is-highlighted .tracking-table {
+  outline: 1px solid rgb(102 192 244 / 55%);
+}
+
+.tracking-game-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.tracking-game-head h3 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 14px;
+}
+
+.tracking-game-head > span:not(.tracking-badge) {
+  overflow: hidden;
+  color: var(--dim);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tracking-badge {
+  padding: 2px 8px;
   border: 1px solid var(--line);
   border-radius: 2px;
   background: var(--surface-2);
-  color: var(--text);
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tracking-badge[data-availability="released"] {
+  border-color: var(--green-dark);
+  color: var(--green);
+}
+
+.tracking-badge[data-availability="playable"] {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.tracking-badge[data-availability="in-development"] {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.implementation-count {
+  color: var(--dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.watch-toggle {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  margin-left: auto;
+  padding: 3px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-1);
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.watch-toggle:hover {
+  border-color: var(--surface-3);
+  color: var(--text-bright);
+}
+
+.watch-toggle[aria-pressed="true"] {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #0b0f16;
+}
+
+.tracking-table {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgb(16 24 34 / 72%);
+}
+
+/* Steam's list is a table, not cards: ~32px rows with fixed right-aligned
+   meta columns and a small capsule thumb. */
+.tracking-row {
+  display: grid;
+  grid-template-columns: 69px minmax(0, 1fr) 120px 110px 96px minmax(96px, auto);
+  gap: 10px;
+  align-items: center;
+  min-height: 32px;
+  padding: 2px 10px 2px 3px;
+  border-bottom: 1px solid var(--line);
+}
+
+.tracking-row:last-child {
+  border-bottom: 0;
+}
+
+.tracking-row:hover {
+  background: var(--surface-hover);
+}
+
+.tracking-row:hover .capsule-thumb img {
+  filter: brightness(1.1);
+}
+
+.capsule-thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 69px;
+  height: 26px;
+  overflow: hidden;
+  border-radius: 2px;
+  color: rgb(255 255 255 / 88%);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+}
+
+.capsule-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: filter 120ms ease;
+}
+
+.tracking-row h4 {
+  display: inline;
+  margin: 0;
+  color: var(--text-bright);
   font-size: 12px;
 }
+
+.tracking-row-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--text-bright);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.tracking-row-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* Name and completion share one truncated line to hold the 32px row. */
+.tracking-row > div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tracking-row p {
+  display: inline;
+  margin: 0 0 0 8px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.tracking-row > span {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: right;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.tracking-row .release-cell {
+  text-transform: none;
+}
+
+.tracking-row .tracking-source-note {
+  color: var(--dim);
+  text-transform: none;
+}
+
+.download-action,
+.in-library-action {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 2px;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.download-action {
+  border: 1px solid var(--blue);
+  background: var(--surface-2);
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.download-action:hover {
+  background: var(--blue);
+  color: #0b0f16;
+}
+
+.in-library-action {
+  border: 1px solid var(--green-dark);
+  background: var(--green-dark);
+  color: var(--text-bright);
+}
+
+.in-library-action:hover {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.download-action:disabled,
+.featured-download:disabled {
+  border-color: var(--line);
+  background: var(--surface-2);
+  color: var(--muted);
+  cursor: default;
+  filter: none;
+}
+
+/* Real downloads: button + auto-picked asset caption, with an optional
+   Steam-style menu listing every release file. */
+.download-control {
+  display: grid;
+  gap: 3px;
+  justify-items: end;
+  min-width: 0;
+}
+
+.download-control-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Green primary CTAs (game page, featured hero) fuse with their caret into
+   one segmented control instead of a stray outlined square. */
+.download-control-actions:has(.game-cta-download),
+.download-control-actions:has(.featured-download) {
+  gap: 0;
+}
+
+.download-control-actions:has(.download-menu-toggle) .game-cta-download,
+.download-control-actions:has(.download-menu-toggle) .featured-download {
+  border-radius: 2px 0 0 2px;
+}
+
+.download-control-actions:has(.game-cta-download) .download-menu-toggle,
+.download-control-actions:has(.featured-download) .download-menu-toggle {
+  align-self: stretch;
+  width: 26px;
+  height: auto;
+  border: 0;
+  border-left: 1px solid rgb(0 0 0 / 30%);
+  border-radius: 0 2px 2px 0;
+  background: var(--green-dark);
+  color: #d3efa4;
+}
+
+.download-control-actions:has(.game-cta-download) .download-menu-toggle:hover,
+.download-control-actions:has(.featured-download) .download-menu-toggle:hover {
+  background: var(--green);
+  color: #fff;
+}
+
+.download-control-asset {
+  overflow: hidden;
+  max-width: 200px;
+  color: var(--dim);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10px;
+  overflow-wrap: anywhere;
+  text-align: right;
+  white-space: normal;
+}
+
+/* Dense table rows hold ~32px: the chosen file sits inline beside the
+   button instead of stacking into a second line. */
+.tracking-row .download-control {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.tracking-row .download-control-asset {
+  max-width: 150px;
+}
+
+.download-menu-wrap {
+  position: relative;
+}
+
+.download-menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--blue);
+  border-radius: 2px;
+  background: var(--surface-2);
+  color: var(--blue);
+  cursor: pointer;
+}
+
+.download-menu-toggle:hover,
+.download-menu-toggle[aria-expanded="true"] {
+  background: var(--blue);
+  color: #0b0f16;
+}
+
+.download-menu {
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  bottom: calc(100% + 4px);
+  min-width: 240px;
+  max-width: 320px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface-2);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 55%);
+  list-style: none;
+}
+
+.download-menu-item {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: var(--text);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.download-menu-item:hover {
+  background: var(--blue);
+  color: #0b0f16;
+}
+
+.download-menu-name {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.download-menu-size {
+  flex-shrink: 0;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.download-menu-item:hover .download-menu-size {
+  color: #0b0f16;
+}
+
+/* Featured hero: the control stacks asset caption under the big button and
+   left-aligns inside the info panel. */
+.featured-actions .download-control {
+  justify-items: start;
+}
+
+.featured-actions .download-control-asset {
+  max-width: 260px;
+}
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  text-decoration: underline;
+}
+
+/* ── Store game page (Steam app page) ────────────────────────────────── */
+
+.game-page-back {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--blue);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.game-page-back:hover {
+  color: var(--text-bright);
+}
+
+.game-page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 20px;
+  align-items: start;
+}
+
+.game-page-heading {
+  margin-bottom: 18px;
+}
+
+.game-page-heading h2 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.game-page-subtitle {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.game-page-description {
+  margin: 10px 0 0;
+  max-width: 62ch;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.game-page-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Steam's purchase box anchors the top of the right rail: the chosen file,
+   its size, and the primary action. */
+.game-cta-box {
+  display: grid;
+  gap: 8px;
+  margin: -12px -14px 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(135deg, rgb(42 71 94 / 85%), rgb(27 40 56 / 90%));
+}
+
+.game-cta-heading {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.game-cta-box .download-control {
+  display: grid;
+  gap: 6px;
+  justify-items: start;
+}
+
+.game-cta-download {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(#75a319, #5c7e10);
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.game-cta-download:hover {
+  filter: brightness(1.12);
+}
+
+.game-cta-download:disabled {
+  border: 1px solid #33495b;
+  background: var(--surface-3);
+  color: var(--muted);
+  filter: none;
+  cursor: default;
+}
+
+.game-cta-download.download-action-link {
+  border: 1px solid var(--blue);
+  background: var(--surface-2);
+  color: var(--blue);
+}
+
+.game-cta-download.download-action-link:hover {
+  background: var(--blue);
+  color: #0b0f16;
+  filter: none;
+}
+
+.game-cta-fallback {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* Right rail opens with the CTA box; the full-width portrait cover follows,
+   like a Steam app page's capsule column. */
+.game-page-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 0 -14px 12px;
+  aspect-ratio: 2 / 3;
+  border-radius: 3px;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 40%);
+}
+
+.game-page-cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.game-page-cover-fallback {
+  padding: 0 20px;
+  color: rgb(255 255 255 / 92%);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  text-align: center;
+  text-shadow: 0 1px 4px rgb(0 0 0 / 55%);
+  text-transform: uppercase;
+}
+
+/* Status block sits where Steam puts the review score. */
+.game-page-status {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.game-page-impls > h3,
+.game-page-mods > h3 {
+  margin: 0 0 10px;
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.game-page-mods {
+  margin-top: 22px;
+}
+
+.game-page-mods-all {
+  margin-top: 10px;
+}
+
+.game-impl {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-bottom: 0;
+  background: rgb(16 24 34 / 72%);
+}
+
+.game-impl:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.game-impl:hover {
+  background: var(--surface-hover);
+}
+
+.game-impl-main {
+  min-width: 0;
+}
+
+.game-impl h4 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 13px;
+}
+
+.game-impl-repo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 10px;
+  color: var(--dim);
+  font-size: 11px;
+  font-weight: 400;
+  text-decoration: none;
+  vertical-align: 1px;
+}
+
+.game-impl-repo-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.game-impl p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.game-impl .game-impl-description {
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.game-impl .game-impl-sub {
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.game-impl .tracking-source-note {
+  color: var(--dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.game-page-meta {
+  position: sticky;
+  top: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgb(16 24 34 / 72%);
+}
+
+.game-page-meta dl {
+  margin: 0;
+}
+
+.game-page-meta dl > div {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.game-page-meta dl > div:last-child {
+  border-bottom: 0;
+}
+
+.game-page-meta dt {
+  flex-shrink: 0;
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.game-page-meta dd {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  text-align: right;
+  text-overflow: ellipsis;
+}
+
+.game-page-meta-states {
+  text-transform: capitalize;
+}
+
+.tracking-game-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text-bright);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tracking-game-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* ── Mods table ──────────────────────────────────────────────────────── */
 
 .mods-game {
   margin-bottom: 18px;
@@ -812,4 +2170,2026 @@
 .mod-toggle[aria-checked="true"] .mod-toggle-knob {
   transform: translateX(16px);
   background: var(--text-bright);
+}
+
+/* ── Empty library ───────────────────────────────────────────────────── */
+
+.library-empty {
+  display: grid;
+  place-content: center;
+  gap: 10px;
+  text-align: center;
+  background: radial-gradient(ellipse at 50% 42%, #1d2f45 0%, var(--surface-0) 68%);
+}
+
+.library-empty h2 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.library-empty p {
+  margin: 0;
+  color: rgb(255 255 255 / 62%);
+  font-size: 15px;
+}
+
+.library-empty button {
+  justify-self: center;
+  margin-top: 14px;
+  padding: 9px 22px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--green), var(--green-dark));
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.library-empty button:hover {
+  filter: brightness(1.1);
+}
+
+/* ── Steam-parity pass: cover-cropped art, game page, mods, dialogs ─────── */
+
+/* Every art slot crops with object-fit: cover — Steam never letterboxes, so
+   there is no contain treatment by default. The single exception is a
+   validated cover whose aspect is wildly off the 2:3 portrait slot
+   (art-frame-fill: landscape box scans, square-ish logo covers): it sits
+   contained on a plinth built from its own blurred copy instead of being
+   cropped to ribbons or letterboxed in hard black. Inside a capsule the two
+   treatments share one mount (see .store-capsule-art below) so the choice
+   between them changes how much art shows, never how it is presented. */
+.art-frame {
+  position: absolute;
+  inset: 0;
+}
+
+.art-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.art-frame-fill img {
+  object-fit: contain;
+}
+
+/* Off-aspect covers keep the whole box art visible while a copy of the same
+   art, blurred past legibility and pushed well down in value, becomes the
+   plinth it sits on. Pushing it that far is the point: a half-readable smear
+   competes with the real art and reads as a mistake, whereas a near-flat
+   field tinted by the cover's own colours reads as a deliberate mount. The
+   oversized scale keeps the blur bleeding past the edges, so there is no
+   seam. Class-qualified because `.art-frame-og img` sets `filter` at the
+   same specificity later in the file and would otherwise unblur the plinth
+   on OpenGraph covers. */
+.art-frame-fill img.art-backdrop {
+  z-index: 0;
+  transform: scale(1.8);
+  object-fit: cover;
+  filter: blur(34px) brightness(calc(.44 * var(--art-lift, 1))) saturate(1.35);
+}
+
+/* A vignette rather than a top-to-bottom ramp: the insert is centred, so the
+   field has to fall off evenly around it. A one-way ramp weights the bottom
+   and makes the centred art look like it slipped. */
+.art-frame-fill::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  content: "";
+  background: radial-gradient(112% 74% at 50% 50%, rgb(0 0 0 / 0%), rgb(0 0 0 / 22%) 62%, rgb(0 0 0 / 52%));
+  pointer-events: none;
+}
+
+.art-frame-fill img:not(.art-backdrop) {
+  z-index: 2;
+}
+
+/* Capsule art carries the OpenGraph tone through the same filter chain as
+   the hover lift, so a tinted card still brightens on hover instead of
+   having its tint replaced. The plinth is excluded by name: this selector
+   out-specifies the backdrop rule above, and without the exclusion it drops
+   the blur, leaving a sharp second copy of the cover reading through behind
+   the real one. */
+.store-capsule-art .art-frame img:not(.art-backdrop) {
+  object-position: 50% 50%;
+  filter:
+    saturate(var(--art-sat, 1))
+    brightness(calc(var(--art-tone, 1) * var(--art-lift, 1)));
+}
+
+/* The game-page rail shows the box at its honest ratio (inline aspect-ratio
+   from the audited cover), so the blur fill has nothing to fill there. */
+.game-page-cover .art-backdrop,
+.game-page-cover .art-frame-fill::before {
+  display: none;
+}
+
+/* GitHub OpenGraph cards are white; a dark tint plus slight desaturation
+   pulls them into the theme. Real covers and local artwork stay untouched.
+   The tone travels as custom properties as well as a `filter`, because the
+   capsule mount above sets `filter` at a higher specificity and would
+   otherwise drop the desaturation; the properties fold it back into that
+   chain. The bare `filter` still serves the contexts with no mount (the
+   game-page rail, the featured hero). */
+.art-frame-og {
+  --art-sat: .6;
+  --art-tone: .85;
+}
+
+.art-frame-og::after {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  content: "";
+  background: rgb(16 24 34 / 35%);
+  pointer-events: none;
+}
+
+.art-frame-og img {
+  filter: saturate(.6) brightness(calc(.85 * var(--art-lift, 1)));
+}
+
+.store-capsule-title {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.store-capsule-foot .store-capsule-status {
+  flex-shrink: 0;
+}
+
+.tracking-badge[data-availability="in-library"] {
+  border-color: var(--green-dark);
+  color: var(--green);
+}
+
+.featured-status {
+  align-self: flex-start;
+}
+
+/* Game page: screenshot gallery, about, tags, recent updates */
+
+.game-page-shots,
+.game-page-about,
+.game-page-tags,
+.game-page-updates {
+  margin-bottom: 20px;
+}
+
+.game-page-shots > h3,
+.game-page-about > h3,
+.game-page-tags > h3,
+.game-page-updates > h3 {
+  margin: 0 0 10px;
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* Captures are 1280×720 (YouTube/Steam pulls) or small retro PNGs: the main
+   preview and the thumbs use a 16:9 frame with object-fit: contain so
+   gameplay is never cropped, over a dark surround. Only genuinely tiny shots
+   (.shot-lowres) upscale with crisp pixels. */
+.game-page-shot-main {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  aspect-ratio: 16 / 9;
+  background: #05080d;
+}
+
+.game-page-shot-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.shot-lowres {
+  image-rendering: pixelated;
+}
+
+/* Thumbs share the gallery row: with a healthy count the strip runs flush
+   with the main shot's edges instead of stopping ragged; small galleries cap
+   at a sane thumb size. */
+.game-page-shot-thumbs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-color: #34495e transparent;
+  scrollbar-width: thin;
+}
+
+.game-page-shot-thumbs .game-page-shot-thumb {
+  flex: 1 1 0;
+  min-width: 96px;
+  max-width: 180px;
+}
+
+.game-page-shot-thumb {
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  aspect-ratio: 16 / 9;
+  background: #05080d;
+  cursor: pointer;
+  opacity: .55;
+  transition: opacity 120ms ease;
+}
+
+.game-page-shot-thumb:hover {
+  opacity: .85;
+}
+
+.game-page-shot-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The shot on stage is also the active thumb; mark it clearly so the strip
+   never reads as a duplicate of the preview. */
+.game-page-shot-thumb[aria-current="true"] {
+  border-color: var(--blue);
+  opacity: 1;
+  outline: 1px solid var(--blue);
+}
+
+.game-page-about p {
+  max-width: 72ch;
+  margin: 0;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.game-page-tags ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topic-chip {
+  padding: 2px 9px;
+  border-radius: 2px;
+  background: rgb(102 192 244 / 12%);
+  color: var(--blue);
+  font-size: 11px;
+}
+
+.game-page-updates ul {
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgb(16 24 34 / 72%);
+  list-style: none;
+}
+
+.game-page-updates li {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.game-page-updates li:last-child {
+  border-bottom: 0;
+}
+
+.game-page-updates li a {
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.game-page-updates li a:hover {
+  text-decoration: underline;
+}
+
+.game-page-updates .update-project {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-page-updates .update-date {
+  margin-left: auto;
+  color: var(--dim);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.game-page-features {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+  padding: 0 0 12px;
+  border-bottom: 1px solid var(--line-soft);
+  list-style: none;
+}
+
+.game-page-features li {
+  color: var(--text);
+  font-size: 12px;
+}
+
+.game-page-features li::before {
+  margin-right: 7px;
+  color: var(--blue);
+  content: "✓";
+}
+
+/* Mods: Workshop-style live cards */
+
+/* Background refresh status: quiet inline text beside the heading, never a
+   banner that reads as an error. */
+.mods-loading {
+  margin: 0;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+.mods-view .view-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.mods-heading-side {
+  display: inline-flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.mods-add-repo {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid rgb(103 193 245 / 35%);
+  border-radius: 2px;
+  background: rgb(103 193 245 / 8%);
+  color: var(--blue);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mods-add-repo:hover {
+  border-color: var(--blue);
+  color: var(--text-bright);
+}
+
+/* Mod repository dialog: add form and pinned-source list. The card is wider
+   than the key dialogs because it holds a repo path plus a game picker. */
+.mod-repo-dialog {
+  width: 460px;
+}
+
+.mod-repo-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.mod-repo-form select {
+  grid-column: 1 / -1;
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface-1);
+  color: var(--text);
+  font-size: 12px;
+}
+
+.mod-repo-form .media-key-input {
+  min-width: 0;
+  margin: 0;
+}
+
+.mod-repo-form .dialog-primary {
+  height: 32px;
+}
+
+.mod-repo-list {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mod-repo-list li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 2px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.mod-repo-name {
+  overflow: hidden;
+  color: var(--text-bright);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mod-repo-game {
+  flex: 1;
+  color: var(--dim);
+  font-size: 11px;
+  text-align: right;
+}
+
+.mod-repo-list button {
+  display: inline-flex;
+  padding: 4px;
+  border: 0;
+  background: none;
+  color: var(--dim);
+  cursor: pointer;
+}
+
+.mod-repo-list button:hover {
+  color: var(--red);
+}
+
+.mod-repo-empty {
+  margin: 10px 0 0;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+.mods-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.mod-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: 3px;
+  background: var(--surface-1);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 25%);
+}
+
+.mod-card:hover {
+  border-color: var(--surface-3);
+}
+
+.mod-card h4 {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-bright);
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mod-card p {
+  display: -webkit-box;
+  overflow: hidden;
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.mod-card-meta {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: auto;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+.mod-card-author {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mod-card-stars {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.mod-card-updated {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.mod-card-link {
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  align-self: flex-start;
+  color: var(--blue);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.mod-card-link:hover {
+  color: var(--text-bright);
+  text-decoration: underline;
+}
+
+/* Mods toolbar: text filter plus per-game jump chips. The chips reuse the
+   store's tag-chip so the pressed/filter language stays consistent. */
+.mods-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.mods-search {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  height: 28px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: #0b0f16;
+  color: var(--dim);
+}
+
+.mods-search:focus-within {
+  border-color: var(--blue);
+}
+
+.mods-search input {
+  width: 210px;
+  border: 0;
+  background: transparent;
+  color: var(--text-bright);
+  font-size: 12px;
+  outline: none;
+}
+
+.mods-search input::placeholder {
+  color: var(--dim);
+}
+
+.mods-game-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The count is context, not the label: quieter than the chip text, and the
+   pressed chip's own contrast flips it with the rest. */
+.mods-chip-count {
+  margin-left: 5px;
+  font-size: 10px;
+  opacity: .75;
+}
+
+.mods-game-count {
+  color: var(--dim);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* Group labels separate mods the user already has (toggleable) from GitHub
+   discoveries (external links) inside one game's section. */
+.mods-group + .mods-group {
+  margin-top: 12px;
+}
+
+.mods-group-label {
+  margin: 0 0 6px;
+  color: var(--dim);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+/* Pinned sources are the user's own repositories, so they get the accent
+   border and a badge instead of blending into ranked search results. */
+.mod-card.is-pinned {
+  border-color: rgb(103 193 245 / 45%);
+}
+
+.mod-card-pinned {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+/* Empty state for a filter combination with no matches. */
+.mods-empty {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  place-content: center;
+  min-height: 180px;
+  border: 1px dashed var(--line);
+  border-radius: 3px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.mods-empty p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.mods-empty button {
+  height: 26px;
+  padding: 0 12px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface-1);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mods-empty button:hover {
+  border-color: var(--blue);
+  color: var(--text-bright);
+}
+
+/* Header account area */
+
+.header-account-area {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-self: end;
+  padding-right: 10px;
+}
+
+.header-account-area .account-menu {
+  padding-right: 0;
+}
+
+.header-friends {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 30px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.header-friends:hover {
+  background: rgb(255 255 255 / 5%);
+  color: var(--text-bright);
+}
+
+/* Owner-configured PayPal link; same quiet chrome as the Friends button. */
+.header-donate {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 30px;
+  padding: 0 8px;
+  border-radius: 2px;
+  color: var(--text);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.header-donate:hover {
+  background: rgb(255 255 255 / 5%);
+  color: var(--text-bright);
+}
+
+.header-donate svg {
+  color: var(--blue);
+}
+
+/* Release-notice bell */
+.header-notices {
+  position: relative;
+  display: inline-flex;
+}
+
+.header-notices > button {
+  position: relative;
+}
+
+.notices-badge {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  min-width: 14px;
+  padding: 0 3px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #0b0f16;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+}
+
+.notices-dropdown {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 300px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface-1);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 55%);
+}
+
+.notices-dropdown ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notice-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 5px 6px;
+  border-radius: 2px;
+}
+
+.notice-row:hover {
+  background: var(--surface-hover);
+}
+
+.notice-open {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font-size: 12px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+button.notice-open:hover {
+  color: var(--text-bright);
+}
+
+.notice-link,
+.notice-dismiss {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  padding: 3px;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.notice-link:hover,
+.notice-dismiss:hover {
+  color: var(--text-bright);
+}
+
+.notices-empty {
+  margin: 0;
+  padding: 10px 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Dialogs (sign-in) and friends slide-over */
+
+.dialog-overlay,
+.friends-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  background: rgb(0 0 0 / 55%);
+}
+
+.dialog-card {
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  padding: 18px 20px 20px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface-1);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 50%);
+}
+
+.dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.dialog-head h2 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.dialog-close {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.dialog-close:hover {
+  background: var(--surface-hover);
+  color: var(--text-bright);
+}
+
+.dialog-error {
+  margin: 0 0 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--red);
+  border-radius: 2px;
+  background: rgb(193 75 64 / 12%);
+  color: var(--red);
+  font-size: 12px;
+}
+
+.dialog-form {
+  display: grid;
+  gap: 10px;
+}
+
+.dialog-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.dialog-note strong {
+  color: var(--text-bright);
+  font-weight: 600;
+}
+
+.dialog-form label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.dialog-form input {
+  height: 30px;
+  padding: 0 8px;
+  border: 1px solid #22303e;
+  border-radius: 2px;
+  background: #0b0f16;
+  color: var(--text);
+  font-size: 12px;
+  text-transform: none;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dialog-primary {
+  height: 32px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(#75a319, #5c7e10);
+  color: var(--text-bright);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dialog-primary:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.dialog-primary:disabled {
+  background: var(--surface-3);
+  color: var(--muted);
+  cursor: default;
+}
+
+.dialog-secondary {
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--surface-3);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dialog-secondary:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--text-bright);
+}
+
+.friends-overlay {
+  justify-items: end;
+  place-items: stretch end;
+}
+
+.friends-panel {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  max-width: calc(100vw - 40px);
+  padding: 14px 14px 0;
+  border-left: 1px solid var(--line);
+  background: var(--surface-1);
+  box-shadow: -12px 0 40px rgb(0 0 0 / 45%);
+}
+
+.friends-add {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.friends-add input {
+  min-width: 0;
+  width: 100%;
+  height: 28px;
+  padding: 0 8px;
+  border: 1px solid #22303e;
+  border-radius: 2px;
+  background: #0b0f16;
+  color: var(--text);
+  font-size: 12px;
+}
+
+.friends-add button {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--surface-3);
+  color: var(--text-bright);
+  cursor: pointer;
+}
+
+.friends-add button:hover {
+  background: var(--blue);
+  color: #0b0f16;
+}
+
+.friends-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-color: #34495e transparent;
+  scrollbar-width: thin;
+}
+
+.friends-group {
+  margin-bottom: 14px;
+}
+
+.friends-group h3 {
+  margin: 0 0 6px;
+  color: var(--dim);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.friends-group ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.friend-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 5px 6px;
+  border-radius: 2px;
+}
+
+.friend-row:hover {
+  background: var(--surface-hover);
+}
+
+.friend-avatar {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 2px;
+  background: var(--surface-3);
+  color: var(--text-bright);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.friend-name {
+  overflow: hidden;
+  color: var(--text);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friend-row[data-status="online"] .friend-name {
+  color: var(--blue);
+}
+
+.friend-status {
+  color: var(--dim);
+  font-size: 10px;
+  text-transform: capitalize;
+}
+
+.friends-empty {
+  margin: 0;
+  padding: 4px 6px;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+/* Library game context menu, options button, uninstall/properties dialogs */
+
+.context-menu {
+  position: fixed;
+  z-index: 70;
+  display: grid;
+  gap: 1px;
+  min-width: 180px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: var(--surface-2);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 55%);
+}
+
+.context-menu [role="menuitem"] {
+  padding: 6px 12px;
+  border: 0;
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.context-menu [role="menuitem"]:hover,
+.context-menu [role="menuitem"]:focus-visible {
+  background: var(--surface-3);
+  color: var(--text-bright);
+  outline: none;
+}
+
+.game-options {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--surface-3);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.game-options:hover {
+  border-color: var(--blue);
+  color: var(--text-bright);
+}
+
+.dialog-danger {
+  height: 32px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 2px;
+  background: linear-gradient(#c14b40, #96352c);
+  color: var(--text-bright);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dialog-danger:hover {
+  filter: brightness(1.12);
+}
+
+.uninstall-dialog .dialog-actions {
+  margin-top: 14px;
+}
+
+.properties-dialog {
+  width: 460px;
+}
+
+.properties-section + .properties-section {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.properties-section h3 {
+  margin: 0 0 8px;
+  color: var(--text-bright);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.properties-summary {
+  margin: 0;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.properties-path {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.properties-links {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.properties-links li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: baseline;
+  font-size: 12px;
+}
+
+.properties-links a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.properties-links a:hover {
+  text-decoration: underline;
+}
+
+.properties-link-note {
+  overflow-wrap: anywhere;
+  color: var(--dim);
+  font-size: 11px;
+}
+
+/* ── Setup guides & source downloads ─────────────────────────────────── */
+
+.game-cta-source {
+  text-decoration: none;
+}
+
+.game-impl-source {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+/* Wishlist lives inside the purchase box as a full-width secondary action,
+   Steam-style, not a pill floating above the rail. */
+.game-cta-wishlist {
+  justify-content: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.game-impl-source-link {
+  padding: 4px 12px;
+  border: 1px solid rgb(103 193 245 / 35%);
+  border-radius: 2px;
+  color: var(--blue);
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.game-impl-source-link:hover {
+  border-color: var(--blue);
+  color: var(--text-bright);
+}
+
+.game-impl-setup {
+  margin-top: 8px;
+}
+
+.game-impl-setup summary {
+  width: fit-content;
+  color: var(--blue);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.game-impl-setup summary:hover {
+  color: var(--text-bright);
+}
+
+.game-impl-setup ol {
+  margin: 8px 0 2px;
+  padding-left: 18px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.game-impl-setup li + li {
+  margin-top: 3px;
+}
+
+.game-impl-setup li:last-child {
+  color: var(--dim);
+}
+
+.media-key-dialog {
+  width: min(460px, calc(100vw - 48px));
+}
+
+.media-key-input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px solid #2a3f55;
+  border-radius: 2px;
+  background: var(--surface-0);
+  color: var(--text-bright);
+  font-family: monospace;
+  font-size: 12px;
+}
+
+.media-key-input:focus {
+  border-color: var(--blue);
+  outline: none;
+}
+
+.media-key-input + .dialog-actions {
+  margin-top: 14px;
+}
+
+/* ── Persistent header search ────────────────────────────────────────── */
+
+.header-search {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  align-self: center;
+  justify-self: end;
+  width: min(280px, 100%);
+  margin-right: 14px;
+  padding: 0 10px;
+  border: 1px solid #2a3f55;
+  border-radius: 2px;
+  background: rgb(0 0 0 / 25%);
+  color: var(--dim);
+}
+
+.header-search:focus-within {
+  border-color: var(--blue);
+}
+
+.header-search input {
+  width: 100%;
+  padding: 6px 0;
+  border: 0;
+  outline: none;
+  background: none;
+  color: var(--text-bright);
+  font-size: 12px;
+}
+
+.header-search input::placeholder {
+  color: var(--dim);
+}
+
+.header-search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.header-search-results {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 4px);
+  right: 0;
+  width: 340px;
+  margin: 0;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #1b212a;
+  box-shadow: 0 10px 28px rgb(0 0 0 / 55%);
+  list-style: none;
+}
+
+.header-search-results button {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.header-search-results button.is-active {
+  background: #2a3f55;
+}
+
+.header-search-results img,
+.header-search-cover-fallback {
+  width: 30px;
+  height: 42px;
+  border-radius: 2px;
+  object-fit: cover;
+  background: linear-gradient(135deg, #2a475e, #12161d);
+}
+
+.header-search-title {
+  overflow: hidden;
+  color: var(--text-bright);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-search-state {
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+/* ── Round-3 Steam parity ────────────────────────────────────────────── */
+
+/* Capsule information scent: platform · year · implementation count. */
+.store-capsule-meta {
+  overflow: hidden;
+  color: var(--dim);
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Featured hero identity + description fill the former dead space. */
+.featured-sub {
+  margin: -4px 0 0;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+.featured-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.55;
+  -webkit-line-clamp: 3;
+}
+
+/* Steam's fading hairline under long-page section headers. */
+.game-page-shots > h3,
+.game-page-about > h3,
+.game-page-tags > h3,
+.game-page-updates > h3,
+.game-page-impls > h3,
+.game-page-mods > h3 {
+  padding-bottom: 6px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgb(103 193 245 / 40%), transparent 65%) 1;
+}
+
+/* Landscape covers hug their own ratio instead of floating in a 2:3 slot. */
+.game-page-cover:has(.art-frame-fill) {
+  aspect-ratio: auto;
+}
+
+.game-page-cover .art-frame-fill {
+  position: relative;
+  inset: auto;
+}
+
+.game-page-cover .art-frame-fill img {
+  position: static;
+  height: auto;
+}
+
+/* Back/forward chevrons, Steam client style. */
+.header-nav-arrows {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding-left: 2px;
+}
+
+.header-nav-arrows button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 2px;
+  background: rgb(0 0 0 / 25%);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.header-nav-arrows button:hover:not(:disabled) {
+  background: #2a3f55;
+  color: var(--text-bright);
+}
+
+.header-nav-arrows button:disabled {
+  color: #3d4450;
+  cursor: default;
+}
+
+/* Breadcrumb trail on game pages. */
+.game-page-crumbs {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+.game-page-crumbs [aria-current='page'] {
+  color: var(--text);
+}
+
+/* Right-rail glance block: clamped description + tag chips. */
+.game-page-glance-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.55;
+  -webkit-line-clamp: 3;
+}
+
+.game-page-glance-tags .glance-tags-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.game-page-glance-tags ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Platform browse chips. */
+.platform-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: -6px 0 12px;
+}
+
+/* "More like this" related capsules. */
+.game-page-related .related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.game-page-related button {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+.game-page-related button:hover {
+  transform: translateY(-2px);
+}
+
+/* Square to match the store capsules — these are the same box scans in a
+   smaller slot, so they need the same container to crop the same way. */
+.related-art {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 3px;
+  color: rgb(255 255 255 / 85%);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.related-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+}
+
+.related-title {
+  overflow: hidden;
+  color: var(--text-bright);
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.related-state {
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.game-page-related > h3 {
+  margin: 0 0 10px;
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding-bottom: 6px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, rgb(103 193 245 / 40%), transparent 65%) 1;
+}
+
+/* Store sub-navigation: section tabs, categories menu, catalog search, and
+   the wishlist — Steam's store chrome. */
+.store-nav {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  margin: 2px 0 18px;
+  padding: 0 4px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(90deg, rgb(38 62 90 / 70%), rgb(27 40 56 / 80%));
+  box-shadow: 0 1px 3px rgb(0 0 0 / 35%);
+}
+
+.store-nav-tab {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  height: 34px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: #dcdedf;
+  font-size: 12.5px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+}
+
+.store-nav-tab:hover {
+  color: #fff;
+}
+
+.store-nav-tab[aria-current='page'] {
+  background: linear-gradient(180deg, rgb(103 193 245 / 22%), transparent);
+  box-shadow: inset 0 -2px 0 var(--blue);
+  color: #fff;
+}
+
+.store-nav-categories {
+  position: relative;
+}
+
+.store-nav-menu {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 2px);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 210px;
+  padding: 4px 0;
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 3px;
+  background: #3d4450;
+  box-shadow: 0 8px 22px rgb(0 0 0 / 50%);
+}
+
+.store-nav-menu button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 14px;
+  border: 0;
+  background: transparent;
+  color: #dcdedf;
+  font-size: 12.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.store-nav-menu button:hover,
+.store-nav-menu button:focus-visible {
+  background: var(--blue);
+  color: #16202d;
+  outline: none;
+}
+
+.store-nav-menu-count {
+  opacity: 0.65;
+  font-size: 11px;
+}
+
+.store-nav-search {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 28px;
+  margin-left: auto;
+  padding: 0 9px;
+  border: 1px solid rgb(0 0 0 / 30%);
+  border-radius: 2px;
+  background: rgb(21 32 44 / 90%);
+  color: var(--muted);
+}
+
+.store-nav-search input {
+  width: 150px;
+  border: 0;
+  background: transparent;
+  color: var(--text-bright);
+  font-size: 12px;
+  outline: none;
+}
+
+.store-nav-search input::placeholder {
+  color: var(--dim);
+}
+
+.store-nav-wishlist {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  height: 34px;
+  margin-left: 6px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: #dcdedf;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.store-nav-wishlist:hover {
+  color: #fff;
+}
+
+.store-nav-wishlist[aria-current='page'] {
+  box-shadow: inset 0 -2px 0 var(--blue);
+  color: #fff;
+}
+
+.store-nav-wishlist svg {
+  color: var(--blue);
+}
+
+.store-nav-badge {
+  min-width: 17px;
+  padding: 1px 5px;
+  border-radius: 9px;
+  background: var(--blue);
+  color: #16202d;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Front-page footer into the full catalog. */
+.store-home-foot {
+  display: flex;
+  justify-content: center;
+  margin: 34px 0 10px;
+}
+
+.store-browse-all {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 9px 22px;
+  border: 1px solid rgb(103 193 245 / 35%);
+  border-radius: 2px;
+  background: rgb(103 193 245 / 8%);
+  color: var(--blue);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.store-browse-all:hover {
+  border-color: var(--blue);
+  background: rgb(103 193 245 / 16%);
+  color: var(--text-bright);
+}
+
+/* Wishlist section: the capsule grid. */
+.store-wishlist .empty-state {
+  margin-top: 14px;
+}
+
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.wishlist-grid .store-capsule {
+  width: auto;
+}
+
+/* A failed Play sits in the action bar next to the button that failed, not in
+   a toast that appears somewhere else — and it is a button, so dismissing it
+   needs no separate close affordance. */
+.launch-error {
+  padding: 6px 10px;
+  border: 1px solid var(--red);
+  border-radius: 2px;
+  background: rgb(218 112 99 / 12%);
+  color: var(--red);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* ── Roadmap ─────────────────────────────────────────────────────────────
+   A reading page, not a dashboard: one column at a comfortable measure,
+   since the point is that someone actually reads what their money buys. */
+.roadmap-view {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 24px 60px;
+}
+
+.roadmap-head h2 {
+  margin: 0 0 10px;
+  color: var(--text-bright);
+  font-size: 26px;
+  letter-spacing: .01em;
+}
+
+.roadmap-head p {
+  margin: 0 0 8px;
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.roadmap-phase {
+  margin-top: 34px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255 255 255 / 8%);
+}
+
+.roadmap-phase-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.roadmap-phase-head h3 {
+  margin: 0;
+  color: var(--text-bright);
+  font-size: 17px;
+}
+
+/* The cost sits beside the phase name, so "what would this take" is answered
+   in the same glance as "what is it". */
+.roadmap-funds {
+  color: var(--gold);
+  font-size: 12px;
+}
+
+.roadmap-summary {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.roadmap-items {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.roadmap-items li {
+  padding: 12px 14px;
+  border-radius: 3px;
+  background: var(--surface-2);
+}
+
+.roadmap-item-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.roadmap-item-title {
+  color: var(--text-bright);
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.roadmap-items p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.roadmap-status {
+  display: inline-flex;
+  flex-shrink: 0;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 10px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.roadmap-status[data-status="shipped"] {
+  border-color: var(--green-dark);
+  color: var(--green);
+}
+
+.roadmap-status[data-status="building"] {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.roadmap-status[data-status="planned"] {
+  border-color: #3d5266;
+  color: var(--dim);
+}
+
+.roadmap-status[data-status="blocked"] {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+/* The ask comes last, after the plan it pays for. */
+.roadmap-support {
+  margin-top: 34px;
+  padding: 20px;
+  border: 1px solid rgb(103 193 245 / 22%);
+  border-radius: 3px;
+  background: rgb(103 193 245 / 6%);
+}
+
+.roadmap-support h3 {
+  margin: 0 0 10px;
+  color: var(--text-bright);
+  font-size: 16px;
+}
+
+.roadmap-support p {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.roadmap-support-note {
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.roadmap-donate {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 4px;
+  padding: 9px 18px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, var(--green), var(--green-dark));
+  color: var(--text-bright);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.roadmap-donate:hover {
+  filter: brightness(1.1);
 }

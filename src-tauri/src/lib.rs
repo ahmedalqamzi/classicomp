@@ -4,7 +4,7 @@ pub mod database;
 use std::sync::Mutex;
 
 #[cfg(feature = "desktop")]
-use database::{AppState, Database};
+use database::{AppState, Database, Game, TrackedProject, TrackedProjectUpdate};
 
 #[cfg(feature = "desktop")]
 #[tauri::command]
@@ -47,6 +47,7 @@ fn sign_out(database: tauri::State<'_, Mutex<Database>>) -> Result<AppState, Str
 #[tauri::command]
 fn queue_install(
     game_id: String,
+    game: Option<Game>,
     database: tauri::State<'_, Mutex<Database>>,
 ) -> Result<AppState, String> {
     let database = database
@@ -58,7 +59,87 @@ fn queue_install(
         .active_profile_id
         .ok_or("not signed in".to_string())?;
     database
-        .queue_install(&active_profile_id, &game_id)
+        .queue_install_with_game(&active_profile_id, &game_id, game.as_ref())
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn uninstall_game(
+    game_id: String,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    let active_profile_id = database
+        .load_state()
+        .map_err(|error| error.to_string())?
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
+    database
+        .uninstall_game(&active_profile_id, &game_id)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn set_game_rom(
+    game_id: String,
+    rom_path: Option<String>,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    let active_profile_id = database
+        .load_state()
+        .map_err(|error| error.to_string())?
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
+    database
+        .set_game_rom(&active_profile_id, &game_id, rom_path.as_deref())
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn set_game_installed(
+    game_id: String,
+    launch_target: String,
+    installed_version: Option<String>,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    let active_profile_id = database
+        .load_state()
+        .map_err(|error| error.to_string())?
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
+    database
+        .set_game_installed(&active_profile_id, &game_id, &launch_target, installed_version.as_deref())
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn set_download_state(
+    download_id: String,
+    state: String,
+    progress: Option<i64>,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    database
+        .set_download_state(&download_id, &state, progress)
         .and_then(|_| database.load_state())
         .map_err(|error| error.to_string())
 }
@@ -79,6 +160,72 @@ fn toggle_mod(
         .ok_or("not signed in".to_string())?;
     database
         .toggle_mod(&active_profile_id, &mod_id)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn toggle_watch(
+    game_key: String,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    let active_profile_id = database
+        .load_state()
+        .map_err(|error| error.to_string())?
+        .active_profile_id
+        .ok_or("not signed in".to_string())?;
+    database
+        .toggle_watch(&active_profile_id, &game_key)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn apply_tracking_updates(
+    updates: Vec<TrackedProjectUpdate>,
+    scanned_at: String,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    database
+        .apply_tracking_updates(&updates, &scanned_at)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn dismiss_notice(
+    notice_id: String,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    database
+        .dismiss_notice(&notice_id)
+        .and_then(|_| database.load_state())
+        .map_err(|error| error.to_string())
+}
+
+#[cfg(feature = "desktop")]
+#[tauri::command]
+fn add_tracked_projects(
+    projects: Vec<TrackedProject>,
+    database: tauri::State<'_, Mutex<Database>>,
+) -> Result<AppState, String> {
+    let database = database
+        .lock()
+        .map_err(|_| "database lock poisoned".to_string())?;
+    database
+        .add_tracked_projects(&projects)
         .and_then(|_| database.load_state())
         .map_err(|error| error.to_string())
 }
@@ -105,7 +252,15 @@ pub fn run() {
             set_active_profile,
             sign_out,
             queue_install,
-            toggle_mod
+            uninstall_game,
+            set_game_rom,
+            set_game_installed,
+            set_download_state,
+            toggle_mod,
+            toggle_watch,
+            apply_tracking_updates,
+            dismiss_notice,
+            add_tracked_projects
         ])
         .run(tauri::generate_context!())
         .expect("error while running Classicomp");

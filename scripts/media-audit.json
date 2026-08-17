@@ -1,0 +1,1038 @@
+{
+  "covers": {
+    "ace-combat-6-fires-of-liberation": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/1/16/Ace_Combat_6_Fires_of_Liberation_Game_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7067,
+      "verdict": "box-art"
+    },
+    "animal-crossing": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/82/Animal_Crossing_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7072,
+      "verdict": "box-art"
+    },
+    "banjo-kazooie": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Banjo-Kazooie%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "banjo-kazooie-nuts-bolts": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/6/63/Banjo-Kazooie_Nuts_%26_Bolts_Game_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6984,
+      "verdict": "box-art"
+    },
+    "battle-city": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20Entertainment%20System/Named_Boxarts/BattleCity%20%28Japan%29.png",
+      "aspect": 1.4262,
+      "verdict": "not-box-art"
+    },
+    "body-harvest": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Body%20Harvest%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "blue-dragon": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f7/Blue_Dragon_Box_Art.jpeg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.8621,
+      "verdict": "box-art"
+    },
+    "bomberman-hero": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Bomberman%20Hero%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "castlevania-legacy-of-darkness": {
+      "url": "https://upload.wikimedia.org/wikipedia/zh/0/0d/Akumajou_Dracula_Mokushiroku_Gaiden_Boxart.jpg?utm_source=zh.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7152,
+      "verdict": "box-art"
+    },
+    "castlevania-symphony-of-the-night": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/c/cf/Castlevania_SOTN_PAL.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.9781,
+      "verdict": "box-art"
+    },
+    "chameleon-twist": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Chameleon%20Twist%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "animal-forest-e": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/82/Animal_Crossing_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7072,
+      "verdict": "box-art"
+    },
+    "crackdown": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/35/Crackdownfinalbox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "crackdown-2": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/31/Crackdown2Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "crash-bandicoot": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/4/44/Crash_Bandicoot_Cover.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0067,
+      "verdict": "box-art"
+    },
+    "bomberman-64": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Bomberman%2064%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "crash-team-racing": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/4/4f/CrashTeamRacingNACover.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0039,
+      "verdict": "box-art"
+    },
+    "dance-central-3": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/fe/Dance_Central_3_cover.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7887,
+      "verdict": "box-art"
+    },
+    "destroy-all-humans-path-of-the-furon": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/bb/Destroy_All_Humans%21_Path_of_the_Furon_cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.8017,
+      "verdict": "box-art"
+    },
+    "diddy-kong-racing": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Diddy%20Kong%20Racing%20%28USA%29%20%28En%2CFr%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "diablo": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/3a/Diablo_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6675,
+      "verdict": "box-art"
+    },
+    "dr-mario": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f8/Dr._Mario_box_art.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7003,
+      "verdict": "box-art"
+    },
+    "dr-mario-64": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Dr.%20Mario%2064%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "dragon-quest-ix": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Dragon%20Quest%20IX%20-%20Sentinels%20of%20the%20Starry%20Skies%20%28USA%29%20%28En%2CFr%2CEs%29.png",
+      "aspect": 1.1155,
+      "verdict": "not-box-art"
+    },
+    "classic-adventure-engines": {
+      "url": null,
+      "aspect": null,
+      "verdict": "not-box-art"
+    },
+    "driver-2": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/8e/Driver_2_Coverart.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "duke-nukem-zero-hour": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Duke%20Nukem%20-%20Zero%20Hour%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "guitar-hero-ii": {
+      "url": "https://thumbnails.libretro.com/Sony%20-%20PlayStation%202/Named_Boxarts/Guitar%20Hero%20II%20%28USA%29.png",
+      "aspect": 0.7052,
+      "verdict": "box-art"
+    },
+    "halo-3": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/b4/Halo_3_final_boxshot.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7877,
+      "verdict": "box-art"
+    },
+    "harvest-moon-64": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Harvest%20Moon%2064%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "jak-3": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/e/ec/Jak_3_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7072,
+      "verdict": "box-art"
+    },
+    "jak-and-daxter-the-precursor-legacy": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/b6/Jak_and_Daxter_-_The_Precursor_Legacy_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7033,
+      "verdict": "box-art"
+    },
+    "jak-ii": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/b3/JakIIbox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6958,
+      "verdict": "box-art"
+    },
+    "kingdom-hearts-358-2-days": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Kingdom%20Hearts%20-%20358-2%20Days%20%28USA%29%20%28En%2CFr%29.png",
+      "aspect": 1.1155,
+      "verdict": "not-box-art"
+    },
+    "klonoa-empire-of-dreams": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/7/70/Klonoa_Empire_of_Dreams_Packaging02.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "mario-kart-64": {
+      "url": "https://upload.wikimedia.org/wikipedia/zh/c/cc/%E7%91%AA%E5%88%A9%E6%AD%90%E8%B3%BD%E8%BB%8A64JP.jpg?utm_source=zh.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7151,
+      "verdict": "box-art"
+    },
+    "metroid-prime": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/ba/MetroidPrimebox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7204,
+      "verdict": "box-art"
+    },
+    "mega-man-64": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/3d/MMLegendsBox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0289,
+      "verdict": "box-art"
+    },
+    "perfect-dark": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Perfect%20Dark%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "mystical-ninja-starring-goemon": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Mystical%20Ninja%20Starring%20Goemon%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "pokemon-battle-revolution": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/9/94/Pok%C3%A9mon_Battle_Revolution_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7111,
+      "verdict": "box-art"
+    },
+    "pokemon-black": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20-%20Black%20Version%20%28USA%2C%20Europe%29%20%28NDSi%20Enhanced%29.png",
+      "aspect": 1.1106,
+      "verdict": "not-box-art"
+    },
+    "pokemon-crystal": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/84/Pok%C3%A9mon_Crystal_box_art.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0063,
+      "verdict": "box-art"
+    },
+    "pokemon-diamond": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20-%20Diamond%20Version%20%28USA%29%20%28Rev%205%29.png",
+      "aspect": 1.1155,
+      "verdict": "not-box-art"
+    },
+    "pokemon-emerald": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f7/PokemonEmeraldBox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "animal-forest": {
+      "url": "https://upload.wikimedia.org/wikipedia/zh/a/a2/Doubutsu_No_Mori_Boxart.jpg?utm_source=zh.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7139,
+      "verdict": "box-art"
+    },
+    "pokemon-firered-and-leafgreen": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20FireRed%20Version%20%28USA%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokemon-gold-and-silver": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Color/Named_Boxarts/Pokemon%20-%20Gold%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "dinosaur-planet": {
+      "url": null,
+      "aspect": null,
+      "verdict": "not-box-art"
+    },
+    "pokemon-card-gb2": {
+      "url": "https://upload.wikimedia.org/wikipedia/pt/7/7b/Pok%C3%A9mon_Trading_Card_Game_2_cover.png?utm_source=pt.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.788,
+      "verdict": "box-art"
+    },
+    "pokemon-heartgold": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20-%20HeartGold%20Version%20%28USA%29.png",
+      "aspect": 1.1179,
+      "verdict": "not-box-art"
+    },
+    "pokemon-mystery-dungeon-explorers-of-sky": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Explorers%20of%20Sky%20%28USA%29.png",
+      "aspect": 1.1179,
+      "verdict": "not-box-art"
+    },
+    "pokemon-mystery-dungeon-red-rescue-team": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Red%20Rescue%20Team%20%28USA%2C%20Australia%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokemon-pinball": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/e/e9/Pok%C3%A9mon_Pinball_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.9874,
+      "verdict": "box-art"
+    },
+    "pokemon-pinball-ruby-sapphire": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/82/Pokemonpinballrubyandsapphire.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0032,
+      "verdict": "box-art"
+    },
+    "pokemon-platinum": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%20DS/Named_Boxarts/Pokemon%20-%20Platinum%20Version%20%28USA%29.png",
+      "aspect": 1.113,
+      "verdict": "not-box-art"
+    },
+    "pokemon-puzzle-league": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Pokemon%20Puzzle%20League%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "pokemon-emerald-japanese": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f7/PokemonEmeraldBox.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "pokemon-red-blue-and-yellow": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy/Named_Boxarts/Pokemon%20-%20Red%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokemon-red-and-blue": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy/Named_Boxarts/Pokemon%20-%20Red%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokemon-rumble": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Wii/Named_Boxarts/Pokemon%20Rumble%20%28USA%29.png",
+      "aspect": 0.7103,
+      "verdict": "box-art"
+    },
+    "pokemon-ruby-and-sapphire": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy%20Advance/Named_Boxarts/Pokemon%20-%20Ruby%20Version%20%28USA%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokemon-snap": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Pokemon%20Snap%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "pokemon-stadium": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Pokemon%20Stadium%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "pokemon-stadium-2": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Pokemon%20Stadium%202%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "pokemon-trading-card-game": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/1/19/Pok%C3%A9mon_Trading_Card_Game_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0032,
+      "verdict": "box-art"
+    },
+    "pokemon-xd-gale-of-darkness": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/b7/Pok%C3%A9mon_XD-_Gale_of_Darkness_Coverart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "pokemon-yellow": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Game%20Boy/Named_Boxarts/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.png",
+      "aspect": 1.0,
+      "verdict": "box-art"
+    },
+    "pokepark-wii-pikachus-adventure": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/1/14/Pok%C3%A9Park_Wii_NA_Cover.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7112,
+      "verdict": "box-art"
+    },
+    "quest-64": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Quest%2064%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "rock-band-3": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/3b/Rock_Band_3_Game_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.8065,
+      "verdict": "box-art"
+    },
+    "rollercoaster-tycoon-2": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/e/e4/RollerCoaster_Tycoon_2_%28boxart%29.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.8484,
+      "verdict": "box-art"
+    },
+    "snowboard-kids-2": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Snowboard%20Kids%202%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "pokemon-gold-space-world-demo": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/4/4c/Pok%C3%A9mon_box_art_-_Gold_Version.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 2,
+      "verdict": "not-box-art"
+    },
+    "skate-3": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/8/84/Skate-3-Boxart.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.9507,
+      "verdict": "box-art"
+    },
+    "sonic-unleashed": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/a/a0/Sonic_unleashed_boxart.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "space-station-silicon-valley": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/SpaceStation%20Silicon%20Valley%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "star-fox-64": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Star%20Fox%2064%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "star-fox-adventures": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/31/Star_Fox_Adventures_GCN_Game_Box.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7048,
+      "verdict": "box-art"
+    },
+    "super-mario-world": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/Named_Boxarts/Super%20Mario%20World%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "super-mario-64": {
+      "url": "https://upload.wikimedia.org/wikipedia/zh/0/06/Super_mario_64_boxart.jpg?utm_source=zh.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7151,
+      "verdict": "box-art"
+    },
+    "super-smash-bros": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Super%20Smash%20Bros.%20%28USA%29.png",
+      "aspect": 1.369,
+      "verdict": "not-box-art"
+    },
+    "test-drive-unlimited": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/6/63/Test_Drive_Unlimited_boxart.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6667,
+      "verdict": "box-art"
+    },
+    "syphon-filter": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f9/Syphon_Filter_US_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "the-elder-scrolls-iii-morrowind": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/5/53/MorrowindCOVER.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-a-link-to-the-past": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Super%20Nintendo%20Entertainment%20System/Named_Boxarts/Legend%20of%20Zelda%2C%20The%20-%20A%20Link%20to%20the%20Past%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "the-legend-of-zelda-majoras-mask": {
+      "url": "https://thumbnails.libretro.com/Nintendo%20-%20Nintendo%2064/Named_Boxarts/Legend%20of%20Zelda%2C%20The%20-%20Majora%27s%20Mask%20%28USA%29.png",
+      "aspect": 1.4342,
+      "verdict": "not-box-art"
+    },
+    "the-legend-of-zelda-ocarina-of-time": {
+      "url": "https://upload.wikimedia.org/wikipedia/zh/5/5a/The_Legend_of_Zelda_Ocarina_of_Time_Boxart.jpg?utm_source=zh.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7158,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-ocarina-of-time-3d": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/30/The_Legend_of_Zelda_Ocarina_of_Time_3D_box_art.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1.0288,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-phantom-hourglass": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/5/5e/The_Legend_of_Zelda_Phantom_Hourglass_Game_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.9506,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-skyward-sword": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/9/99/Legend_of_Zelda_Skyward_Sword_boxart.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6667,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-spirit-tracks": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/9/91/The_Legend_of_Zelda_Spirit_Tracks_box_art.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.9542,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-the-minish-cap": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/0/0a/TLOZ-_Minish_Cap_NA_Box_art.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 1,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-the-wind-waker": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/7/79/The_Legend_of_Zelda_The_Wind_Waker.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.8285,
+      "verdict": "box-art"
+    },
+    "the-legend-of-zelda-twilight-princess": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/0/0e/The_Legend_of_Zelda_Twilight_Princess_Game_Cover.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7062,
+      "verdict": "box-art"
+    },
+    "transport-tycoon-deluxe": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/7/7f/Transport_Tycoon_Coverart.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7479,
+      "verdict": "box-art"
+    },
+    "viva-pinata-trouble-in-paradise": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/a/a0/Viva_Pinata_Trouble_in_Paradise.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7067,
+      "verdict": "box-art"
+    },
+    "the-sims-2": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/b/bd/The_sims_2.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7022,
+      "verdict": "box-art"
+    },
+    "wario-land-shake-it": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/3/3a/Wario_Land_Shake_It%21_Box_Art.png?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7151,
+      "verdict": "box-art"
+    },
+    "wwe-smackdown-vs-raw-2007": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/6/62/WWE_SmackDown_vs._Raw_2007.jpg?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.7855,
+      "verdict": "box-art"
+    },
+    "sonic-the-hedgehog-2006-demo": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/d/d1/Sonic_the_Hedgehog_Next-Gen_Box_Art.JPG?utm_source=en.wikipedia.org&utm_campaign=api&utm_content=thumbnail_unscaled",
+      "aspect": 0.6667,
+      "verdict": "box-art"
+    }
+  },
+  "screenshots": {
+    "ace-combat-6-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "animal-crossing-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/acreteam/ac-decomp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "animal-crossing-pc-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "animal-forest-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "animal-forest-e-plus-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/acreteam/afe-decomp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "banjo-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "lighthouse": {
+      "total": 0,
+      "suspect": []
+    },
+    "banjo-nuts-bolts-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "battle-city-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "blue-dragon-recomp": {
+      "total": 4,
+      "suspect": []
+    },
+    "body-harvest-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "bomberman-64-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "bomberman-hero-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "castlevania-lod-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "sotn-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "symphony-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "chameleon-twist-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "scummvm": {
+      "total": 0,
+      "suspect": []
+    },
+    "crackdown-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "crackdown-2-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "crash-bandicoot-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "ctr-native": {
+      "total": 0,
+      "suspect": []
+    },
+    "dance-central-3-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/rjkiv/dc3-decomp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "dah-path-furon-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "devilutionx": {
+      "total": 2,
+      "suspect": []
+    },
+    "golden-balloon": {
+      "total": 0,
+      "suspect": []
+    },
+    "dinosaur-planet-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "dr-mario-disassembly": {
+      "total": 0,
+      "suspect": []
+    },
+    "dr-mario-64-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "dr-mario-64-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "dragon-quest-ix-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "redriver2": {
+      "total": 3,
+      "suspect": []
+    },
+    "duke-zero-hour-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "guitar-hero-2-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "halo-3-recomp": {
+      "total": 3,
+      "suspect": []
+    },
+    "harvest-moon-64-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "opengoal-jak-3": {
+      "total": 2,
+      "suspect": []
+    },
+    "opengoal-jak-1": {
+      "total": 2,
+      "suspect": []
+    },
+    "opengoal-jak-2": {
+      "total": 2,
+      "suspect": []
+    },
+    "tatsh-expert-satphone": {
+      "total": 0,
+      "suspect": []
+    },
+    "yokimitsuro-khdays-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "klonoa-eod-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "mario-kart-64-recomp-independent": {
+      "total": 0,
+      "suspect": []
+    },
+    "mario-kart-64-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "spaghettikart": {
+      "total": 2,
+      "suspect": [
+        "https://raw.githubusercontent.com/HarbourMasters/SpaghettiKart/HEAD/docs/spaghettigithublight.png#gh-light-mode-only",
+        "https://raw.githubusercontent.com/HarbourMasters/SpaghettiKart/HEAD/docs/spaghettigithubnight.png#gh-dark-mode-only"
+      ]
+    },
+    "mega-man-64-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "metroid-prime-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/PrimeDecomp/prime/HEAD/assets/objdiff.png"
+      ]
+    },
+    "goemon-64-recomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/klorfmorf/Goemon64Recomp/HEAD/docs/deck_gyro_1.jpg"
+      ]
+    },
+    "perfect-dark-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "perfect-dark-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-battle-revolution-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/bgsamm/pbr-dtk/HEAD/assets/objdiff.png"
+      ]
+    },
+    "pokemon-black-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "poketcg2": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokecrystal": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-diamond-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokeemerald": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokeemerald-jp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokefirered": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokegold": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokegold-spaceworld": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-heartgold-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pmd-sky-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pmd-red": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokepinball": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokepinballrs": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-platinum-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-puzzle-league-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokered": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-gen1-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "pokeruby": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-rumble-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/KooShnoo/pokemon-rumble/HEAD/assets/objdiff.png"
+      ]
+    },
+    "pokemon-snap-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-stadium-recomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/mstan/PokemonStadiumRecomp/HEAD/docs/launcher.png"
+      ]
+    },
+    "pokemon-stadium-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-stadium-2-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "poketcg": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokemon-xd-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokeyellow": {
+      "total": 0,
+      "suspect": []
+    },
+    "pokepark-wii-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/sephdb/pokepark-wii-decomp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "quest-64-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "tatsh-expert-xylophone": {
+      "total": 0,
+      "suspect": []
+    },
+    "rock-band-3-x360-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "rock-band-3-wii-decomp": {
+      "total": 2,
+      "suspect": [
+        "https://raw.githubusercontent.com/DarkRTA/rb3/HEAD/assets/dolphin-extract.png",
+        "https://raw.githubusercontent.com/DarkRTA/rb3/HEAD/assets/objdiff.png"
+      ]
+    },
+    "openrct2": {
+      "total": 4,
+      "suspect": []
+    },
+    "skate-3-recomp": {
+      "total": 2,
+      "suspect": [
+        "https://raw.githubusercontent.com/mchughalex/skate3recomp/HEAD/banner-light.png"
+      ]
+    },
+    "snowboard-kids-2-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "sonic-06-demo-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "unleashed-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "sssv-recomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "star-fox-64-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "starship": {
+      "total": 0,
+      "suspect": []
+    },
+    "star-fox-adventures-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/zcanann/SFA-Decomp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "ghostship": {
+      "total": 0,
+      "suspect": []
+    },
+    "sm64-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "sm64-coop-dx": {
+      "total": 0,
+      "suspect": []
+    },
+    "smw-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "battleship": {
+      "total": 0,
+      "suspect": []
+    },
+    "syphon-filter-pc-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "tdu-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "openmw": {
+      "total": 0,
+      "suspect": []
+    },
+    "zelda3-port": {
+      "total": 4,
+      "suspect": []
+    },
+    "two-ship-two-harkinian": {
+      "total": 0,
+      "suspect": []
+    },
+    "zelda64-recompiled": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/Zelda64Recomp/Zelda64Recomp/HEAD/docs/deck_gyro_1.jpg"
+      ]
+    },
+    "zeldaret-mm": {
+      "total": 0,
+      "suspect": []
+    },
+    "shipwright": {
+      "total": 2,
+      "suspect": [
+        "https://raw.githubusercontent.com/HarbourMasters/Shipwright/HEAD/docs/shiptitle.darkmode.png#gh-dark-mode-only",
+        "https://raw.githubusercontent.com/HarbourMasters/Shipwright/HEAD/docs/shiptitle.lightmode.png#gh-light-mode-only"
+      ]
+    },
+    "zeldaret-oot": {
+      "total": 0,
+      "suspect": []
+    },
+    "oot3d-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "phantom-hourglass-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "skyward-sword-decomp": {
+      "total": 5,
+      "suspect": [
+        "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/dolphin-game-properties.png",
+        "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/dolphin-extract-entire-partition.png",
+        "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-project-settings.png",
+        "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-project-directory.png",
+        "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-example.png"
+      ]
+    },
+    "spirit-tracks-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "minish-cap-port": {
+      "total": 0,
+      "suspect": []
+    },
+    "project-picori": {
+      "total": 0,
+      "suspect": []
+    },
+    "minish-cap-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "wind-waker-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/zeldaret/tww/HEAD/assets/objdiff.png"
+      ]
+    },
+    "dusklight": {
+      "total": 1,
+      "suspect": []
+    },
+    "twilight-princess-decomp": {
+      "total": 1,
+      "suspect": [
+        "https://raw.githubusercontent.com/zeldaret/tp/HEAD/assets/objdiff.png"
+      ]
+    },
+    "sims-2-gamecube-decomp": {
+      "total": 0,
+      "suspect": []
+    },
+    "openttd": {
+      "total": 0,
+      "suspect": []
+    },
+    "viva-pinata-tip-recomp": {
+      "total": 1,
+      "suspect": []
+    },
+    "swiftshine-wlsi": {
+      "total": 0,
+      "suspect": []
+    },
+    "svr07-recomp": {
+      "total": 0,
+      "suspect": []
+    }
+  }
+}

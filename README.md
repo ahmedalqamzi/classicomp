@@ -17,7 +17,7 @@ The first research baseline is complete:
 
 ## Current state
 
-This repository currently contains the research and product direction. The earlier local tracker implementation remains separate at `/home/thedictator/recomp-tracker`; it was audited, not copied or modified as part of this baseline.
+This repository currently contains the research and product direction. The earlier local tracker implementation remains separate, in a sibling checkout outside this repository; it was audited, not copied or modified as part of this baseline.
 
 ## Remote installation targets
 

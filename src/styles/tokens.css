@@ -12,22 +12,37 @@
   --surface-2: #101822;
   --surface-3: #2a475e;
   --surface-hover: #1c2b3d;
+  --rail-bg: #1f2226;
+  --rail-row-hover: #2c313a;
+  --chrome-charcoal: #23262c;
+  --store-deep: #16202d;
+  --card-border: rgb(255 255 255 / 4%);
   --line: #0d1219;
   --line-soft: rgb(255 255 255 / 5%);
   --text: #c7d5e0;
   --text-bright: #fff;
-  --muted: #8f98a0;
-  --dim: #65717b;
+  --muted: #a9b4bd;
+  --dim: #86909b;
   --blue: #66c0f4;
   --green: #75a319;
   --green-dark: #5c7e10;
   --gold: #c4a44a;
-  --red: #c14b40;
+  --red: #da7063;
   --focus: #66c0f4;
 }
 
 * {
   box-sizing: border-box;
+}
+
+/* Every unpainted surface must be dark — a load hiccup or short page must
+   never flash browser-default white. Thin dark scrollbars everywhere. */
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--surface-0, #16202d);
+  scrollbar-color: rgb(96 118 140 / 55%) transparent;
 }
 
 body {

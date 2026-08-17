@@ -2,9 +2,21 @@ node_modules/
 dist/
 target/
 src-tauri/target/
+# Tauri writes these schemas on build; they are generated, not authored.
+src-tauri/gen/
 .playwright-cli/
 .superpowers/
 output/
 tmp/
 *.tsbuildinfo
 *.log
+
+# Never commit credentials or per-machine paths. The app keeps its Supabase
+# and IGDB keys in localStorage, not on disk, but these guard against a
+# stray .env or key file being added later.
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json

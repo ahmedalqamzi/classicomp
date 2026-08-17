@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Classicomp — a storefront for rebuilt classic games</title>
+<meta name="description" content="Classicomp finds, installs and launches open-source recompilations and source ports of classic games. Bring your own original copy.">
+<meta name="theme-color" content="#10161d">
+<script>
+/* Apply a saved theme before first paint; without a saved choice the OS decides. */
+(function () {
+  try {
+    var t = localStorage.getItem("classicomp-theme");
+    if (t === "light" || t === "dark") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="#top" aria-label="Classicomp home"><span class="wordmark-mark" aria-hidden="true"></span>CLASSICOMP</a>
+    <nav class="topnav" aria-label="Sections">
+      <a href="#state">Status</a>
+      <a href="#how">Catalogue</a>
+      <a href="#next">Roadmap</a>
+    </nav>
+    <div class="topbar-actions">
+      <button class="theme-toggle" type="button" hidden aria-label="Switch theme"></button>
+      <a class="topbar-download" href="https://github.com/ahmedalqamzi/classicomp/releases">Download</a>
+    </div>
+  </div>
+</header>
+
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Storefront · Library · Launcher</p>
+      <h1>Classic games, rebuilt to run on the machine you own</h1>
+      <p class="lede">
+        Dozens of open-source projects have painstakingly recompiled and reimplemented classic
+        games so they run natively — no emulator, no compatibility layer. Classicomp finds them,
+        installs them, and launches them.
+      </p>
+      <p class="cta-row">
+        <a class="cta" href="https://github.com/ahmedalqamzi/classicomp/releases">Download Classicomp</a>
+        <a class="cta cta-quiet" href="https://github.com/ahmedalqamzi/classicomp">View source</a>
+      </p>
+      <p class="disclaimer">
+        Classicomp ships no game content. Every game needs your own original copy.
+      </p>
+    </div>
+
+    <div class="app-window" aria-hidden="true">
+      <div class="app-chrome">
+        <span class="app-dot"></span><span class="app-dot"></span><span class="app-dot"></span>
+        <span class="app-title">classicomp — catalogue</span>
+      </div>
+      <div class="app-tabs">
+        <span class="app-tab is-active">Catalogue</span>
+        <span class="app-tab">Library</span>
+        <span class="app-tab">Downloads</span>
+        <span class="app-search">search the catalogue</span>
+      </div>
+      <div class="app-body">
+        <div class="capsule capsule-featured art-a">
+          <span class="capsule-tag">Featured · source port</span>
+          <span class="capsule-install">+ Install</span>
+        </div>
+        <div class="capsule-row">
+          <div class="capsule art-b"><span class="capsule-tag">Recompilation</span></div>
+          <div class="capsule art-c"><span class="capsule-tag">Decompilation</span></div>
+          <div class="capsule art-d">
+            <span class="capsule-tag">Update ready</span>
+            <span class="capsule-badge">1</span>
+          </div>
+          <div class="capsule art-e"><span class="capsule-tag">New release</span></div>
+        </div>
+      </div>
+      <div class="app-status">
+        <span class="status-dot"></span>sync complete — 151 projects · 55 playable · 48 builds · 42 launching<span class="status-cursor"></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section aria-labelledby="state">
+  <p class="section-eyebrow">Measured, not promised</p>
+  <h2 id="state">Where it stands</h2>
+  <dl class="stats">
+    <div><dt>Projects tracked</dt><dd>151</dd></div>
+    <div><dt>Playable games</dt><dd>55</dd></div>
+    <div><dt>Builds offered</dt><dd>48</dd></div>
+    <div><dt>Launch today</dt><dd>42</dd></div>
+  </dl>
+  <p class="note">
+    Measured by installing and launching every offered build in a single pass on Linux x86-64.
+  </p>
+</section>
+
+<section aria-labelledby="how">
+  <p class="section-eyebrow">What the client does</p>
+  <h2 id="how">How it works</h2>
+  <ul class="features">
+    <li>
+      <span class="feature-art art-b" aria-hidden="true"></span>
+      <div>
+        <h3>It keeps its own catalogue</h3>
+        <p>
+          Projects are rescanned on a rotation, with box art and screenshots pulled
+          automatically. New releases show up without anyone editing a list.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="feature-art art-c" aria-hidden="true"></span>
+      <div>
+        <h3>It picks the right build</h3>
+        <p>
+          Your operating system and CPU decide which release is offered — native builds beat
+          anything needing a compatibility layer, and a build that cannot run on your machine is
+          never offered at all.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="feature-art art-d" aria-hidden="true"></span>
+      <div>
+        <h3>It installs, properly</h3>
+        <p>
+          Nested archives are unpacked, Flatpaks registered, and the real executable found among
+          the helpers and uninstallers that ship beside it.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="feature-art art-e" aria-hidden="true"></span>
+      <div>
+        <h3>It handles the dependencies</h3>
+        <p>
+          Games needing .NET get it provisioned into Classicomp's own directory — no package
+          manager, no root. Windows-only builds run through Wine in a per-game prefix.
+        </p>
+      </div>
+    </li>
+    <li>
+      <span class="feature-art art-a" aria-hidden="true"></span>
+      <div>
+        <h3>It updates without eating your saves</h3>
+        <p>
+          Installed games update in the background. Saves, settings and mods are lifted out
+          before the old build is replaced and restored afterwards — including when an update
+          fails.
+        </p>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section aria-labelledby="next">
+  <p class="section-eyebrow">On the wishlist</p>
+  <h2 id="next">Coming next</h2>
+  <ul class="roadmap">
+    <li><strong>Big Picture mode</strong> — a full-screen, controller-first layout for a TV or a handheld.</li>
+    <li><strong>Remote install</strong> — queue a game from anywhere and have the machine at home fetch it.</li>
+    <li><strong>Mobile app</strong> — browse the catalogue and manage your library from a phone.</li>
+    <li><strong>Cloud saves</strong> — sync progress between machines.</li>
+    <li><strong>Friends list</strong> — see who is online and what they are playing.</li>
+    <li><strong>Multiplayer connectivity</strong> — join a friend's session straight from their profile.</li>
+    <li><strong>Built-in workshop</strong> — browse, install and update mods without leaving the app.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="legal">
+  <p class="section-eyebrow">The fine print</p>
+  <h2 id="legal">About the games</h2>
+  <div class="notice">
+    <p>
+      Every title in the catalogue is an independent open-source project — a recompilation,
+      decompilation or source port maintained by its own community. Classicomp links to their
+      releases and installs them for you. It does not host, bundle or distribute any copyrighted
+      game data, and it never will. To play, you supply your own original copy of the game.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>
+    Classicomp is free and open source.
+    <a href="https://github.com/ahmedalqamzi/classicomp">View the source on GitHub</a>.
+  </p>
+</footer>
+
+<script>
+(function () {
+  var btn = document.querySelector(".theme-toggle");
+  var root = document.documentElement;
+  function current() {
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  }
+  function paint() {
+    var t = current();
+    btn.textContent = t === "dark" ? "☀" : "☾";
+    btn.setAttribute("aria-label", "Switch to " + (t === "dark" ? "light" : "dark") + " theme");
+  }
+  btn.hidden = false;
+  paint();
+  btn.addEventListener("click", function () {
+    var next = current() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("classicomp-theme", next); } catch (e) {}
+    paint();
+  });
+  try {
+    window.matchMedia("(prefers-color-scheme: light)").addEventListener("change", function () {
+      if (!root.getAttribute("data-theme")) paint();
+    });
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

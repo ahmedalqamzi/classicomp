@@ -148,7 +148,7 @@ The safest project pattern is therefore:
 
 ## Local project and tracker audit
 
-At the time of the research, the Classicomp workspace was an otherwise empty Git repository. A separate, previously planned product had become a substantial implementation at `/home/thedictator/recomp-tracker`.
+At the time of the research, the Classicomp workspace was an otherwise empty Git repository. A separate, previously planned product had become a substantial implementation in a sibling checkout outside this repository.
 
 The following results were directly observed on August 13, 2026:
 

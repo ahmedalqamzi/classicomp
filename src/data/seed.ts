@@ -1,11 +1,12 @@
-import type { AppState, Game, LibraryEntry, Mod } from '../domain/types';
+import trackedProjectsData from './tracked-projects.json';
+import type { AppState, Game, Mod, TrackedProject } from '../domain/types';
 
 const games: Game[] = [
   {
     id: 'openrct2',
-    title: 'OpenRCT2',
-    shortTitle: 'RCT',
-    summary: 'Open-source reimplementation of RollerCoaster Tycoon 2',
+    title: 'RollerCoaster Tycoon 2',
+    shortTitle: 'RCT2',
+    summary: 'Played through OpenRCT2, the open-source reimplementation',
     description:
       'A modern engine for RollerCoaster Tycoon 2 with cross-platform support, expanded limits, and active upstream releases.',
     artworkUrl: '/artwork/openrct2-hero.jpg',
@@ -19,9 +20,9 @@ const games: Game[] = [
   },
   {
     id: 'devilutionx',
-    title: 'DevilutionX',
-    shortTitle: 'DX',
-    summary: 'Modern source port of Diablo and Hellfire',
+    title: 'Diablo',
+    shortTitle: 'Diablo',
+    summary: 'Played through DevilutionX, the modern Diablo and Hellfire port',
     description:
       'A maintained engine reconstruction focused on accurate gameplay, modern systems, and portable builds.',
     artworkUrl: '/artwork/devilutionx-hero.png',
@@ -35,9 +36,9 @@ const games: Game[] = [
   },
   {
     id: 'openmw',
-    title: 'OpenMW',
-    shortTitle: 'MW',
-    summary: 'Open-source engine for Morrowind',
+    title: 'Morrowind',
+    shortTitle: 'Morrowind',
+    summary: 'Played through OpenMW, the open-source Morrowind engine',
     description:
       'A clean-room engine implementation with a native Linux runtime, modern tooling, and strong mod support.',
     artworkUrl: '/artwork/openmw-hero.png',
@@ -51,9 +52,9 @@ const games: Game[] = [
   },
   {
     id: 'openttd',
-    title: 'OpenTTD',
+    title: 'Transport Tycoon Deluxe',
     shortTitle: 'TTD',
-    summary: 'Transport simulation engine reimplementation',
+    summary: 'Played through OpenTTD, the transport simulation reimplementation',
     description:
       'A long-running open-source transport simulation with native Linux releases and multiplayer support.',
     artworkUrl: '/artwork/openttd-hero.png',
@@ -83,9 +84,9 @@ const games: Game[] = [
   },
   {
     id: 'soh',
-    title: 'Ship of Harkinian',
-    shortTitle: 'SOH',
-    summary: 'PC port of the Ocarina of Time engine',
+    title: 'Ocarina of Time',
+    shortTitle: 'OoT',
+    summary: 'Played through Ship of Harkinian, the native PC port',
     description:
       'A community-built native port with modern rendering, input, accessibility, and quality-of-life options.',
     artworkUrl: null,
@@ -99,9 +100,9 @@ const games: Game[] = [
   },
   {
     id: 'zelda64recompiled',
-    title: 'Zelda 64: Recompiled',
-    shortTitle: 'Z64',
-    summary: 'Static recompilation of Majora\'s Mask',
+    title: 'Majora\'s Mask',
+    shortTitle: 'MM',
+    summary: 'Played through Zelda 64: Recompiled, the static recompilation',
     description:
       'A native recompilation project with modern rendering, ultrawide support, and high frame-rate presentation.',
     artworkUrl: null,
@@ -133,6 +134,38 @@ const modCatalog: Array<Omit<Mod, 'enabled'>> = [
     author: 'trancemaster_198',
   },
   {
+    id: 'mod-openmw-patch-for-purists',
+    gameId: 'openmw',
+    name: 'Patch for Purists',
+    summary: 'Unofficial bug-fix patch that stays close to vanilla Morrowind.',
+    version: '5.0.6',
+    author: 'TES3 Community and Half11',
+  },
+  {
+    id: 'mod-openmw-project-atlas',
+    gameId: 'openmw',
+    name: 'Project Atlas',
+    summary: 'Atlases heavy meshes onto fewer textures to cut draw calls.',
+    version: '0.7.5',
+    author: 'Melchior Dahrk',
+  },
+  {
+    id: 'mod-openmw-optimization-patch',
+    gameId: 'openmw',
+    name: 'Morrowind Optimization Patch',
+    summary: 'Optimized vanilla meshes that improve outdoor performance.',
+    version: '1.18.0',
+    author: 'Remiros',
+  },
+  {
+    id: 'mod-openmw-oaab-data',
+    gameId: 'openmw',
+    name: 'OAAB_Data',
+    summary: 'Shared vanilla-plus asset library used by many Morrowind mods.',
+    version: '2.6.2',
+    author: 'OAAB Team',
+  },
+  {
     id: 'mod-openrct2-openmusic',
     gameId: 'openrct2',
     name: 'OpenMusic',
@@ -149,12 +182,156 @@ const modCatalog: Array<Omit<Mod, 'enabled'>> = [
     author: 'OpenRCT2 Community',
   },
   {
+    id: 'mod-openrct2-ride-price-manager',
+    gameId: 'openrct2',
+    name: 'Ride Price Manager',
+    summary: 'Automatically sets ride prices from stats and park rules.',
+    version: '1.3.2',
+    author: 'mgovea',
+  },
+  {
+    id: 'mod-openrct2-price-manager',
+    gameId: 'openrct2',
+    name: 'Price Manager',
+    summary: 'Keeps park entry, ride, and shop prices updated automatically.',
+    version: '1.1.7',
+    author: 'Sadret',
+  },
+  {
+    id: 'mod-openrct2-scenery-manager',
+    gameId: 'openrct2',
+    name: 'Scenery Manager',
+    summary: 'Copy, paste, and organize scenery with extra placement tools.',
+    version: '2.0.9',
+    author: 'Sadret',
+  },
+  {
+    id: 'mod-openrct2-proxy-pather',
+    gameId: 'openrct2',
+    name: 'Proxy Pather',
+    summary: 'Covers guide paths with full paths without changing guest routing.',
+    version: '0.3',
+    author: 'Basssiiie',
+  },
+  {
     id: 'mod-devilutionx-infernal',
     gameId: 'devilutionx',
     name: 'Infernal Difficulty',
     summary: 'Brutal difficulty rebalance for veteran players.',
     version: '0.9',
     author: 'Community',
+  },
+  {
+    id: 'mod-devilutionx-infernity',
+    gameId: 'devilutionx',
+    name: 'Infernity',
+    summary: 'Devilution-based overhaul with Inferno difficulty, stash, and HD.',
+    version: '1.22',
+    author: 'qndel',
+  },
+  {
+    id: 'mod-devilutionx-belzebub',
+    gameId: 'devilutionx',
+    name: 'Belzebub',
+    summary: 'Diablo 1 HD overhaul with extra quests and widescreen support.',
+    version: '1.045',
+    author: 'Noktis',
+  },
+  {
+    id: 'mod-devilutionx-tchernobog',
+    gameId: 'devilutionx',
+    name: 'Tchernobog',
+    summary: 'Multiplayer-focused Diablo 1 overhaul from the Belzebub author.',
+    version: '0.2.2f',
+    author: 'Noktis',
+  },
+  {
+    id: 'mod-devilutionx-the-hell-2',
+    gameId: 'devilutionx',
+    name: 'The Hell 2',
+    summary: 'Total-overhaul HD Hellfire mod with new classes, items, and levels.',
+    version: '1.2502',
+    author: 'Mordor',
+  },
+  {
+    id: 'mod-openttd-opengfx',
+    gameId: 'openttd',
+    name: 'OpenGFX',
+    summary: 'Free 8bpp base graphics set that replaces the original TTD sprites.',
+    version: '8.0',
+    author: 'OpenTTD Team',
+  },
+  {
+    id: 'mod-openttd-opengfx2',
+    gameId: 'openttd',
+    name: 'OpenGFX2',
+    summary: 'Redrawn extra-zoom graphics set in classic and high-def variants.',
+    version: '0.8.1',
+    author: 'zephyris',
+  },
+  {
+    id: 'mod-openttd-zbase',
+    gameId: 'openttd',
+    name: 'zBase',
+    summary: '32bpp high-resolution base graphics set for OpenTTD.',
+    version: 'v5588',
+    author: 'Zephyris',
+  },
+  {
+    id: 'mod-openttd-firs',
+    gameId: 'openttd',
+    name: 'FIRS Industry Replacement Set',
+    summary: 'Replaces default industries and cargos with longer production chains.',
+    version: '5.2.0',
+    author: 'andythenorth',
+  },
+  {
+    id: 'mod-openttd-nutracks',
+    gameId: 'openttd',
+    name: 'NuTracks',
+    summary: 'Adds extra rail types with adjustable speed limits and costs.',
+    version: 'r283',
+    author: 'djnekkid',
+  },
+  {
+    id: 'mod-openttd-opensfx',
+    gameId: 'openttd',
+    name: 'OpenSFX',
+    summary: 'Free replacement base sound set so OpenTTD can ship without TTD audio.',
+    version: '1.0.3',
+    author: 'OpenTTD Team',
+  },
+  {
+    id: 'mod-scummvm-mi1-talkie',
+    gameId: 'scummvm',
+    name: 'The Secret of Monkey Island Ultimate Talkie Edition',
+    summary: 'Builds a ScummVM talkie from the Special Edition voices and extra audio.',
+    version: '1.02',
+    author: 'Ultimate Talkie Project',
+  },
+  {
+    id: 'mod-scummvm-mi2-talkie',
+    gameId: 'scummvm',
+    name: "Monkey Island 2 Ultimate Talkie Edition",
+    summary: 'Adds Special Edition speech and bug fixes to LeChuck\'s Revenge.',
+    version: '0.2',
+    author: 'Ultimate Talkie Project',
+  },
+  {
+    id: 'mod-scummvm-tljhd',
+    gameId: 'scummvm',
+    name: 'The Longest Journey HD',
+    summary: 'Neural-upscaled backgrounds, sprites, and a redrawn interface.',
+    version: '1.0',
+    author: 'Faberman',
+  },
+  {
+    id: 'mod-scummvm-broken-sword-25',
+    gameId: 'scummvm',
+    name: 'Broken Sword 2.5: The Return of the Templars',
+    summary: 'Fan-made freeware sequel that ScummVM can run between BS2 and BS3.',
+    version: '1.0',
+    author: 'mindFactory',
   },
   {
     id: 'mod-soh-hd-textures',
@@ -164,16 +341,75 @@ const modCatalog: Array<Omit<Mod, 'enabled'>> = [
     version: '3.1',
     author: 'Community',
   },
+  {
+    id: 'mod-soh-oot-reloaded',
+    gameId: 'soh',
+    name: 'OoT Reloaded',
+    summary: 'Ultra HD texture pack built for Ship of Harkinian O2R mods.',
+    version: '11.0.0',
+    author: 'GhostlyDark',
+  },
+  {
+    id: 'mod-soh-archipelago',
+    gameId: 'soh',
+    name: 'Archipelago-SoH',
+    summary: 'Official Harbour Masters client for Archipelago multiworld randomizer.',
+    version: '1.4.2',
+    author: 'Harbour Masters',
+  },
+  {
+    id: 'mod-soh-djipi-3ds',
+    gameId: 'soh',
+    name: "Djipi's 3DS Experience",
+    summary: '3DS-style textures, scenes, NPCs, and models for Ship of Harkinian.',
+    version: '6.0.1',
+    author: 'Djipi',
+  },
+  {
+    id: 'mod-zelda64recompiled-mm-rando',
+    gameId: 'zelda64recompiled',
+    name: 'MMRecompRando',
+    summary: 'Archipelago randomizer for Majora\'s Mask: Recompiled.',
+    version: '0.9.5',
+    author: 'RecompRando',
+  },
+  {
+    id: 'mod-zelda64recompiled-mm-reloaded',
+    gameId: 'zelda64recompiled',
+    name: 'MM Reloaded',
+    summary: 'Ultra HD texture pack for Zelda 64: Recompiled via RT64.',
+    version: '11.0.2',
+    author: 'GhostlyDark',
+  },
+  {
+    id: 'mod-zelda64recompiled-mmn64hd',
+    gameId: 'zelda64recompiled',
+    name: 'MMN64HD',
+    summary: 'Nerrel hand-drawn HD textures packaged for the recompiled port.',
+    version: '1.2',
+    author: 'Nerrel',
+  },
+  {
+    id: 'mod-zelda64recompiled-dpad',
+    gameId: 'zelda64recompiled',
+    name: 'D-Pad Special Items',
+    summary: 'Maps transformation masks and the Ocarina onto the D-Pad HUD.',
+    version: '1.0.0',
+    author: 'Wiseguy',
+  },
+  {
+    id: 'mod-zelda64recompiled-music-rando',
+    gameId: 'zelda64recompiled',
+    name: 'MM Recomp Music Randomizer',
+    summary: 'Restores MMR-style custom music reading and sequence shuffling.',
+    version: '1.1.0',
+    author: 'AACooper1',
+  },
 ];
 
-function availableLibrary(): LibraryEntry[] {
-  return games.map((game) => ({
-    gameId: game.id,
-    installState: 'available',
-    installPath: null,
-    playMinutes: 0,
-  }));
-}
+// The full tracked catalog is generated from the Classic Game Ports tracker
+// sources (see docs); scans keep it current at runtime.
+const trackedProjects = trackedProjectsData as TrackedProject[];
 
 function modLibrary(enabledModIds: string[]): Mod[] {
   return modCatalog.map((mod) => ({ ...mod, enabled: enabledModIds.includes(mod.id) }));
@@ -182,15 +418,15 @@ function modLibrary(enabledModIds: string[]): Mod[] {
 export const seedState: AppState = {
   activeProfileId: 'owner',
   selectedGameId: 'openrct2',
-  route: 'library',
+  route: 'store',
   profiles: [
     { id: 'owner', displayName: 'The Dictator', avatarInitials: 'TD' },
     { id: 'guest', displayName: 'Guest', avatarInitials: 'GU' },
   ],
   games,
   libraries: {
-    owner: availableLibrary(),
-    guest: availableLibrary(),
+    owner: [],
+    guest: [],
   },
   mods: {
     owner: modLibrary(['mod-openmw-tamriel-rebuilt']),
@@ -198,5 +434,12 @@ export const seedState: AppState = {
   },
   downloads: [],
   saveSnapshots: [],
+  trackedProjects,
+  watchlists: {
+    owner: ['the-legend-of-zelda-majoras-mask'],
+    guest: [],
+  },
+  releaseNotices: [],
+  trackingLastScanAt: null,
   cloudProvider: null,
 };

@@ -1,0 +1,51 @@
+{
+  "--muted": {
+    "current": "#8f98a0",
+    "proposed": "#a9b4bd",
+    "worstBackground": "#2a475e",
+    "currentRatio": 3.32,
+    "proposedRatio": 4.6
+  },
+  "--dim": {
+    "current": "#65717b",
+    "proposed": "#86909b",
+    "worstBackground": "#1b2838",
+    "currentRatio": 2.99,
+    "proposedRatio": 4.6
+  },
+  "--text": {
+    "current": "#c7d5e0",
+    "proposed": "#c7d5e0",
+    "worstBackground": "#1b2838",
+    "currentRatio": 9.96,
+    "proposedRatio": 9.96
+  },
+  "--blue": {
+    "current": "#66c0f4",
+    "proposed": "#66c0f4",
+    "worstBackground": "#243a4f",
+    "currentRatio": 5.81,
+    "proposedRatio": 5.81
+  },
+  "--gold": {
+    "current": "#c4a44a",
+    "proposed": "#c4a44a",
+    "worstBackground": "#1b2838",
+    "currentRatio": 6.22,
+    "proposedRatio": 6.22
+  },
+  "--green": {
+    "current": "#75a319",
+    "proposed": "#75a319",
+    "worstBackground": "#1b2838",
+    "currentRatio": 4.98,
+    "proposedRatio": 4.98
+  },
+  "--red": {
+    "current": "#c14b40",
+    "proposed": "#da7063",
+    "worstBackground": "#1b2838",
+    "currentRatio": 3.09,
+    "proposedRatio": 4.6
+  }
+}

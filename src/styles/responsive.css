@@ -1,14 +1,33 @@
 @media (max-width: 1100px) {
-  .app-header {
-    grid-template-columns: 160px minmax(310px, 1fr) 210px;
-  }
-
   .app-body:has(.library-rail) {
     grid-template-columns: 200px minmax(0, 1fr);
   }
 
   .game-hero {
-    height: 220px;
+    height: 260px;
+  }
+
+  .featured-capsule {
+    grid-template-columns: minmax(0, 1.6fr) minmax(240px, 1fr);
+  }
+
+  .game-page-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Single-column layout: the rail cover drops below the content, so cap its
+     width instead of letting the 2:3 slot span the page. */
+  .game-page-cover {
+    margin: 0 auto 12px;
+    max-width: 240px;
+  }
+
+  .tracking-row {
+    grid-template-columns: 69px minmax(0, 1fr) 110px 96px minmax(96px, auto);
+  }
+
+  .tracking-row > span:nth-child(4) {
+    display: none;
   }
 
   .detail-layout {
@@ -23,10 +42,6 @@
 }
 
 @media (max-width: 960px) {
-  .app-header {
-    grid-template-columns: 142px minmax(300px, 1fr) 190px;
-  }
-
   .brand-lockup {
     padding-inline: 10px;
   }
@@ -44,7 +59,15 @@
   }
 
   .game-hero {
-    height: 200px;
+    height: 220px;
+  }
+
+  .featured-capsule {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-art {
+    min-height: 220px;
   }
 
   .action-bar {
@@ -56,10 +79,59 @@
   .action-bar .cloud-mini-status {
     margin-left: 0;
   }
+
+  .game-stats {
+    flex-wrap: wrap;
+  }
 }
 
 @media (max-height: 720px) {
   .game-hero {
-    height: 200px;
+    height: 220px;
+  }
+}
+
+/* ── Wide screens (maximized windows) ────────────────────────────────
+   The content column grows with the window (capped only on very wide
+   monitors), and cards, shelves, and the hero scale up with it instead
+   of leaving dead space around fixed-size content. */
+
+.store-view {
+  padding-inline: max(20px, (100% - 2040px) / 2);
+}
+
+.store-view.game-page {
+  padding-inline: max(20px, (100% - 1760px) / 2);
+}
+
+/* Mods shares the store's content column so switching tabs never makes the
+   page gutter lurch. */
+.mods-view {
+  padding-inline: max(20px, (100% - 2040px) / 2);
+}
+
+@media (min-width: 1360px) {
+  .store-shelf-track {
+    grid-auto-columns: clamp(150px, 10vw, 236px);
+    gap: clamp(12px, 0.9vw, 18px);
+  }
+
+  .featured-capsule {
+    min-height: clamp(300px, 22vw, 520px);
+  }
+
+  .store-capsule-title {
+    font-size: clamp(12px, 0.85vw, 15px);
+  }
+
+  .game-page-layout {
+    grid-template-columns: minmax(0, 1fr) clamp(300px, 19vw, 380px);
+    gap: clamp(20px, 1.6vw, 32px);
+  }
+}
+
+@media (max-width: 1080px) {
+  .header-search {
+    display: none;
   }
 }

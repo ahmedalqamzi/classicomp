@@ -1,0 +1,222 @@
+{
+  "ace-combat-6-recomp": [],
+  "animal-crossing-decomp": [
+    "https://raw.githubusercontent.com/acreteam/ac-decomp/HEAD/assets/objdiff.png"
+  ],
+  "animal-crossing-pc-port": [],
+  "animal-forest-decomp": [],
+  "animal-forest-e-plus-decomp": [
+    "https://raw.githubusercontent.com/acreteam/afe-decomp/HEAD/assets/objdiff.png"
+  ],
+  "banjo-recomp": [],
+  "lighthouse": [],
+  "banjo-nuts-bolts-recomp": [
+    "https://github.com/user-attachments/assets/273bee28-755f-4494-920f-9333af72091e"
+  ],
+  "battle-city-decomp": [],
+  "blue-dragon-recomp": [
+    "https://github.com/user-attachments/assets/f1e2af70-18e7-4359-8f86-48f67fb3e039",
+    "https://github.com/user-attachments/assets/238a2ee5-9583-4936-aff2-2414a790a879",
+    "https://github.com/user-attachments/assets/ffb7c570-2052-40a4-ac1b-8392a39929ac",
+    "https://github.com/user-attachments/assets/28aabe18-0d7c-4f1b-8b97-5dd2cdef3bda"
+  ],
+  "body-harvest-decomp": [],
+  "bomberman-64-recomp": [],
+  "bomberman-hero-recomp": [],
+  "castlevania-lod-recomp": [],
+  "sotn-decomp": [],
+  "symphony-recomp": [],
+  "chameleon-twist-recomp": [],
+  "scummvm": [],
+  "crackdown-recomp": [],
+  "crackdown-2-recomp": [],
+  "crash-bandicoot-recomp": [
+    "https://github.com/user-attachments/assets/3682fe9c-0deb-466c-adbe-285a1fd7bbcc"
+  ],
+  "ctr-native": [],
+  "dance-central-3-decomp": [
+    "https://raw.githubusercontent.com/rjkiv/dc3-decomp/HEAD/assets/objdiff.png"
+  ],
+  "dah-path-furon-recomp": [
+    "https://github.com/user-attachments/assets/d80c06b9-bc26-4fca-b235-22de8d32971b"
+  ],
+  "devilutionx": [
+    "https://github.com/user-attachments/assets/7ac73801-ef7b-4cc1-8442-a191a2a0a1ce",
+    "https://github.com/user-attachments/assets/ee902926-6382-4ee5-b1c2-7947e8b434e9"
+  ],
+  "golden-balloon": [],
+  "dinosaur-planet-recomp": [],
+  "dr-mario-disassembly": [],
+  "dr-mario-64-recomp": [],
+  "dr-mario-64-decomp": [],
+  "dragon-quest-ix-decomp": [],
+  "redriver2": [
+    "https://i.ibb.co/2q1pp06/red2.png",
+    "https://i.ibb.co/JxfC5xX/aaa.png",
+    "https://i.ibb.co/ydLsK9z/aaa.png"
+  ],
+  "duke-zero-hour-recomp": [
+    "https://github.com/user-attachments/assets/d40067a6-37d2-4784-927c-2c7f7cc6104b"
+  ],
+  "guitar-hero-2-recomp": [],
+  "halo-3-recomp": [
+    "https://github.com/user-attachments/assets/8ef2ba53-4774-47c0-975d-34e3f43b1af5",
+    "https://github.com/user-attachments/assets/0d4dc658-0b3f-46a2-8230-98dbddd4d635",
+    "https://github.com/user-attachments/assets/7bf66958-8bdc-4a65-bab9-a7b652f742ce"
+  ],
+  "harvest-moon-64-recomp": [],
+  "opengoal-jak-3": [
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall1.png",
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall2.png"
+  ],
+  "opengoal-jak-1": [
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall1.png",
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall2.png"
+  ],
+  "opengoal-jak-2": [
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall1.png",
+    "https://raw.githubusercontent.com/open-goal/jak-project/HEAD/docs/img/promosmall2.png"
+  ],
+  "tatsh-expert-satphone": [],
+  "yokimitsuro-khdays-port": [],
+  "klonoa-eod-decomp": [],
+  "mario-kart-64-recomp-independent": [],
+  "mario-kart-64-recomp": [
+    "https://github.com/user-attachments/assets/d40067a6-37d2-4784-927c-2c7f7cc6104b"
+  ],
+  "spaghettikart": [
+    "https://raw.githubusercontent.com/HarbourMasters/SpaghettiKart/HEAD/docs/spaghettigithublight.png#gh-light-mode-only",
+    "https://raw.githubusercontent.com/HarbourMasters/SpaghettiKart/HEAD/docs/spaghettigithubnight.png#gh-dark-mode-only"
+  ],
+  "mega-man-64-recomp": [],
+  "metroid-prime-decomp": [
+    "https://raw.githubusercontent.com/PrimeDecomp/prime/HEAD/assets/objdiff.png"
+  ],
+  "goemon-64-recomp": [
+    "https://raw.githubusercontent.com/klorfmorf/Goemon64Recomp/HEAD/docs/deck_gyro_1.jpg"
+  ],
+  "perfect-dark-decomp": [],
+  "perfect-dark-port": [],
+  "pokemon-battle-revolution-decomp": [
+    "https://raw.githubusercontent.com/bgsamm/pbr-dtk/HEAD/assets/objdiff.png"
+  ],
+  "pokemon-black-decomp": [],
+  "poketcg2": [],
+  "pokecrystal": [],
+  "pokemon-diamond-decomp": [],
+  "pokeemerald": [],
+  "pokeemerald-jp": [],
+  "pokefirered": [],
+  "pokegold": [],
+  "pokegold-spaceworld": [],
+  "pokemon-heartgold-decomp": [],
+  "pmd-sky-decomp": [],
+  "pmd-red": [],
+  "pokepinball": [],
+  "pokepinballrs": [],
+  "pokemon-platinum-decomp": [],
+  "pokemon-puzzle-league-decomp": [],
+  "pokered": [],
+  "pokemon-gen1-recomp": [
+    "https://img.youtube.com/vi/8IOgqbe4YvA/maxresdefault.jpg"
+  ],
+  "pokeruby": [],
+  "pokemon-rumble-decomp": [
+    "https://raw.githubusercontent.com/KooShnoo/pokemon-rumble/HEAD/assets/objdiff.png"
+  ],
+  "pokemon-snap-decomp": [],
+  "pokemon-stadium-recomp": [
+    "https://raw.githubusercontent.com/mstan/PokemonStadiumRecomp/HEAD/docs/launcher.png"
+  ],
+  "pokemon-stadium-decomp": [],
+  "pokemon-stadium-2-decomp": [],
+  "poketcg": [],
+  "pokemon-xd-decomp": [],
+  "pokeyellow": [],
+  "pokepark-wii-decomp": [
+    "https://raw.githubusercontent.com/sephdb/pokepark-wii-decomp/HEAD/assets/objdiff.png"
+  ],
+  "quest-64-recomp": [],
+  "tatsh-expert-xylophone": [],
+  "rock-band-3-x360-recomp": [],
+  "rock-band-3-wii-decomp": [
+    "https://raw.githubusercontent.com/DarkRTA/rb3/HEAD/assets/dolphin-extract.png",
+    "https://raw.githubusercontent.com/DarkRTA/rb3/HEAD/assets/objdiff.png"
+  ],
+  "openrct2": [
+    "https://github.com/user-attachments/assets/fa893cc8-1484-4751-94be-4ead00a6c8f9",
+    "https://user-images.githubusercontent.com/604665/53047651-2c533c00-3493-11e9-911a-1a3540fc1156.png",
+    "https://user-images.githubusercontent.com/550290/36507534-4693f354-175a-11e8-93a7-faa0481474fb.png",
+    "https://user-images.githubusercontent.com/550290/36508276-8b572f0e-175c-11e8-8622-9febbce756b2.png"
+  ],
+  "skate-3-recomp": [
+    "https://raw.githubusercontent.com/mchughalex/skate3recomp/HEAD/banner-light.png",
+    "https://img.youtube.com/vi/ETXCOsip1Uo/maxresdefault.jpg"
+  ],
+  "snowboard-kids-2-recomp": [],
+  "sonic-06-demo-recomp": [],
+  "unleashed-recomp": [],
+  "sssv-recomp": [],
+  "star-fox-64-recomp": [
+    "https://github.com/user-attachments/assets/d40067a6-37d2-4784-927c-2c7f7cc6104b"
+  ],
+  "starship": [],
+  "star-fox-adventures-decomp": [
+    "https://raw.githubusercontent.com/zcanann/SFA-Decomp/HEAD/assets/objdiff.png"
+  ],
+  "ghostship": [],
+  "sm64-decomp": [],
+  "sm64-coop-dx": [],
+  "smw-port": [],
+  "battleship": [],
+  "syphon-filter-pc-port": [],
+  "tdu-recomp": [
+    "https://raw.githubusercontent.com/testdriveupgrade/TDURE/HEAD/image.webp"
+  ],
+  "openmw": [],
+  "zelda3-port": [
+    "https://user-images.githubusercontent.com/37708128/216780011-98f4ff41-01a6-4b95-9621-f1eef447df77.png",
+    "https://user-images.githubusercontent.com/37708128/218764570-c36e7ffd-f604-4de0-8116-6e1f18174b57.png",
+    "https://user-images.githubusercontent.com/37708128/226472052-a12d4d64-4fe6-443c-85b0-283c5a335d1f.png",
+    "https://user-images.githubusercontent.com/37708128/223178075-c2030a81-55d4-45c6-a2e6-842267aa2789.png"
+  ],
+  "two-ship-two-harkinian": [],
+  "zelda64-recompiled": [
+    "https://raw.githubusercontent.com/Zelda64Recomp/Zelda64Recomp/HEAD/docs/deck_gyro_1.jpg"
+  ],
+  "zeldaret-mm": [],
+  "shipwright": [
+    "https://raw.githubusercontent.com/HarbourMasters/Shipwright/HEAD/docs/shiptitle.darkmode.png#gh-dark-mode-only",
+    "https://raw.githubusercontent.com/HarbourMasters/Shipwright/HEAD/docs/shiptitle.lightmode.png#gh-light-mode-only"
+  ],
+  "zeldaret-oot": [],
+  "oot3d-decomp": [],
+  "phantom-hourglass-decomp": [],
+  "skyward-sword-decomp": [
+    "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/dolphin-game-properties.png",
+    "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/dolphin-extract-entire-partition.png",
+    "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-project-settings.png",
+    "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-project-directory.png",
+    "https://raw.githubusercontent.com/zeldaret/ss/HEAD/assets/objdiff-example.png"
+  ],
+  "spirit-tracks-decomp": [],
+  "minish-cap-port": [],
+  "project-picori": [],
+  "minish-cap-decomp": [],
+  "wind-waker-decomp": [
+    "https://raw.githubusercontent.com/zeldaret/tww/HEAD/assets/objdiff.png"
+  ],
+  "dusklight": [
+    "https://raw.githubusercontent.com/TwilitRealm/dusklight/HEAD/assets/aurora-powered.png"
+  ],
+  "twilight-princess-decomp": [
+    "https://raw.githubusercontent.com/zeldaret/tp/HEAD/assets/objdiff.png"
+  ],
+  "sims-2-gamecube-decomp": [],
+  "openttd": [],
+  "viva-pinata-tip-recomp": [
+    "https://github.com/user-attachments/assets/8841c75d-1d5b-43f5-b19e-050b05fb7d08"
+  ],
+  "swiftshine-wlsi": [],
+  "svr07-recomp": []
+}

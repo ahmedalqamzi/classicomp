@@ -9,6 +9,8 @@ describe('first-run state', () => {
       libraries: Record<string, Array<{ gameId: string; installState: string }>>;
       mods: Record<string, Array<{ gameId: string; enabled: boolean }>>;
       saveSnapshots: unknown[];
+      trackedProjects: Array<{ id: string; gameKey: string; gameId: string | null }>;
+      watchlists: Record<string, string[]>;
     } }).seedState;
 
     expect(seedState).toBeDefined();
@@ -28,5 +30,34 @@ describe('first-run state', () => {
     expect(modEntries.every((mod) => gameIds.has(mod.gameId))).toBe(true);
     expect(seedState.mods.owner?.filter((mod) => mod.enabled)).toHaveLength(1);
     expect(seedState.mods.guest?.every((mod) => !mod.enabled)).toBe(true);
+  });
+
+  it('links tracked projects to real catalog games and watches only tracked games', () => {
+    const seedState = (seedModule as { seedState?: {
+      games: Array<{ id: string }>;
+      trackedProjects: Array<{ id: string; gameKey: string; gameId: string | null }>;
+      watchlists: Record<string, string[]>;
+    } }).seedState;
+
+    expect(seedState).toBeDefined();
+    if (!seedState) return;
+
+    expect(seedState.trackedProjects.length).toBeGreaterThan(0);
+
+    const gameIds = new Set(seedState.games.map((game) => game.id));
+    const linkedIds = seedState.trackedProjects
+      .map((project) => project.gameId)
+      .filter((gameId): gameId is string => gameId !== null);
+    expect(linkedIds.length).toBeGreaterThan(0);
+    expect(linkedIds.every((gameId) => gameIds.has(gameId))).toBe(true);
+
+    const projectIds = seedState.trackedProjects.map((project) => project.id);
+    expect(new Set(projectIds).size).toBe(projectIds.length);
+
+    const trackedGameKeys = new Set(
+      seedState.trackedProjects.map((project) => project.gameKey),
+    );
+    const watchedKeys = Object.values(seedState.watchlists).flat();
+    expect(watchedKeys.every((gameKey) => trackedGameKeys.has(gameKey))).toBe(true);
   });
 });

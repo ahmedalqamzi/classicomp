@@ -1,0 +1,252 @@
+{
+  "ace-combat-6-recomp": {
+    "version": "v1.0.0-beta.1",
+    "url": "https://github.com/sal063/AC6_recomp/releases/tag/v1.0.0-beta.1",
+    "publishedAt": "2026-08-09T19:16:30Z"
+  },
+  "animal-crossing-pc-port": {
+    "version": "v0.9.3-playtest",
+    "url": "https://github.com/flyngmt/ACGC-PC-Port/releases/tag/v0.9.3-playtest",
+    "publishedAt": "2026-08-02T00:56:51Z"
+  },
+  "banjo-recomp": {
+    "version": "v1.0.2",
+    "url": "https://github.com/BanjoRecomp/BanjoRecomp/releases/tag/v1.0.2",
+    "publishedAt": "2026-07-31T19:43:17Z"
+  },
+  "lighthouse": {
+    "version": "1.0.3",
+    "url": "https://github.com/HarbourMasters/Lighthouse/releases/tag/1.0.3",
+    "publishedAt": "2026-08-09T00:01:49Z"
+  },
+  "banjo-nuts-bolts-recomp": {
+    "version": "texturereplacements",
+    "url": "https://github.com/masterspike52/reNut/releases/tag/texturereplacements",
+    "publishedAt": "2026-08-12T20:34:31Z"
+  },
+  "blue-dragon-recomp": {
+    "version": "v0.1.0",
+    "url": "https://github.com/SolarCookies/reblue/releases/tag/v0.1.0",
+    "publishedAt": "2026-04-19T15:19:59Z"
+  },
+  "bomberman-64-recomp": {
+    "version": "v1.0.0",
+    "url": "https://github.com/RevoSucks/BM64Recomp/releases/tag/v1.0.0",
+    "publishedAt": "2026-03-24T12:07:14Z"
+  },
+  "bomberman-hero-recomp": {
+    "version": "v0.7.1",
+    "url": "https://github.com/RevoSucks/BMHeroRecomp/releases/tag/v0.7.1",
+    "publishedAt": "2026-05-03T20:48:28Z"
+  },
+  "castlevania-lod-recomp": {
+    "version": "v0.2.26",
+    "url": "https://github.com/fliperama86/cvlod_recomp/releases/tag/v0.2.26",
+    "publishedAt": "2026-07-02T14:24:48Z"
+  },
+  "symphony-recomp": {
+    "version": "v0.4.3b",
+    "url": "https://github.com/BlackLabelHQ/SymphonyRecomp/releases/tag/v0.4.3b",
+    "publishedAt": "2026-08-11T15:26:36Z"
+  },
+  "chameleon-twist-recomp": {
+    "version": "v0.1",
+    "url": "https://github.com/Rainchus/ChameleonTwist1-JP-Recomp/releases/tag/v0.1",
+    "publishedAt": "2024-12-14T08:14:13Z"
+  },
+  "crash-bandicoot-recomp": {
+    "version": "1.7.1",
+    "url": "https://github.com/Matteo842/CrashBandicoot-Launcher/releases/tag/1.7.1",
+    "publishedAt": "2026-08-14T08:24:49Z"
+  },
+  "ctr-native": {
+    "version": "beta-7.1",
+    "url": "https://github.com/CTR-tools/ctr-native/releases/tag/beta-7.1",
+    "publishedAt": "2026-07-07T08:11:52Z"
+  },
+  "dah-path-furon-recomp": {
+    "version": "jank",
+    "url": "https://github.com/masterspike52/reDAHM/releases/tag/jank",
+    "publishedAt": "2026-08-11T22:26:44Z"
+  },
+  "golden-balloon": {
+    "version": "v1.2.0",
+    "url": "https://github.com/akratch/goldenballoon/releases/tag/v1.2.0",
+    "publishedAt": "2026-08-10T16:31:41Z"
+  },
+  "dinosaur-planet-recomp": {
+    "version": "v0.3.0",
+    "url": "https://github.com/DinosaurPlanetRecomp/dino-recomp/releases/tag/v0.3.0",
+    "publishedAt": "2026-05-31T00:23:46Z"
+  },
+  "dr-mario-64-recomp": {
+    "version": "1.0.0",
+    "url": "https://github.com/theboy181/drmario64_recomp_plus/releases/tag/1.0.0",
+    "publishedAt": "2025-12-18T04:36:29Z"
+  },
+  "redriver2": {
+    "version": "8.0",
+    "url": "https://github.com/OpenDriver2/REDRIVER2/releases/tag/8.0",
+    "publishedAt": "2026-07-02T07:39:19Z"
+  },
+  "duke-zero-hour-recomp": {
+    "version": "0.0.3@2026-06-01_1780332196",
+    "url": "https://github.com/pkgforge-dev/DNZHRecomp-AppImage/releases/tag/0.0.3%402026-06-01_1780332196",
+    "publishedAt": "2026-06-01T16:43:21Z"
+  },
+  "harvest-moon-64-recomp": {
+    "version": "v1.2.1",
+    "url": "https://github.com/HarvestMoon64Recomp/HarvestMoon64Recomp/releases/tag/v1.2.1",
+    "publishedAt": "2026-07-07T00:26:27Z"
+  },
+  "opengoal-jak-3": {
+    "version": "v0.3.5",
+    "url": "https://github.com/open-goal/jak-project/releases/tag/v0.3.5",
+    "publishedAt": "2026-07-04T01:15:26Z"
+  },
+  "opengoal-jak-1": {
+    "version": "v0.3.5",
+    "url": "https://github.com/open-goal/jak-project/releases/tag/v0.3.5",
+    "publishedAt": "2026-07-04T01:15:26Z"
+  },
+  "opengoal-jak-2": {
+    "version": "v0.3.5",
+    "url": "https://github.com/open-goal/jak-project/releases/tag/v0.3.5",
+    "publishedAt": "2026-07-04T01:15:26Z"
+  },
+  "mario-kart-64-recomp-independent": {
+    "version": "1.0.0",
+    "url": "https://github.com/arefdsg/MK64Recomp/releases/tag/1.0.0",
+    "publishedAt": "2025-05-28T00:50:57Z"
+  },
+  "mario-kart-64-recomp": {
+    "version": "0.9.2@2026-06-01_1780317544",
+    "url": "https://github.com/pkgforge-dev/MarioKart64Recomp-AppImage/releases/tag/0.9.2%402026-06-01_1780317544",
+    "publishedAt": "2026-06-01T12:39:08Z"
+  },
+  "spaghettikart": {
+    "version": "1.0.0",
+    "url": "https://github.com/HarbourMasters/SpaghettiKart/releases/tag/1.0.0",
+    "publishedAt": "2026-03-04T17:31:16Z"
+  },
+  "mega-man-64-recomp": {
+    "version": "v0.9.1",
+    "url": "https://github.com/MegaMan64Recomp/MegaMan64Recompiled/releases/tag/v0.9.1",
+    "publishedAt": "2026-04-30T20:35:04Z"
+  },
+  "pokemon-gen1-recomp": {
+    "version": "v0.1.87",
+    "url": "https://github.com/bryanthaboi/gen1recomp/releases/tag/v0.1.87",
+    "publishedAt": "2026-08-14T21:19:39Z"
+  },
+  "pokemon-stadium-recomp": {
+    "version": "v0.4.6-beta",
+    "url": "https://github.com/mstan/PokemonStadiumRecomp/releases/tag/v0.4.6-beta",
+    "publishedAt": "2026-07-20T16:23:13Z"
+  },
+  "quest-64-recomp": {
+    "version": "v0.1",
+    "url": "https://github.com/Rainchus/Quest64-Recomp/releases/tag/v0.1",
+    "publishedAt": "2026-01-16T02:17:42Z"
+  },
+  "skate-3-recomp": {
+    "version": "v2.0.2",
+    "url": "https://github.com/mchughalex/skate3recomp/releases/tag/v2.0.2",
+    "publishedAt": "2026-07-24T21:21:06Z"
+  },
+  "snowboard-kids-2-recomp": {
+    "version": "v2.0.0+alpha1",
+    "url": "https://github.com/cdlewis/snowboardkids2-recomp/releases/tag/v2.0.0%2Balpha1",
+    "publishedAt": "2026-07-24T04:44:15Z"
+  },
+  "sonic-06-demo-recomp": {
+    "version": "v0.1",
+    "url": "https://github.com/PranchaD/re-Sonic06Demo/releases/tag/v0.1",
+    "publishedAt": "2026-02-26T19:52:16Z"
+  },
+  "unleashed-recomp": {
+    "version": "v1.0.3",
+    "url": "https://github.com/hedge-dev/UnleashedRecomp/releases/tag/v1.0.3",
+    "publishedAt": "2025-04-05T13:24:51Z"
+  },
+  "sssv-recomp": {
+    "version": "v0.2.0",
+    "url": "https://github.com/Cellenseres/SSSV_Recomp/releases/tag/v0.2.0",
+    "publishedAt": "2026-03-13T13:03:41Z"
+  },
+  "star-fox-64-recomp": {
+    "version": "1.0.3@2026-06-01_1780331807",
+    "url": "https://github.com/pkgforge-dev/Starfox64Recomp-AppImage/releases/tag/1.0.3%402026-06-01_1780331807",
+    "publishedAt": "2026-06-01T16:36:53Z"
+  },
+  "starship": {
+    "version": "v2.0.0",
+    "url": "https://github.com/HarbourMasters/Starship/releases/tag/v2.0.0",
+    "publishedAt": "2025-05-26T02:53:29Z"
+  },
+  "ghostship": {
+    "version": "2.0.0",
+    "url": "https://github.com/HarbourMasters/Ghostship/releases/tag/2.0.0",
+    "publishedAt": "2026-05-29T19:21:00Z"
+  },
+  "sm64-coop-dx": {
+    "version": "v1.5.1",
+    "url": "https://github.com/coop-deluxe/sm64coopdx/releases/tag/v1.5.1",
+    "publishedAt": "2026-06-26T17:10:29Z"
+  },
+  "smw-port": {
+    "version": "v0.1",
+    "url": "https://github.com/snesrev/smw/releases/tag/v0.1",
+    "publishedAt": "2023-08-16T22:38:38Z"
+  },
+  "battleship": {
+    "version": "v1.6",
+    "url": "https://github.com/JRickey/BattleShip/releases/tag/v1.6",
+    "publishedAt": "2026-08-12T03:19:33Z"
+  },
+  "syphon-filter-pc-port": {
+    "version": "0.2.0-beta.2",
+    "url": "https://github.com/Madxbio97/SF-pc-port/releases/tag/0.2.0-beta.2",
+    "publishedAt": "2026-08-13T20:35:00Z"
+  },
+  "zelda3-port": {
+    "version": "v1.3.6.0",
+    "url": "https://github.com/RadzPrower/Zelda-3-Launcher/releases/tag/v1.3.6.0",
+    "publishedAt": "2024-06-04T13:49:33Z"
+  },
+  "two-ship-two-harkinian": {
+    "version": "5.0.0",
+    "url": "https://github.com/HarbourMasters/2ship2harkinian/releases/tag/5.0.0",
+    "publishedAt": "2026-08-12T03:47:13Z"
+  },
+  "zelda64-recompiled": {
+    "version": "v1.2.2",
+    "url": "https://github.com/Zelda64Recomp/Zelda64Recomp/releases/tag/v1.2.2",
+    "publishedAt": "2025-08-27T00:58:35Z"
+  },
+  "shipwright": {
+    "version": "9.2.3",
+    "url": "https://github.com/HarbourMasters/Shipwright/releases/tag/9.2.3",
+    "publishedAt": "2026-04-15T20:12:42Z"
+  },
+  "minish-cap-port": {
+    "version": "0.2.0-pre",
+    "url": "https://github.com/MatheoVignaud/tmc/releases/tag/0.2.0-pre",
+    "publishedAt": "2026-05-17T09:57:19Z"
+  },
+  "project-picori": {
+    "version": "v0.8.3",
+    "url": "https://github.com/999sian/tmc/releases/tag/v0.8.3",
+    "publishedAt": "2026-07-19T08:15:17Z"
+  },
+  "viva-pinata-tip-recomp": {
+    "version": "1.11.2",
+    "url": "https://github.com/SolarCookies/TiP-Recomp/releases/tag/1.11.2",
+    "publishedAt": "2026-07-17T20:52:44Z"
+  },
+  "svr07-recomp": {
+    "version": "v1.0",
+    "url": "https://github.com/HollywoodAkeem/SVR07-Recomp/releases/tag/v1.0",
+    "publishedAt": "2026-04-24T05:37:53Z"
+  }
+}
