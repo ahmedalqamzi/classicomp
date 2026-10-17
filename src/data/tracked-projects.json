@@ -467,6 +467,43 @@
     "repositoryUrl": "https://github.com/vgrichina/battlecity"
   },
   {
+    "id": "battletanx-gbc",
+    "gameKey": "battletanx-gbc",
+    "gameTitle": "BattleTanx",
+    "gameShortTitle": "BattleTanx",
+    "gameId": null,
+    "description": "Byte-exact RGBDS disassembly of BattleTanx (USA) for Game Boy Color.",
+    "projectName": "BattleTanx GBC",
+    "projectType": "matching-decompilation",
+    "developmentState": "active",
+    "stability": "unknown",
+    "completionPercent": null,
+    "completionLabel": "Byte-exact rebuild; semantic recovery ongoing",
+    "originalReleaseYear": 2000,
+    "originalPlatforms": [
+      "Game Boy Color"
+    ],
+    "targetPlatforms": [],
+    "latestVersion": null,
+    "lastActivityAt": null,
+    "lastCheckedAt": null,
+    "downloadUrl": null,
+    "coverUrl": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/master/Named_Boxarts/BattleTanx%20%28USA%29.png",
+    "coverAspect": 1,
+    "screenshots": [
+      "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/master/Named_Snaps/BattleTanx%20%28USA%29.png",
+      "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/master/Named_Titles/BattleTanx%20%28USA%29.png"
+    ],
+    "topics": [
+      "rgbds",
+      "sm83",
+      "game-boy-color"
+    ],
+    "recentReleases": [],
+    "downloadAssets": [],
+    "repositoryUrl": "https://github.com/TheGh0stShip/BattleTanx-GBC"
+  },
+  {
     "id": "blue-dragon-recomp",
     "gameKey": "blue-dragon",
     "gameTitle": "Blue Dragon",
